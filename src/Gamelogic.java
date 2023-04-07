@@ -10,7 +10,7 @@ public class Gamelogic {
         int wallCounter = 5;
         int marketCounter = 5;
         int lootThingCounter = 13;
-        int trapCounter = 1+rand.nextInt(7);
+        int trapCounter = 1+rand.nextInt(5);
         int treasureCounter2 = 0;
         int wallCounter2 = 0;
         int marketCounter2 = 0;
