@@ -3,6 +3,7 @@ public class Information {
     int Founded_treasure = 0;
     String is_turn = "Player" + turn;
     long timeElapsed;
+    int treasureCounter = 0;
 
     public void setFounded_treasure(int founded_treasure) {
         Founded_treasure = founded_treasure;
