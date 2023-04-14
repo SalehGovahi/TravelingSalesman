@@ -2,6 +2,8 @@ public class Player {
     int money = 0;
     int power = 0;
     int treasure_founded = 0;
+    int x;
+    int y;
 
     public int getMoney() {
         return money;

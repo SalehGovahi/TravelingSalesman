@@ -8,7 +8,7 @@ public class Gamelogic {
 
         int treasureCounter = 8;
         int wallCounter = 5;
-        int marketCounter = 5;
+        int marketCounter = 4;
         int lootThingCounter = 13;
         int trapCounter = 1+rand.nextInt(5);
         int treasureCounter2 = 0;
@@ -23,42 +23,53 @@ public class Gamelogic {
             }
         }
 
+        logicBoard[0][0] = 44;
+        logicBoard[0][1] = 44;
+        logicBoard[0][size-1] = 44;
+        logicBoard[0][size-2] = 44;
+
+        if (size%2==0){
+            logicBoard[center-1][center]=1;
+        }
+        else {
+            logicBoard[center][center]=1;
+        }
+
+        logicBoard[1][1]= 4;
+        logicBoard[size-2][size-2] = 4;
+        logicBoard[size-2][1] = 4;
+        logicBoard[1][size-2] = 4;
+
         while (treasureCounter2 != treasureCounter){
             int row = rand.nextInt(size);
             int col = rand.nextInt(size);
             if (logicBoard[col][row] ==0){
                 if (treasureCounter2==0){
                     logicBoard[col][row] = 21;
-                    treasureCounter2 += 1;
                 }
                 if (treasureCounter2==1){
                     logicBoard[col][row] = 22;
-                    treasureCounter2 += 1;
                 }
                 if (treasureCounter2==2){
                     logicBoard[col][row] = 23;
-                    treasureCounter2 += 1;
                 }
                 if (treasureCounter2==3){
                     logicBoard[col][row] = 24;
-                    treasureCounter2 += 1;
                 }
                 if (treasureCounter2==4){
                     logicBoard[col][row] = 25;
-                    treasureCounter2 += 1;
                 }
                 if (treasureCounter2==5){
                     logicBoard[col][row] = 26;
-                    treasureCounter2 += 1;
                 }
                 if (treasureCounter2==6){
                     logicBoard[col][row] = 27;
-                    treasureCounter2 += 1;
                 }
                 if (treasureCounter2==7){
                     logicBoard[col][row] = 28;
-                    treasureCounter2 += 1;
                 }
+                treasureCounter2+=1;
+                System.out.printf("%d %d\n" , col , row);
             }
         }
         while (wallCounter2 != wallCounter){
@@ -67,14 +78,6 @@ public class Gamelogic {
             if (logicBoard[col][row] ==0){
                 logicBoard[col][row] = 3;
                 wallCounter2 += 1;
-            }
-        }
-        while (marketCounter2 != marketCounter){
-            int row = rand.nextInt(size);
-            int col = rand.nextInt(size);
-            if (logicBoard[col][row] ==0){
-                logicBoard[col][row] = 4;
-                marketCounter2 += 1;
             }
         }
         while (lootThingCounter2 != lootThingCounter){
@@ -93,14 +96,14 @@ public class Gamelogic {
                 trapCounter2 += 1;
             }
         }
-        if (size%2==0){
-            logicBoard[center-1][center]=1;
-        }
-        else {
-            logicBoard[center][center]=1;
-        }
         logicBoard[0][0] = 0;
         logicBoard[0][1] = 0;
+        logicBoard[0][size-1] = 0;
+        logicBoard[0][size-2] = 0;
         return logicBoard;
+    }
+
+    public static void main(String[] args) {
+        logicCreator(5);
     }
 }
