@@ -94,28 +94,28 @@ public class Temp{
         Gamelogic logic1 = new Gamelogic();
         int logicBoard[][] = logic1.logicCreator(size);
 
-        JPanel arr[][] = new JPanel[size][size];
+        JPanel arr2[][] = new JPanel[size][size];
 
         for (int i = 0; i < size; i++) {
             for (int j = 0 ; j<size ; j++){
-                arr[i][j] = new JPanel( new BorderLayout() );
-                Board.add(arr[i][j]);
+                arr2[i][j] = new JPanel( new BorderLayout() );
+                Board.add(arr2[i][j]);
                 int row = (i / size) % 2;
                 Border blackline = BorderFactory.createLineBorder(Color.black);
-                arr[i][j].setBorder(blackline);
+                arr2[i][j].setBorder(blackline);
             }
         }
 
         for (int i = 0; i < size; i++) {
             for (int j = 0 ; j<size ; j++){
                 if (logicBoard[i][j]==1){
-                    arr[i][j].add(new JLabel(new ImageIcon("Assets/castle.png")));
+                    arr2[i][j].add(new JLabel(new ImageIcon("Assets/castle.png")));
                 }
                 if (logicBoard[i][j]==3){
-                    arr[i][j].add(new JLabel(new ImageIcon("Assets/wall.png")));
+                    arr2[i][j].add(new JLabel(new ImageIcon("Assets/wall.png")));
                 }
                 if (logicBoard[i][j]==4){
-                    arr[i][j].add(new JLabel(new ImageIcon("Assets/market.png")));
+                    arr2[i][j].add(new JLabel(new ImageIcon("Assets/market.png")));
                 }
             }
         }
@@ -171,8 +171,8 @@ public class Temp{
         int finalSize2 = size;
         final int[] yy = {0};
 
-        arr[0][0].setBackground(Color.blue);
-        arr[0][size - 1].setBackground(Color.red);
+        arr2[0][0].setBackground(Color.blue);
+        arr2[0][size - 1].setBackground(Color.red);
 
         JButton ShowScore2 = new JButton("Score Board");
         ShowScore2.setBounds(120,300,140,50);
@@ -257,7 +257,6 @@ public class Temp{
 
         /******************************************************************/
 
-        if (switchPlayer[0]==2){
             Dice2.addKeyListener(new KeyListener() {
                 @Override
                 public void keyTyped(KeyEvent e) {}
@@ -282,7 +281,7 @@ public class Temp{
                                         for (int i = 0; i< finalSize1; i++){
                                             for (int j = 0; j< finalSize1; j++){
                                                 if (logicBoard[i][j]==99){
-                                                    arr[i][j].setBackground(Color.white);
+                                                    arr2[i][j].setBackground(Color.white);
                                                     logicBoard[i][j] = 0;
                                                 }
                                             }
@@ -315,7 +314,7 @@ public class Temp{
 
                                                 else {
 
-                                                    arr[xAdjustment2[0] - 1][yAdjustment2[0]].setBackground(Color.red);
+                                                    arr2[xAdjustment2[0] - 1][yAdjustment2[0]].setBackground(Color.red);
 
                                                     if (logicBoard[xAdjustment2[0]][yAdjustment2[0]] != 1 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=2 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=4){
                                                         logicBoard[xAdjustment2[0]][yAdjustment2[0]] = 99;
@@ -560,7 +559,7 @@ public class Temp{
                                                     if (logicBoard[xAdjustment2[0] - 1][yAdjustment2[0]]==99){
                                                         JOptionPane.showMessageDialog(layeredPane2, "You can not return",
                                                                 "Oh no", JOptionPane.ERROR_MESSAGE);
-                                                        arr[xAdjustment2[0] - 1][yAdjustment2[0]].setBackground(Color.white);
+                                                        arr2[xAdjustment2[0] - 1][yAdjustment2[0]].setBackground(Color.white);
                                                         xAdjustment2[0] += 1;
                                                         counter -= 1;
                                                     }
@@ -573,7 +572,7 @@ public class Temp{
 
 
                                                     yy[0] = 0;
-                                                    arr[xAdjustment2[0]+1][yAdjustment2[0]].setBackground(Color.white);
+                                                    arr2[xAdjustment2[0]+1][yAdjustment2[0]].setBackground(Color.white);
                                                 }
                                             }
                                         }
@@ -603,7 +602,7 @@ public class Temp{
                                             for (int i = 0; i< finalSize1; i++){
                                                 for (int j = 0; j< finalSize1; j++){
                                                     if (logicBoard[i][j]==99){
-                                                        arr[i][j].setBackground(Color.white);
+                                                        arr2[i][j].setBackground(Color.white);
                                                         logicBoard[i][j] = 0;
                                                     }
                                                 }
@@ -627,7 +626,7 @@ public class Temp{
                                                 }
 
                                                 else {
-                                                    arr[xAdjustment2[0] + 1][yAdjustment2[0]].setBackground(Color.red);
+                                                    arr2[xAdjustment2[0] + 1][yAdjustment2[0]].setBackground(Color.red);
 
                                                     if (logicBoard[xAdjustment2[0]][yAdjustment2[0]] != 1 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=2 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=4){
                                                         logicBoard[xAdjustment2[0]][yAdjustment2[0]] = 99;
@@ -851,7 +850,7 @@ public class Temp{
                                                     if (logicBoard[xAdjustment2[0] + 1][yAdjustment2[0]]==99){
                                                         JOptionPane.showMessageDialog(layeredPane2, "You can not return",
                                                                 "Oh no", JOptionPane.ERROR_MESSAGE);
-                                                        arr[xAdjustment2[0] + 1][yAdjustment2[0]].setBackground(Color.white);
+                                                        arr2[xAdjustment2[0] + 1][yAdjustment2[0]].setBackground(Color.white);
                                                         xAdjustment2[0] -= 1;
                                                         counter -= 1;
                                                         ll[0] = counter;
@@ -865,7 +864,7 @@ public class Temp{
                                                     ll2[0] = counter;
 
 
-                                                    arr[xAdjustment2[0]-1][yAdjustment2[0]].setBackground(Color.white);
+                                                    arr2[xAdjustment2[0]-1][yAdjustment2[0]].setBackground(Color.white);
                                                 }
                                             }
                                         }
@@ -894,7 +893,7 @@ public class Temp{
                                             for (int i = 0; i< finalSize1; i++){
                                                 for (int j = 0; j< finalSize1; j++){
                                                     if (logicBoard[i][j]==99){
-                                                        arr[i][j].setBackground(Color.white);
+                                                        arr2[i][j].setBackground(Color.white);
                                                         logicBoard[i][j] = 0;
                                                     }
                                                 }
@@ -916,7 +915,7 @@ public class Temp{
                                                 }
 
                                                 else {
-                                                    arr[xAdjustment2[0]][yAdjustment2[0] +1].setBackground(Color.red);
+                                                    arr2[xAdjustment2[0]][yAdjustment2[0] +1].setBackground(Color.red);
 
                                                     if (logicBoard[xAdjustment2[0]][yAdjustment2[0]] != 1 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=2 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=4){
                                                         logicBoard[xAdjustment2[0]][yAdjustment2[0]] = 99;
@@ -1147,7 +1146,7 @@ public class Temp{
                                                     if (logicBoard[xAdjustment2[0]][yAdjustment2[0] +1]==99){
                                                         JOptionPane.showMessageDialog(layeredPane2, "You can not return",
                                                                 "Oh no", JOptionPane.ERROR_MESSAGE);
-                                                        arr[xAdjustment2[0]][yAdjustment2[0] +1].setBackground(Color.white);
+                                                        arr2[xAdjustment2[0]][yAdjustment2[0] +1].setBackground(Color.white);
                                                         yAdjustment2[0] -= 1;
                                                         counter -= 1;
                                                         ll[0] = counter;
@@ -1161,7 +1160,7 @@ public class Temp{
                                                     ll2[0] = counter;
 
 
-                                                    arr[xAdjustment2[0]][yAdjustment2[0]-1].setBackground(Color.white);
+                                                    arr2[xAdjustment2[0]][yAdjustment2[0]-1].setBackground(Color.white);
                                                 }
                                             }
                                         }
@@ -1191,7 +1190,7 @@ public class Temp{
                                             for (int i = 0; i< finalSize1; i++){
                                                 for (int j = 0; j< finalSize1; j++){
                                                     if (logicBoard[i][j]==99){
-                                                        arr[i][j].setBackground(Color.white);
+                                                        arr2[i][j].setBackground(Color.white);
                                                         logicBoard[i][j] = 0;
                                                     }
                                                 }
@@ -1212,7 +1211,7 @@ public class Temp{
                                                 }
 
                                                 else {
-                                                    arr[xAdjustment2[0]][yAdjustment2[0] -1].setBackground(Color.red);
+                                                    arr2[xAdjustment2[0]][yAdjustment2[0] -1].setBackground(Color.red);
                                                     if (logicBoard[xAdjustment2[0]][yAdjustment2[0]] != 1 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=2 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=4){
                                                         logicBoard[xAdjustment2[0]][yAdjustment2[0]] = 99;
                                                     }
@@ -1442,7 +1441,7 @@ public class Temp{
                                                     if (logicBoard[xAdjustment2[0]][yAdjustment2[0] -1]==99){
                                                         JOptionPane.showMessageDialog(layeredPane2, "You can not return",
                                                                 "Oh no", JOptionPane.ERROR_MESSAGE);
-                                                        arr[xAdjustment2[0]][yAdjustment2[0] -1].setBackground(Color.white);
+                                                        arr2[xAdjustment2[0]][yAdjustment2[0] -1].setBackground(Color.white);
                                                         yAdjustment[0] += 1;
                                                         counter -= 1;
                                                         ll[0] = counter;
@@ -1457,7 +1456,7 @@ public class Temp{
 
 
 
-                                                    arr[xAdjustment2[0]][yAdjustment2[0]+1].setBackground(Color.white);
+                                                    arr2[xAdjustment2[0]][yAdjustment2[0]+1].setBackground(Color.white);
                                                 }
                                             }
                                         }
@@ -1474,7 +1473,6 @@ public class Temp{
 
                 }
             });
-        }
 
         Scoreboard.addWindowListener(new WindowAdapter() {
             @Override
