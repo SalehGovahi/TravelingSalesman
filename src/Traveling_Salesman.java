@@ -36,6 +36,7 @@ public class Traveling_Salesman{
 
     public static void main(String[] args) throws IOException {
         int won =0;
+        final int[] uu = {0};
         final int[] xAdjustment = {0};
         final int[] yAdjustment = {0};
         final int[] xAdjustment2 = {0};
@@ -44,7 +45,7 @@ public class Traveling_Salesman{
         final int[][] treasureCodes = {new int[50]};
         final int[] treasureIndex = {0};
 
-        final int[] switchPlayer = {2};
+        final int[] switchPlayer = {1};
 
         Border green = BorderFactory.createLineBorder(Color.green);
 
@@ -172,7 +173,6 @@ public class Traveling_Salesman{
         final int[] yy = {0};
 
         arr[0][0].setBackground(Color.blue);
-        arr[0][size - 1].setBackground(Color.red);
 
         JButton ShowScore = new JButton("Score Board");
         ShowScore.setBounds(120,300,140,50);
@@ -295,7 +295,8 @@ public class Traveling_Salesman{
                 arr2[i][j] = new JPanel( new BorderLayout() );
                 Board2.add(arr2[i][j]);
                 int row = (i / size) % 2;
-                arr2[i][j].setBorder(blackline);
+                Border black = BorderFactory.createLineBorder(Color.black);
+                arr2[i][j].setBorder(black);
             }
         }
 
@@ -355,7 +356,6 @@ public class Traveling_Salesman{
 
         });
 
-        arr2[0][0].setBackground(Color.blue);
         arr2[0][size - 1].setBackground(Color.red);
 
         JButton ShowScore2 = new JButton("Score Board");
@@ -458,9 +458,11 @@ public class Traveling_Salesman{
                                             "Error", JOptionPane.ERROR_MESSAGE);
 
                                     switchPlayer[0]=1;
-                                    PlayerName2.setText("Player1");
                                     counter=0;
                                     ll2[0] = 0;
+
+                                    int saveX = xAdjustment2[0];
+                                    int saveY = yAdjustment2[0];
 
                                     for (int i = 0; i< finalSize1; i++){
                                         for (int j = 0; j< finalSize1; j++){
@@ -484,6 +486,7 @@ public class Traveling_Salesman{
                                     }
 
                                     else {
+
                                         if (logicBoard[xAdjustment2[0]-1][yAdjustment2[0]] == 3){
                                             JOptionPane.showMessageDialog(layeredPane2, "Here is a wall",
                                                     "Error", JOptionPane.ERROR_MESSAGE);
@@ -492,264 +495,303 @@ public class Traveling_Salesman{
 
                                         else {
 
-                                            if (logicBoard[xAdjustment2[0]-1][yAdjustment2[0]] == 3){
-                                                JOptionPane.showMessageDialog(layeredPane2, "Here is a wall",
-                                                        "Error", JOptionPane.ERROR_MESSAGE);
-                                                counter -=1;
+                                            arr2[xAdjustment2[0] - 1][yAdjustment2[0]].setBackground(Color.red);
+
+                                            if (logicBoard[xAdjustment2[0]][yAdjustment2[0]] != 1 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=2 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=4){
+                                                logicBoard[xAdjustment2[0]][yAdjustment2[0]] = 99;
                                             }
 
-                                            else {
-
-                                                arr2[xAdjustment2[0] - 1][yAdjustment2[0]].setBackground(Color.red);
-
-                                                if (logicBoard[xAdjustment2[0]][yAdjustment2[0]] != 1 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=2 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=4){
-                                                    logicBoard[xAdjustment2[0]][yAdjustment2[0]] = 99;
-                                                }
-
-                                                if (logicBoard[xAdjustment2[0] - 1][yAdjustment2[0]]==1){
-                                                    JFrame f=new JFrame("Castle");
-                                                    f.getContentPane().setBackground(new Color(16,5,47));
-                                                    final JLabel label = new JLabel();
-                                                    label.setBounds(80,600, 250,50);
-                                                    JTextField value = new JTextField();
-                                                    value.setBounds(355,265,100,30);
-                                                    JLabel l2=new JLabel("Enter your treasure Code:");
-                                                    l2.setBounds(120,250, 300,60);
-                                                    l2.setFont(new Font("Arial", Font.PLAIN, 20));
-                                                    l2.setForeground(Color.white);
-                                                    JButton b = new JButton("Done");
-                                                    b.setBounds(250,320, 80,30);
-                                                    f.add(value); f.add(label); f.add(l2); f.add(b);
-                                                    f.setSize(600,600);
-                                                    f.setLayout(null);
-                                                    f.setVisible(true);
-                                                    b.addActionListener(new ActionListener() {
-                                                        public void actionPerformed(ActionEvent e) {
-                                                            int index = 0;
-                                                            String code = value.getText();
-                                                            int sw = 0;
-                                                            for (int i = 0; i< treasureCodes[0].length ; i++){
-                                                                if (treasureCodes[0][i]==Integer.parseInt(code)){
-                                                                    sw =1;
-                                                                    index = i;
-                                                                    break;
-                                                                }
-                                                            }
-                                                            if (sw==1){
-                                                                info.treasureCounter +=1;
-                                                                for (int i = 0; i< finalSize2; i++){
-                                                                    for (int j = 0 ; j<finalSize2 ; j++){
-                                                                        if (logicBoard[i][j]==21 || logicBoard[i][j]==22 || logicBoard[i][j]==23 || logicBoard[i][j]==24 || logicBoard[i][j]==25 || logicBoard[i][j]==26 || logicBoard[i][j]==27 || logicBoard[i][j]==28){
-                                                                            System.out.printf("--%d %d--\n" , i,j);
-                                                                        }
-                                                                    }
-                                                                }
-                                                                for(int i = 0; i< 10 ; i++){
-                                                                    System.out.println(treasureCodes[0][i]);
-                                                                }
-                                                                String namme = null;
-                                                                int name =  treasureCodes[0][index-1];
-                                                                int temp1 = treasureCodes[0][index+1];
-                                                                int temp2 = treasureCodes[0][index+2];
-                                                                for (int i = 0; i< finalSize2; i++){
-                                                                    for (int j = 0 ; j<finalSize2 ; j++){
-                                                                        if (logicBoard[i][j]==21 || logicBoard[i][j]==22 || logicBoard[i][j]==23 || logicBoard[i][j]==24 || logicBoard[i][j]==25 || logicBoard[i][j]==26 || logicBoard[i][j]==27 || logicBoard[i][j]==28){
-                                                                            System.out.printf("--%d %d--\n" , i,j);
-                                                                        }
-                                                                    }
-                                                                }
-                                                                logicBoard[temp1][temp2] = 0;
-                                                                treasureCodes[0] =removeTheElement(treasureCodes[0],index);
-                                                                System.out.println("-------------");
-                                                                for(int i = 0; i< 10 ; i++){
-                                                                    System.out.println(treasureCodes[0][i]);
-                                                                }
-                                                                if (name==21){
-                                                                    namme = "Diamond ring";
-                                                                }
-                                                                if (name==22){
-                                                                    namme = "Jeweled sword";
-                                                                }
-                                                                if (name==23){
-                                                                    namme = "Golden glass";
-                                                                }
-                                                                if (name==24){
-                                                                    namme = "Glass cup";
-                                                                }
-                                                                if (name==25){
-                                                                    namme = "Wooden bow";
-                                                                }
-                                                                if (name==26){
-                                                                    namme = "Steel shield";
-                                                                }
-                                                                if (name==27){
-                                                                    namme = "Golden key";
-                                                                }
-                                                                if (name==28){
-                                                                    namme = "Dragon scroll";
-                                                                }
-                                                                JOptionPane.showMessageDialog(f, "You have found "+namme+"\n"+"Your money increased",
-                                                                        "Treasure Confirmed", JOptionPane.PLAIN_MESSAGE);
-                                                                player1.money += 100000;
-                                                                for (int i = 0; i< finalSize2; i++){
-                                                                    for (int j = 0 ; j<finalSize2 ; j++){
-                                                                        if (logicBoard[i][j]==21 || logicBoard[i][j]==22 || logicBoard[i][j]==23 || logicBoard[i][j]==24 || logicBoard[i][j]==25 || logicBoard[i][j]==26 || logicBoard[i][j]==27 || logicBoard[i][j]==28){
-                                                                            System.out.printf("--%d %d--\n" , i,j);
-                                                                        }
-                                                                    }
-                                                                }
-                                                                f.setVisible(false);
-                                                            }
-                                                            if(sw==0){
-                                                                JOptionPane.showMessageDialog(f, "This is not a trasure code",
-                                                                        "Treasure Confirmed", JOptionPane.ERROR_MESSAGE);
-                                                                f.setVisible(false);
+                                            if (logicBoard[xAdjustment2[0] - 1][yAdjustment2[0]]==1){
+                                                JFrame f=new JFrame("Castle");
+                                                f.getContentPane().setBackground(new Color(16,5,47));
+                                                final JLabel label = new JLabel();
+                                                label.setBounds(80,600, 250,50);
+                                                JTextField value = new JTextField();
+                                                value.setBounds(355,265,100,30);
+                                                JLabel l2=new JLabel("Enter your treasure Code:");
+                                                l2.setBounds(120,250, 300,60);
+                                                l2.setFont(new Font("Arial", Font.PLAIN, 20));
+                                                l2.setForeground(Color.white);
+                                                JButton b = new JButton("Done");
+                                                b.setBounds(250,320, 80,30);
+                                                f.add(value); f.add(label); f.add(l2); f.add(b);
+                                                f.setSize(600,600);
+                                                f.setLayout(null);
+                                                f.setVisible(true);
+                                                b.addActionListener(new ActionListener() {
+                                                    public void actionPerformed(ActionEvent e) {
+                                                        int index = 0;
+                                                        String code = value.getText();
+                                                        int sw = 0;
+                                                        for (int i = 0; i< treasureCodes[0].length ; i++){
+                                                            if (treasureCodes[0][i]==Integer.parseInt(code)){
+                                                                sw =1;
+                                                                index = i;
+                                                                break;
                                                             }
                                                         }
-                                                    });
-                                                }
+                                                        if (sw==1){
+                                                            info.treasureCounter +=1;
+                                                            for (int i = 0; i< finalSize2; i++){
+                                                                for (int j = 0 ; j<finalSize2 ; j++){
+                                                                    if (logicBoard[i][j]==21 || logicBoard[i][j]==22 || logicBoard[i][j]==23 || logicBoard[i][j]==24 || logicBoard[i][j]==25 || logicBoard[i][j]==26 || logicBoard[i][j]==27 || logicBoard[i][j]==28){
+                                                                        System.out.printf("--%d %d--\n" , i,j);
+                                                                    }
+                                                                }
+                                                            }
+                                                            for(int i = 0; i< 10 ; i++){
+                                                                System.out.println(treasureCodes[0][i]);
+                                                            }
+                                                            String namme = null;
+                                                            int name =  treasureCodes[0][index-1];
+                                                            int temp1 = treasureCodes[0][index+1];
+                                                            int temp2 = treasureCodes[0][index+2];
+                                                            for (int i = 0; i< finalSize2; i++){
+                                                                for (int j = 0 ; j<finalSize2 ; j++){
+                                                                    if (logicBoard[i][j]==21 || logicBoard[i][j]==22 || logicBoard[i][j]==23 || logicBoard[i][j]==24 || logicBoard[i][j]==25 || logicBoard[i][j]==26 || logicBoard[i][j]==27 || logicBoard[i][j]==28){
+                                                                        System.out.printf("--%d %d--\n" , i,j);
+                                                                    }
+                                                                }
+                                                            }
+                                                            logicBoard[temp1][temp2] = 0;
+                                                            treasureCodes[0] =removeTheElement(treasureCodes[0],index);
+                                                            System.out.println("-------------");
+                                                            for(int i = 0; i< 10 ; i++){
+                                                                System.out.println(treasureCodes[0][i]);
+                                                            }
+                                                            if (name==21){
+                                                                namme = "Diamond ring";
+                                                            }
+                                                            if (name==22){
+                                                                namme = "Jeweled sword";
+                                                            }
+                                                            if (name==23){
+                                                                namme = "Golden glass";
+                                                            }
+                                                            if (name==24){
+                                                                namme = "Glass cup";
+                                                            }
+                                                            if (name==25){
+                                                                namme = "Wooden bow";
+                                                            }
+                                                            if (name==26){
+                                                                namme = "Steel shield";
+                                                            }
+                                                            if (name==27){
+                                                                namme = "Golden key";
+                                                            }
+                                                            if (name==28){
+                                                                namme = "Dragon scroll";
+                                                            }
+                                                            JOptionPane.showMessageDialog(f, "You have found "+namme+"\n"+"Your money increased",
+                                                                    "Treasure Confirmed", JOptionPane.PLAIN_MESSAGE);
+                                                            player2.money += 100000;
+                                                            player2.treasure_founded += 1;
+                                                            for (int i = 0; i< finalSize2; i++){
+                                                                for (int j = 0 ; j<finalSize2 ; j++){
+                                                                    if (logicBoard[i][j]==21 || logicBoard[i][j]==22 || logicBoard[i][j]==23 || logicBoard[i][j]==24 || logicBoard[i][j]==25 || logicBoard[i][j]==26 || logicBoard[i][j]==27 || logicBoard[i][j]==28){
+                                                                        System.out.printf("--%d %d--\n" , i,j);
+                                                                    }
+                                                                }
+                                                            }
+                                                            f.setVisible(false);
+                                                        }
+                                                        if(sw==0){
+                                                            JOptionPane.showMessageDialog(f, "This is not a trasure code",
+                                                                    "Treasure Confirmed", JOptionPane.ERROR_MESSAGE);
+                                                            f.setVisible(false);
+                                                        }
+                                                    }
+                                                });
+                                            }
 
-                                                if (logicBoard[xAdjustment2[0] - 1][yAdjustment2[0]]==21){
-                                                    Random rand = new Random();
-                                                    int code = rand.nextInt(2000)+1000;
-                                                    JOptionPane.showMessageDialog(layeredPane2, "Code of treasure : " + String.valueOf(code),
-                                                            "Founded", JOptionPane.ERROR_MESSAGE);
-                                                    treasureCodes[0][treasureIndex[0]] = logicBoard[xAdjustment2[0] - 1][yAdjustment2[0]];
-                                                    treasureIndex[0] +=1;
-                                                    treasureCodes[0][treasureIndex[0]] = code;
-                                                    treasureIndex[0] +=1;
-                                                    treasureCodes[0][treasureIndex[0]] = xAdjustment2[0] - 1;
-                                                    treasureIndex[0] +=1;
-                                                    treasureCodes[0][treasureIndex[0]] = yAdjustment2[0];
-                                                    treasureIndex[0] +=1;
-                                                }
-                                                if (logicBoard[xAdjustment2[0] - 1][yAdjustment2[0]]==22){
-                                                    Random rand = new Random();
-                                                    int code = rand.nextInt(2000)+1000;
-                                                    JOptionPane.showMessageDialog(layeredPane2, "Code of treasure : " + String.valueOf(code),
-                                                            "Founded", JOptionPane.ERROR_MESSAGE);
-                                                    treasureCodes[0][treasureIndex[0]] = logicBoard[xAdjustment2[0] - 1][yAdjustment2[0]];
-                                                    treasureIndex[0] +=1;
-                                                    treasureCodes[0][treasureIndex[0]] = code;
-                                                    treasureIndex[0] +=1;
-                                                    treasureCodes[0][treasureIndex[0]] = xAdjustment2[0] - 1;
-                                                    treasureIndex[0] +=1;
-                                                    treasureCodes[0][treasureIndex[0]] = yAdjustment2[0];
-                                                    treasureIndex[0] +=1;
-                                                }
-                                                if (logicBoard[xAdjustment2[0] - 1][yAdjustment2[0]]==23){
-                                                    Random rand = new Random();
-                                                    int code = rand.nextInt(2000)+1000;
-                                                    JOptionPane.showMessageDialog(layeredPane2, "Code of treasure : " + String.valueOf(code),
-                                                            "Founded", JOptionPane.ERROR_MESSAGE);
-                                                    treasureCodes[0][treasureIndex[0]] = logicBoard[xAdjustment2[0] - 1][yAdjustment2[0]];
-                                                    treasureIndex[0] +=1;
-                                                    treasureCodes[0][treasureIndex[0]] = code;
-                                                    treasureIndex[0] +=1;
-                                                    treasureCodes[0][treasureIndex[0]] = xAdjustment2[0] - 1;
-                                                    treasureIndex[0] +=1;
-                                                    treasureCodes[0][treasureIndex[0]] = yAdjustment2[0];
-                                                    treasureIndex[0] +=1;
-                                                }
-                                                if (logicBoard[xAdjustment2[0] - 1][yAdjustment2[0]]==24){
-                                                    Random rand = new Random();
-                                                    int code = rand.nextInt(2000)+1000;
-                                                    JOptionPane.showMessageDialog(layeredPane2, "Code of treasure : " + String.valueOf(code),
-                                                            "Founded", JOptionPane.ERROR_MESSAGE);
-                                                    treasureCodes[0][treasureIndex[0]] = logicBoard[xAdjustment2[0] - 1][yAdjustment2[0]];
-                                                    treasureIndex[0] +=1;
-                                                    treasureCodes[0][treasureIndex[0]] = code;
-                                                    treasureIndex[0] +=1;
-                                                    treasureCodes[0][treasureIndex[0]] = xAdjustment2[0] - 1;
-                                                    treasureIndex[0] +=1;
-                                                    treasureCodes[0][treasureIndex[0]] = yAdjustment2[0];
-                                                    treasureIndex[0] +=1;
-                                                }
-                                                if (logicBoard[xAdjustment2[0] - 1][yAdjustment2[0]]==25){
-                                                    Random rand = new Random();
-                                                    int code = rand.nextInt(2000)+1000;
-                                                    JOptionPane.showMessageDialog(layeredPane2, "Code of treasure : " + String.valueOf(code),
-                                                            "Founded", JOptionPane.ERROR_MESSAGE);
-                                                    treasureCodes[0][treasureIndex[0]] = logicBoard[xAdjustment2[0] - 1][yAdjustment2[0]];
-                                                    treasureIndex[0] +=1;
-                                                    treasureCodes[0][treasureIndex[0]] = code;
-                                                    treasureIndex[0] +=1;
-                                                    treasureCodes[0][treasureIndex[0]] = xAdjustment2[0] - 1;
-                                                    treasureIndex[0] +=1;
-                                                    treasureCodes[0][treasureIndex[0]] = yAdjustment2[0];
-                                                    treasureIndex[0] +=1;
-                                                }
-                                                if (logicBoard[xAdjustment2[0] - 1][yAdjustment2[0]]==26){
-                                                    Random rand = new Random();
-                                                    int code = rand.nextInt(2000)+1000;
-                                                    JOptionPane.showMessageDialog(layeredPane2, "Code of treasure : " + String.valueOf(code),
-                                                            "Founded", JOptionPane.ERROR_MESSAGE);
-                                                    treasureCodes[0][treasureIndex[0]] = logicBoard[xAdjustment2[0] - 1][yAdjustment2[0]];
-                                                    treasureIndex[0] +=1;
-                                                    treasureCodes[0][treasureIndex[0]] = code;
-                                                    treasureIndex[0] +=1;
-                                                    treasureCodes[0][treasureIndex[0]] = xAdjustment2[0] - 1;
-                                                    treasureIndex[0] +=1;
-                                                    treasureCodes[0][treasureIndex[0]] = yAdjustment2[0];
-                                                    treasureIndex[0] +=1;
-                                                }
-                                                if (logicBoard[xAdjustment2[0] - 1][yAdjustment2[0]]==27){
-                                                    Random rand = new Random();
-                                                    int code = rand.nextInt(2000)+1000;
-                                                    JOptionPane.showMessageDialog(layeredPane2, "Code of treasure : " + String.valueOf(code),
-                                                            "Founded", JOptionPane.ERROR_MESSAGE);
-                                                    treasureCodes[0][treasureIndex[0]] = logicBoard[xAdjustment2[0] - 1][yAdjustment2[0]];
-                                                    treasureIndex[0] +=1;
-                                                    treasureCodes[0][treasureIndex[0]] = code;
-                                                    treasureIndex[0] +=1;
-                                                    treasureCodes[0][treasureIndex[0]] = xAdjustment2[0] - 1;
-                                                    treasureIndex[0] +=1;
-                                                    treasureCodes[0][treasureIndex[0]] = yAdjustment2[0];
-                                                    treasureIndex[0] +=1;
-                                                }
-                                                if (logicBoard[xAdjustment2[0] - 1][yAdjustment2[0]]==28){
-                                                    Random rand = new Random();
-                                                    int code = rand.nextInt(2000)+1000;
-                                                    JOptionPane.showMessageDialog(layeredPane2, "Code of treasure : " + String.valueOf(code),
-                                                            "Founded", JOptionPane.ERROR_MESSAGE);
-                                                    treasureCodes[0][treasureIndex[0]] = logicBoard[xAdjustment2[0] - 1][yAdjustment2[0]];
-                                                    treasureIndex[0] +=1;
-                                                    treasureCodes[0][treasureIndex[0]] = code;
-                                                    treasureIndex[0] +=1;
-                                                    treasureCodes[0][treasureIndex[0]] = xAdjustment2[0] - 1;
-                                                    treasureIndex[0] +=1;
-                                                    treasureCodes[0][treasureIndex[0]] = yAdjustment2[0];
-                                                    treasureIndex[0] +=1;
-                                                }
+                                            if (logicBoard[xAdjustment2[0] - 1][yAdjustment2[0]]==21){
+                                                Random rand = new Random();
+                                                int code = rand.nextInt(2000)+1000;
+                                                JOptionPane.showMessageDialog(layeredPane2, "Code of treasure : " + String.valueOf(code),
+                                                        "Founded", JOptionPane.ERROR_MESSAGE);
+                                                treasureCodes[0][treasureIndex[0]] = logicBoard[xAdjustment2[0] - 1][yAdjustment2[0]];
+                                                treasureIndex[0] +=1;
+                                                treasureCodes[0][treasureIndex[0]] = code;
+                                                treasureIndex[0] +=1;
+                                                treasureCodes[0][treasureIndex[0]] = xAdjustment2[0] - 1;
+                                                treasureIndex[0] +=1;
+                                                treasureCodes[0][treasureIndex[0]] = yAdjustment2[0];
+                                                treasureIndex[0] +=1;
+                                            }
+                                            if (logicBoard[xAdjustment2[0] - 1][yAdjustment2[0]]==22){
+                                                Random rand = new Random();
+                                                int code = rand.nextInt(2000)+1000;
+                                                JOptionPane.showMessageDialog(layeredPane2, "Code of treasure : " + String.valueOf(code),
+                                                        "Founded", JOptionPane.ERROR_MESSAGE);
+                                                treasureCodes[0][treasureIndex[0]] = logicBoard[xAdjustment2[0] - 1][yAdjustment2[0]];
+                                                treasureIndex[0] +=1;
+                                                treasureCodes[0][treasureIndex[0]] = code;
+                                                treasureIndex[0] +=1;
+                                                treasureCodes[0][treasureIndex[0]] = xAdjustment2[0] - 1;
+                                                treasureIndex[0] +=1;
+                                                treasureCodes[0][treasureIndex[0]] = yAdjustment2[0];
+                                                treasureIndex[0] +=1;
+                                            }
+                                            if (logicBoard[xAdjustment2[0] - 1][yAdjustment2[0]]==23){
+                                                Random rand = new Random();
+                                                int code = rand.nextInt(2000)+1000;
+                                                JOptionPane.showMessageDialog(layeredPane2, "Code of treasure : " + String.valueOf(code),
+                                                        "Founded", JOptionPane.ERROR_MESSAGE);
+                                                treasureCodes[0][treasureIndex[0]] = logicBoard[xAdjustment2[0] - 1][yAdjustment2[0]];
+                                                treasureIndex[0] +=1;
+                                                treasureCodes[0][treasureIndex[0]] = code;
+                                                treasureIndex[0] +=1;
+                                                treasureCodes[0][treasureIndex[0]] = xAdjustment2[0] - 1;
+                                                treasureIndex[0] +=1;
+                                                treasureCodes[0][treasureIndex[0]] = yAdjustment2[0];
+                                                treasureIndex[0] +=1;
+                                            }
+                                            if (logicBoard[xAdjustment2[0] - 1][yAdjustment2[0]]==24){
+                                                Random rand = new Random();
+                                                int code = rand.nextInt(2000)+1000;
+                                                JOptionPane.showMessageDialog(layeredPane2, "Code of treasure : " + String.valueOf(code),
+                                                        "Founded", JOptionPane.ERROR_MESSAGE);
+                                                treasureCodes[0][treasureIndex[0]] = logicBoard[xAdjustment2[0] - 1][yAdjustment2[0]];
+                                                treasureIndex[0] +=1;
+                                                treasureCodes[0][treasureIndex[0]] = code;
+                                                treasureIndex[0] +=1;
+                                                treasureCodes[0][treasureIndex[0]] = xAdjustment2[0] - 1;
+                                                treasureIndex[0] +=1;
+                                                treasureCodes[0][treasureIndex[0]] = yAdjustment2[0];
+                                                treasureIndex[0] +=1;
+                                            }
+                                            if (logicBoard[xAdjustment2[0] - 1][yAdjustment2[0]]==25){
+                                                Random rand = new Random();
+                                                int code = rand.nextInt(2000)+1000;
+                                                JOptionPane.showMessageDialog(layeredPane2, "Code of treasure : " + String.valueOf(code),
+                                                        "Founded", JOptionPane.ERROR_MESSAGE);
+                                                treasureCodes[0][treasureIndex[0]] = logicBoard[xAdjustment2[0] - 1][yAdjustment2[0]];
+                                                treasureIndex[0] +=1;
+                                                treasureCodes[0][treasureIndex[0]] = code;
+                                                treasureIndex[0] +=1;
+                                                treasureCodes[0][treasureIndex[0]] = xAdjustment2[0] - 1;
+                                                treasureIndex[0] +=1;
+                                                treasureCodes[0][treasureIndex[0]] = yAdjustment2[0];
+                                                treasureIndex[0] +=1;
+                                            }
+                                            if (logicBoard[xAdjustment2[0] - 1][yAdjustment2[0]]==26){
+                                                Random rand = new Random();
+                                                int code = rand.nextInt(2000)+1000;
+                                                JOptionPane.showMessageDialog(layeredPane2, "Code of treasure : " + String.valueOf(code),
+                                                        "Founded", JOptionPane.ERROR_MESSAGE);
+                                                treasureCodes[0][treasureIndex[0]] = logicBoard[xAdjustment2[0] - 1][yAdjustment2[0]];
+                                                treasureIndex[0] +=1;
+                                                treasureCodes[0][treasureIndex[0]] = code;
+                                                treasureIndex[0] +=1;
+                                                treasureCodes[0][treasureIndex[0]] = xAdjustment2[0] - 1;
+                                                treasureIndex[0] +=1;
+                                                treasureCodes[0][treasureIndex[0]] = yAdjustment2[0];
+                                                treasureIndex[0] +=1;
+                                            }
+                                            if (logicBoard[xAdjustment2[0] - 1][yAdjustment2[0]]==27){
+                                                Random rand = new Random();
+                                                int code = rand.nextInt(2000)+1000;
+                                                JOptionPane.showMessageDialog(layeredPane2, "Code of treasure : " + String.valueOf(code),
+                                                        "Founded", JOptionPane.ERROR_MESSAGE);
+                                                treasureCodes[0][treasureIndex[0]] = logicBoard[xAdjustment2[0] - 1][yAdjustment2[0]];
+                                                treasureIndex[0] +=1;
+                                                treasureCodes[0][treasureIndex[0]] = code;
+                                                treasureIndex[0] +=1;
+                                                treasureCodes[0][treasureIndex[0]] = xAdjustment2[0] - 1;
+                                                treasureIndex[0] +=1;
+                                                treasureCodes[0][treasureIndex[0]] = yAdjustment2[0];
+                                                treasureIndex[0] +=1;
+                                            }
+                                            if (logicBoard[xAdjustment2[0] - 1][yAdjustment2[0]]==28){
+                                                Random rand = new Random();
+                                                int code = rand.nextInt(2000)+1000;
+                                                JOptionPane.showMessageDialog(layeredPane2, "Code of treasure : " + String.valueOf(code),
+                                                        "Founded", JOptionPane.ERROR_MESSAGE);
+                                                treasureCodes[0][treasureIndex[0]] = logicBoard[xAdjustment2[0] - 1][yAdjustment2[0]];
+                                                treasureIndex[0] +=1;
+                                                treasureCodes[0][treasureIndex[0]] = code;
+                                                treasureIndex[0] +=1;
+                                                treasureCodes[0][treasureIndex[0]] = xAdjustment2[0] - 1;
+                                                treasureIndex[0] +=1;
+                                                treasureCodes[0][treasureIndex[0]] = yAdjustment2[0];
+                                                treasureIndex[0] +=1;
+                                            }
 
-                                                if (logicBoard[xAdjustment2[0] - 1][yAdjustment2[0]]==5){
-                                                    Random rand = new Random();
-                                                    int money = rand.nextInt(10)+1;
-                                                    money *= 1000;
-                                                    JOptionPane.showMessageDialog(layeredPane2, "You got"+ " "+ String.valueOf(money)+" money",
-                                                            "congratulations", JOptionPane.PLAIN_MESSAGE);
-                                                    player1.money +=money;
-                                                    logicBoard[xAdjustment2[0] - 1][yAdjustment2[0]]=0;
-                                                }
+                                            if (logicBoard[xAdjustment2[0] - 1][yAdjustment2[0]]==5){
+                                                Random rand = new Random();
+                                                int money = rand.nextInt(10)+1;
+                                                money *= 1000;
+                                                JOptionPane.showMessageDialog(layeredPane2, "You got"+ " "+ String.valueOf(money)+" money",
+                                                        "congratulations", JOptionPane.PLAIN_MESSAGE);
+                                                player1.money +=money;
+                                                logicBoard[xAdjustment2[0] - 1][yAdjustment2[0]]=0;
+                                            }
 
-                                                if (logicBoard[xAdjustment2[0] - 1][yAdjustment2[0]]==6){
-                                                    Random rand = new Random();
-                                                    int trap = rand.nextInt(10)+1;
-                                                    trap *= 100;
-                                                    JOptionPane.showMessageDialog(layeredPane2, "You are in a trap\n"+"You lost "+String.valueOf(trap)+" money",
-                                                            "Oh no", JOptionPane.ERROR_MESSAGE);
-                                                    player1.money -=trap;
-                                                    logicBoard[xAdjustment2[0] - 1][yAdjustment2[0]]=0;
-                                                }
+                                            if (logicBoard[xAdjustment2[0] - 1][yAdjustment2[0]]==6){
+                                                Random rand = new Random();
+                                                int trap = rand.nextInt(10)+1;
+                                                trap *= 100;
+                                                JOptionPane.showMessageDialog(layeredPane2, "You are in a trap\n"+"You lost "+String.valueOf(trap)+" money",
+                                                        "Oh no", JOptionPane.ERROR_MESSAGE);
+                                                player1.money -=trap;
+                                                logicBoard[xAdjustment2[0] - 1][yAdjustment2[0]]=0;
+                                            }
 
-                                                if (logicBoard[xAdjustment2[0] - 1][yAdjustment2[0]]==99){
-                                                    JOptionPane.showMessageDialog(layeredPane2, "You can not return",
-                                                            "Oh no", JOptionPane.ERROR_MESSAGE);
-                                                    arr2[xAdjustment2[0] - 1][yAdjustment2[0]].setBackground(Color.white);
-                                                    xAdjustment2[0] += 1;
-                                                    counter -= 1;
-                                                }
+                                            if (logicBoard[xAdjustment2[0] - 1][yAdjustment2[0]]==99){
+                                                JOptionPane.showMessageDialog(layeredPane2, "You can not return",
+                                                        "Oh no", JOptionPane.ERROR_MESSAGE);
+                                                arr2[xAdjustment2[0] - 1][yAdjustment2[0]].setBackground(Color.white);
+                                                xAdjustment2[0] += 1;
+                                                counter -= 1;
+                                            }
 
+                                            if (xAdjustment2[0]-1 == xAdjustment[0] && yAdjustment2[0]==yAdjustment[0]){
+                                                System.out.println("Yes");
+                                                if (player1.power == player2.power){
+                                                    JOptionPane.showMessageDialog(layeredPane2, "Player1's power is more \n beacuse Player1 is here more",
+                                                            "Error", JOptionPane.ERROR_MESSAGE);
+
+                                                    int moneyTemp = ((player1.power - player2.power)/(player1.power + player2.power)) * player2.money;
+                                                    player1.money += moneyTemp;
+                                                    player2.money -= moneyTemp;
+
+                                                    player1.power -= player2.power;
+                                                    player2.power = 0;
+
+                                                    uu[0] =1;
+                                                    arr2[xAdjustment2[0]-1][yAdjustment2[0]].setBackground(Color.white);
+                                                }
+                                                if (player1.power > player2.power){
+                                                    JOptionPane.showMessageDialog(layeredPane2, "Player1's power is more \n beacuse Player1 is here more",
+                                                            "Error", JOptionPane.ERROR_MESSAGE);
+
+                                                    int moneyTemp = ((player1.power - player2.power)/(player1.power + player2.power)) * player2.money;
+                                                    player1.money += moneyTemp;
+                                                    player2.money -= moneyTemp;
+
+                                                    player1.power -= player2.power;
+                                                    player2.power = 0;
+
+                                                    uu[0] =1;
+                                                    arr2[xAdjustment2[0]-1][yAdjustment2[0]].setBackground(Color.white);
+                                                }
+                                                if (player1.power < player2.power){
+                                                    JOptionPane.showMessageDialog(layeredPane2, "Player1's power is more \n beacuse Player1 is here more",
+                                                            "Error", JOptionPane.ERROR_MESSAGE);
+
+                                                    int moneyTemp = ((player2.power - player1.power)/(player2.power + player1.power)) * player1.money;
+                                                    player2.money += moneyTemp;
+                                                    player1.money -= moneyTemp;
+
+                                                    player2.power -= player1.power;
+                                                    player1.power = 0;
+
+                                                    xAdjustment[0] = 0;
+                                                    yAdjustment[0] = 0;
+                                                }
+                                            }
+                                            if (uu[0]==0){
                                                 player2.x=xAdjustment2[0] - 1;
                                                 player2.y=yAdjustment2[0];
                                                 xAdjustment2[0] -= 1;
@@ -759,6 +801,18 @@ public class Traveling_Salesman{
 
                                                 yy[0] = 0;
                                                 arr2[xAdjustment2[0]+1][yAdjustment2[0]].setBackground(Color.white);
+                                            }
+                                            if (uu[0]==1){
+                                                arr2[xAdjustment2[0]][yAdjustment2[0]].setBackground(Color.white);
+                                                xAdjustment2[0] = 0;
+                                                yAdjustment2[0] = finalSize-1;
+                                                uu[0]=0;
+                                                counter += 1;
+                                                ll2[0] = counter;
+                                                PLaying_Game2.setVisible(false);
+                                                PLaying_Game.setVisible(true);
+                                                arr2[xAdjustment2[0]][yAdjustment2[0]].setBackground(Color.red);
+                                                switchPlayer[0] = 1;
                                             }
                                         }
                                     }
@@ -781,7 +835,6 @@ public class Traveling_Salesman{
                                                 "Error", JOptionPane.ERROR_MESSAGE);
 
                                         switchPlayer[0]=1;
-                                        PlayerName2.setText("Player1");
                                         counter=0;
                                         ll2[0] = 0;
 
@@ -798,262 +851,305 @@ public class Traveling_Salesman{
 
                                         break;
                                     }
-                                    else{
+                                    else {
+                                        arr2[xAdjustment2[0] + 1][yAdjustment2[0]].setBackground(Color.red);
 
-                                        if (xAdjustment2[0] == finalSize - 1) {
-                                            JOptionPane.showMessageDialog(layeredPane2, "Out of board size",
-                                                    "Error", JOptionPane.ERROR_MESSAGE);
-                                            break;
+                                        if (logicBoard[xAdjustment2[0]][yAdjustment2[0]] != 1 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=2 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=4){
+                                            logicBoard[xAdjustment2[0]][yAdjustment2[0]] = 99;
                                         }
 
-                                        else {
-                                            if (logicBoard[xAdjustment2[0]+1][yAdjustment2[0]] == 3){
-                                                JOptionPane.showMessageDialog(layeredPane2, "Here is a wall",
-                                                        "Error", JOptionPane.ERROR_MESSAGE);
-                                                counter -=1;
-                                            }
-
-                                            else {
-                                                arr2[xAdjustment2[0] + 1][yAdjustment2[0]].setBackground(Color.red);
-
-                                                if (logicBoard[xAdjustment2[0]][yAdjustment2[0]] != 1 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=2 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=4){
-                                                    logicBoard[xAdjustment2[0]][yAdjustment2[0]] = 99;
-                                                }
-
-                                                if (logicBoard[xAdjustment2[0] + 1][yAdjustment2[0]]==1){
-                                                    JFrame f=new JFrame("Castle");
-                                                    f.getContentPane().setBackground(new Color(16,5,47));
-                                                    final JLabel label = new JLabel();
-                                                    label.setBounds(80,600, 250,50);
-                                                    JTextField value = new JTextField();
-                                                    value.setBounds(355,265,100,30);
-                                                    JLabel l2=new JLabel("Enter your treasure Code:");
-                                                    l2.setBounds(120,250, 300,60);
-                                                    l2.setFont(new Font("Arial", Font.PLAIN, 20));
-                                                    l2.setForeground(Color.white);
-                                                    JButton b = new JButton("Done");
-                                                    b.setBounds(250,320, 80,30);
-                                                    f.add(value); f.add(label); f.add(l2); f.add(b);
-                                                    f.setSize(600,600);
-                                                    f.setLayout(null);
-                                                    f.setVisible(true);
-                                                    b.addActionListener(new ActionListener() {
-                                                        public void actionPerformed(ActionEvent e) {
-                                                            int index = 0;
-                                                            String code = value.getText();
-                                                            int sw = 0;
-                                                            for (int i = 0; i< treasureCodes[0].length ; i++){
-                                                                if (treasureCodes[0][i]==Integer.parseInt(code)){
-                                                                    sw =1;
-                                                                    index = i;
-                                                                    break;
-                                                                }
-                                                            }
-                                                            if (sw==1){
-                                                                info.treasureCounter +=1;
-                                                                for(int i = 0; i< 10 ; i++){
-                                                                    System.out.println(treasureCodes[0][i]);
-                                                                }
-                                                                String namme = null;
-                                                                int name =  treasureCodes[0][index-1];
-                                                                int temp1 = treasureCodes[0][index+1];
-                                                                int temp2 = treasureCodes[0][index+2];
-                                                                logicBoard[temp1][temp2] = 0;
-                                                                treasureCodes[0] =removeTheElement(treasureCodes[0],index);
-                                                                System.out.println("-------------");
-                                                                for(int i = 0; i< 10 ; i++){
-                                                                    System.out.println(treasureCodes[0][i]);
-                                                                }
-                                                                if (name==21){
-                                                                    namme = "Diamond ring";
-                                                                }
-                                                                if (name==22){
-                                                                    namme = "Jeweled sword";
-                                                                }
-                                                                if (name==23){
-                                                                    namme = "Golden glass";
-                                                                }
-                                                                if (name==24){
-                                                                    namme = "Glass cup";
-                                                                }
-                                                                if (name==25){
-                                                                    namme = "Wooden bow";
-                                                                }
-                                                                if (name==26){
-                                                                    namme = "Steel shield";
-                                                                }
-                                                                if (name==27){
-                                                                    namme = "Golden key";
-                                                                }
-                                                                if (name==28){
-                                                                    namme = "Dragon scroll";
-                                                                }
-                                                                JOptionPane.showMessageDialog(f, "You have found "+namme+"\n"+"Your money increased",
-                                                                        "Treasure Confirmed", JOptionPane.PLAIN_MESSAGE);
-                                                                player1.money += 100000;
-                                                                f.setVisible(false);
-                                                            }
-                                                            if(sw==0){
-                                                                JOptionPane.showMessageDialog(f, "This is not a trasure code",
-                                                                        "Treasure Confirmed", JOptionPane.ERROR_MESSAGE);
-                                                                f.setVisible(false);
-                                                            }
+                                        if (logicBoard[xAdjustment2[0] + 1][yAdjustment2[0]]==1){
+                                            JFrame f=new JFrame("Castle");
+                                            f.getContentPane().setBackground(new Color(16,5,47));
+                                            final JLabel label = new JLabel();
+                                            label.setBounds(80,600, 250,50);
+                                            JTextField value = new JTextField();
+                                            value.setBounds(355,265,100,30);
+                                            JLabel l2=new JLabel("Enter your treasure Code:");
+                                            l2.setBounds(120,250, 300,60);
+                                            l2.setFont(new Font("Arial", Font.PLAIN, 20));
+                                            l2.setForeground(Color.white);
+                                            JButton b = new JButton("Done");
+                                            b.setBounds(250,320, 80,30);
+                                            f.add(value); f.add(label); f.add(l2); f.add(b);
+                                            f.setSize(600,600);
+                                            f.setLayout(null);
+                                            f.setVisible(true);
+                                            b.addActionListener(new ActionListener() {
+                                                public void actionPerformed(ActionEvent e) {
+                                                    int index = 0;
+                                                    String code = value.getText();
+                                                    int sw = 0;
+                                                    for (int i = 0; i< treasureCodes[0].length ; i++){
+                                                        if (treasureCodes[0][i]==Integer.parseInt(code)){
+                                                            sw =1;
+                                                            index = i;
+                                                            break;
                                                         }
-                                                    });
+                                                    }
+                                                    if (sw==1){
+                                                        info.treasureCounter +=1;
+                                                        for(int i = 0; i< 10 ; i++){
+                                                            System.out.println(treasureCodes[0][i]);
+                                                        }
+                                                        String namme = null;
+                                                        int name =  treasureCodes[0][index-1];
+                                                        int temp1 = treasureCodes[0][index+1];
+                                                        int temp2 = treasureCodes[0][index+2];
+                                                        logicBoard[temp1][temp2] = 0;
+                                                        treasureCodes[0] =removeTheElement(treasureCodes[0],index);
+                                                        System.out.println("-------------");
+                                                        for(int i = 0; i< 10 ; i++){
+                                                            System.out.println(treasureCodes[0][i]);
+                                                        }
+                                                        if (name==21){
+                                                            namme = "Diamond ring";
+                                                        }
+                                                        if (name==22){
+                                                            namme = "Jeweled sword";
+                                                        }
+                                                        if (name==23){
+                                                            namme = "Golden glass";
+                                                        }
+                                                        if (name==24){
+                                                            namme = "Glass cup";
+                                                        }
+                                                        if (name==25){
+                                                            namme = "Wooden bow";
+                                                        }
+                                                        if (name==26){
+                                                            namme = "Steel shield";
+                                                        }
+                                                        if (name==27){
+                                                            namme = "Golden key";
+                                                        }
+                                                        if (name==28){
+                                                            namme = "Dragon scroll";
+                                                        }
+                                                        JOptionPane.showMessageDialog(f, "You have found "+namme+"\n"+"Your money increased",
+                                                                "Treasure Confirmed", JOptionPane.PLAIN_MESSAGE);
+                                                        player2.money += 100000;
+                                                        player2.treasure_founded += 1;
+                                                        f.setVisible(false);
+                                                    }
+                                                    if(sw==0){
+                                                        JOptionPane.showMessageDialog(f, "This is not a trasure code",
+                                                                "Treasure Confirmed", JOptionPane.ERROR_MESSAGE);
+                                                        f.setVisible(false);
+                                                    }
                                                 }
+                                            });
+                                        }
 
-                                                if (logicBoard[xAdjustment2[0] + 1][yAdjustment2[0]]==21){
-                                                    Random rand = new Random();
-                                                    int code = rand.nextInt(2000)+1000;
-                                                    JOptionPane.showMessageDialog(layeredPane2, "Code of treasure : " + String.valueOf(code),
-                                                            "Founded", JOptionPane.ERROR_MESSAGE);
-                                                    treasureCodes[0][treasureIndex[0]] = logicBoard[xAdjustment2[0] + 1][yAdjustment2[0]];
-                                                    treasureIndex[0] +=1;
-                                                    treasureCodes[0][treasureIndex[0]] = code;
-                                                    treasureIndex[0] +=1;
-                                                    treasureCodes[0][treasureIndex[0]] = xAdjustment2[0] + 1;
-                                                    treasureIndex[0] +=1;
-                                                    treasureCodes[0][treasureIndex[0]] = yAdjustment2[0];
-                                                    treasureIndex[0] +=1;
-                                                }
-                                                if (logicBoard[xAdjustment2[0] + 1][yAdjustment2[0]]==22){
-                                                    Random rand = new Random();
-                                                    int code = rand.nextInt(2000)+1000;
-                                                    JOptionPane.showMessageDialog(layeredPane2, "Code of treasure : " + String.valueOf(code),
-                                                            "Founded", JOptionPane.ERROR_MESSAGE);
-                                                    treasureCodes[0][treasureIndex[0]] = logicBoard[xAdjustment2[0] + 1][yAdjustment2[0]];
-                                                    treasureIndex[0] +=1;
-                                                    treasureCodes[0][treasureIndex[0]] = code;
-                                                    treasureIndex[0] +=1;
-                                                    treasureCodes[0][treasureIndex[0]] = xAdjustment2[0] + 1;
-                                                    treasureIndex[0] +=1;
-                                                    treasureCodes[0][treasureIndex[0]] = yAdjustment2[0];
-                                                    treasureIndex[0] +=1;
-                                                }
-                                                if (logicBoard[xAdjustment2[0] + 1][yAdjustment2[0]]==23){
-                                                    Random rand = new Random();
-                                                    int code = rand.nextInt(2000)+1000;
-                                                    JOptionPane.showMessageDialog(layeredPane2, "Code of treasure : " + String.valueOf(code),
-                                                            "Founded", JOptionPane.ERROR_MESSAGE);
-                                                    treasureCodes[0][treasureIndex[0]] = logicBoard[xAdjustment2[0] + 1][yAdjustment2[0]];
-                                                    treasureIndex[0] +=1;
-                                                    treasureCodes[0][treasureIndex[0]] = code;
-                                                    treasureIndex[0] +=1;
-                                                    treasureCodes[0][treasureIndex[0]] = xAdjustment2[0] + 1;
-                                                    treasureIndex[0] +=1;
-                                                    treasureCodes[0][treasureIndex[0]] = yAdjustment2[0];
-                                                    treasureIndex[0] +=1;
-                                                }
-                                                if (logicBoard[xAdjustment2[0] + 1][yAdjustment2[0]]==24){
-                                                    Random rand = new Random();
-                                                    int code = rand.nextInt(2000)+1000;
-                                                    JOptionPane.showMessageDialog(layeredPane2, "Code of treasure : " + String.valueOf(code),
-                                                            "Founded", JOptionPane.ERROR_MESSAGE);
-                                                    treasureCodes[0][treasureIndex[0]] = logicBoard[xAdjustment2[0] + 1][yAdjustment2[0]];
-                                                    treasureIndex[0] +=1;
-                                                    treasureCodes[0][treasureIndex[0]] = code;
-                                                    treasureIndex[0] +=1;
-                                                    treasureCodes[0][treasureIndex[0]] = xAdjustment2[0] + 1;
-                                                    treasureIndex[0] +=1;
-                                                    treasureCodes[0][treasureIndex[0]] = yAdjustment2[0];
-                                                    treasureIndex[0] +=1;
-                                                }
-                                                if (logicBoard[xAdjustment2[0] + 1][yAdjustment2[0]]==25){
-                                                    Random rand = new Random();
-                                                    int code = rand.nextInt(2000)+1000;
-                                                    JOptionPane.showMessageDialog(layeredPane2, "Code of treasure : " + String.valueOf(code),
-                                                            "Founded", JOptionPane.ERROR_MESSAGE);
-                                                    treasureCodes[0][treasureIndex[0]] = logicBoard[xAdjustment2[0] + 1][yAdjustment2[0]];
-                                                    treasureIndex[0] +=1;
-                                                    treasureCodes[0][treasureIndex[0]] = code;
-                                                    treasureIndex[0] +=1;
-                                                    treasureCodes[0][treasureIndex[0]] = xAdjustment2[0] + 1;
-                                                    treasureIndex[0] +=1;
-                                                    treasureCodes[0][treasureIndex[0]] = yAdjustment2[0];
-                                                    treasureIndex[0] +=1;
-                                                }
-                                                if (logicBoard[xAdjustment2[0] + 1][yAdjustment2[0]]==26){
-                                                    Random rand = new Random();
-                                                    int code = rand.nextInt(2000)+1000;
-                                                    JOptionPane.showMessageDialog(layeredPane2, "Code of treasure : " + String.valueOf(code),
-                                                            "Founded", JOptionPane.ERROR_MESSAGE);
-                                                    treasureCodes[0][treasureIndex[0]] = logicBoard[xAdjustment2[0] + 1][yAdjustment2[0]];
-                                                    treasureIndex[0] +=1;
-                                                    treasureCodes[0][treasureIndex[0]] = code;
-                                                    treasureIndex[0] +=1;
-                                                    treasureCodes[0][treasureIndex[0]] = xAdjustment2[0] + 1;
-                                                    treasureIndex[0] +=1;
-                                                    treasureCodes[0][treasureIndex[0]] = yAdjustment2[0];
-                                                    treasureIndex[0] +=1;
-                                                }
-                                                if (logicBoard[xAdjustment2[0] + 1][yAdjustment2[0]]==27){
-                                                    Random rand = new Random();
-                                                    int code = rand.nextInt(2000)+1000;
-                                                    JOptionPane.showMessageDialog(layeredPane2, "Code of treasure : " + String.valueOf(code),
-                                                            "Founded", JOptionPane.ERROR_MESSAGE);
-                                                    treasureCodes[0][treasureIndex[0]] = logicBoard[xAdjustment2[0] + 1][yAdjustment2[0]];
-                                                    treasureIndex[0] +=1;
-                                                    treasureCodes[0][treasureIndex[0]] = code;
-                                                    treasureIndex[0] +=1;
-                                                    treasureCodes[0][treasureIndex[0]] = xAdjustment2[0] + 1;
-                                                    treasureIndex[0] +=1;
-                                                    treasureCodes[0][treasureIndex[0]] = yAdjustment2[0];
-                                                    treasureIndex[0] +=1;
-                                                }
-                                                if (logicBoard[xAdjustment2[0] + 1][yAdjustment2[0]]==28){
-                                                    Random rand = new Random();
-                                                    int code = rand.nextInt(2000)+1000;
-                                                    JOptionPane.showMessageDialog(layeredPane2, "Code of treasure : " + String.valueOf(code),
-                                                            "Founded", JOptionPane.ERROR_MESSAGE);
-                                                    treasureCodes[0][treasureIndex[0]] = logicBoard[xAdjustment2[0] + 1][yAdjustment2[0]];
-                                                    treasureIndex[0] +=1;
-                                                    treasureCodes[0][treasureIndex[0]] = code;
-                                                    treasureIndex[0] +=1;
-                                                    treasureCodes[0][treasureIndex[0]] = xAdjustment2[0] + 1;
-                                                    treasureIndex[0] +=1;
-                                                    treasureCodes[0][treasureIndex[0]] = yAdjustment2[0];
-                                                    treasureIndex[0] +=1;
-                                                }
+                                        if (logicBoard[xAdjustment2[0] + 1][yAdjustment2[0]]==21){
+                                            Random rand = new Random();
+                                            int code = rand.nextInt(2000)+1000;
+                                            JOptionPane.showMessageDialog(layeredPane2, "Code of treasure : " + String.valueOf(code),
+                                                    "Founded", JOptionPane.ERROR_MESSAGE);
+                                            treasureCodes[0][treasureIndex[0]] = logicBoard[xAdjustment2[0] + 1][yAdjustment2[0]];
+                                            treasureIndex[0] +=1;
+                                            treasureCodes[0][treasureIndex[0]] = code;
+                                            treasureIndex[0] +=1;
+                                            treasureCodes[0][treasureIndex[0]] = xAdjustment2[0] + 1;
+                                            treasureIndex[0] +=1;
+                                            treasureCodes[0][treasureIndex[0]] = yAdjustment2[0];
+                                            treasureIndex[0] +=1;
+                                        }
+                                        if (logicBoard[xAdjustment2[0] + 1][yAdjustment2[0]]==22){
+                                            Random rand = new Random();
+                                            int code = rand.nextInt(2000)+1000;
+                                            JOptionPane.showMessageDialog(layeredPane2, "Code of treasure : " + String.valueOf(code),
+                                                    "Founded", JOptionPane.ERROR_MESSAGE);
+                                            treasureCodes[0][treasureIndex[0]] = logicBoard[xAdjustment2[0] + 1][yAdjustment2[0]];
+                                            treasureIndex[0] +=1;
+                                            treasureCodes[0][treasureIndex[0]] = code;
+                                            treasureIndex[0] +=1;
+                                            treasureCodes[0][treasureIndex[0]] = xAdjustment2[0] + 1;
+                                            treasureIndex[0] +=1;
+                                            treasureCodes[0][treasureIndex[0]] = yAdjustment2[0];
+                                            treasureIndex[0] +=1;
+                                        }
+                                        if (logicBoard[xAdjustment2[0] + 1][yAdjustment2[0]]==23){
+                                            Random rand = new Random();
+                                            int code = rand.nextInt(2000)+1000;
+                                            JOptionPane.showMessageDialog(layeredPane2, "Code of treasure : " + String.valueOf(code),
+                                                    "Founded", JOptionPane.ERROR_MESSAGE);
+                                            treasureCodes[0][treasureIndex[0]] = logicBoard[xAdjustment2[0] + 1][yAdjustment2[0]];
+                                            treasureIndex[0] +=1;
+                                            treasureCodes[0][treasureIndex[0]] = code;
+                                            treasureIndex[0] +=1;
+                                            treasureCodes[0][treasureIndex[0]] = xAdjustment2[0] + 1;
+                                            treasureIndex[0] +=1;
+                                            treasureCodes[0][treasureIndex[0]] = yAdjustment2[0];
+                                            treasureIndex[0] +=1;
+                                        }
+                                        if (logicBoard[xAdjustment2[0] + 1][yAdjustment2[0]]==24){
+                                            Random rand = new Random();
+                                            int code = rand.nextInt(2000)+1000;
+                                            JOptionPane.showMessageDialog(layeredPane2, "Code of treasure : " + String.valueOf(code),
+                                                    "Founded", JOptionPane.ERROR_MESSAGE);
+                                            treasureCodes[0][treasureIndex[0]] = logicBoard[xAdjustment2[0] + 1][yAdjustment2[0]];
+                                            treasureIndex[0] +=1;
+                                            treasureCodes[0][treasureIndex[0]] = code;
+                                            treasureIndex[0] +=1;
+                                            treasureCodes[0][treasureIndex[0]] = xAdjustment2[0] + 1;
+                                            treasureIndex[0] +=1;
+                                            treasureCodes[0][treasureIndex[0]] = yAdjustment2[0];
+                                            treasureIndex[0] +=1;
+                                        }
+                                        if (logicBoard[xAdjustment2[0] + 1][yAdjustment2[0]]==25){
+                                            Random rand = new Random();
+                                            int code = rand.nextInt(2000)+1000;
+                                            JOptionPane.showMessageDialog(layeredPane2, "Code of treasure : " + String.valueOf(code),
+                                                    "Founded", JOptionPane.ERROR_MESSAGE);
+                                            treasureCodes[0][treasureIndex[0]] = logicBoard[xAdjustment2[0] + 1][yAdjustment2[0]];
+                                            treasureIndex[0] +=1;
+                                            treasureCodes[0][treasureIndex[0]] = code;
+                                            treasureIndex[0] +=1;
+                                            treasureCodes[0][treasureIndex[0]] = xAdjustment2[0] + 1;
+                                            treasureIndex[0] +=1;
+                                            treasureCodes[0][treasureIndex[0]] = yAdjustment2[0];
+                                            treasureIndex[0] +=1;
+                                        }
+                                        if (logicBoard[xAdjustment2[0] + 1][yAdjustment2[0]]==26){
+                                            Random rand = new Random();
+                                            int code = rand.nextInt(2000)+1000;
+                                            JOptionPane.showMessageDialog(layeredPane2, "Code of treasure : " + String.valueOf(code),
+                                                    "Founded", JOptionPane.ERROR_MESSAGE);
+                                            treasureCodes[0][treasureIndex[0]] = logicBoard[xAdjustment2[0] + 1][yAdjustment2[0]];
+                                            treasureIndex[0] +=1;
+                                            treasureCodes[0][treasureIndex[0]] = code;
+                                            treasureIndex[0] +=1;
+                                            treasureCodes[0][treasureIndex[0]] = xAdjustment2[0] + 1;
+                                            treasureIndex[0] +=1;
+                                            treasureCodes[0][treasureIndex[0]] = yAdjustment2[0];
+                                            treasureIndex[0] +=1;
+                                        }
+                                        if (logicBoard[xAdjustment2[0] + 1][yAdjustment2[0]]==27){
+                                            Random rand = new Random();
+                                            int code = rand.nextInt(2000)+1000;
+                                            JOptionPane.showMessageDialog(layeredPane2, "Code of treasure : " + String.valueOf(code),
+                                                    "Founded", JOptionPane.ERROR_MESSAGE);
+                                            treasureCodes[0][treasureIndex[0]] = logicBoard[xAdjustment2[0] + 1][yAdjustment2[0]];
+                                            treasureIndex[0] +=1;
+                                            treasureCodes[0][treasureIndex[0]] = code;
+                                            treasureIndex[0] +=1;
+                                            treasureCodes[0][treasureIndex[0]] = xAdjustment2[0] + 1;
+                                            treasureIndex[0] +=1;
+                                            treasureCodes[0][treasureIndex[0]] = yAdjustment2[0];
+                                            treasureIndex[0] +=1;
+                                        }
+                                        if (logicBoard[xAdjustment2[0] + 1][yAdjustment2[0]]==28){
+                                            Random rand = new Random();
+                                            int code = rand.nextInt(2000)+1000;
+                                            JOptionPane.showMessageDialog(layeredPane2, "Code of treasure : " + String.valueOf(code),
+                                                    "Founded", JOptionPane.ERROR_MESSAGE);
+                                            treasureCodes[0][treasureIndex[0]] = logicBoard[xAdjustment2[0] + 1][yAdjustment2[0]];
+                                            treasureIndex[0] +=1;
+                                            treasureCodes[0][treasureIndex[0]] = code;
+                                            treasureIndex[0] +=1;
+                                            treasureCodes[0][treasureIndex[0]] = xAdjustment2[0] + 1;
+                                            treasureIndex[0] +=1;
+                                            treasureCodes[0][treasureIndex[0]] = yAdjustment2[0];
+                                            treasureIndex[0] +=1;
+                                        }
 
-                                                if (logicBoard[xAdjustment2[0] + 1][yAdjustment2[0]]==5){
-                                                    Random rand = new Random();
-                                                    int money = rand.nextInt(10)+1;
-                                                    money *= 1000;
-                                                    JOptionPane.showMessageDialog(layeredPane2, "You got"+ " "+ String.valueOf(money)+" money",
-                                                            "congratulations", JOptionPane.PLAIN_MESSAGE);
-                                                    player1.money +=money;
-                                                    logicBoard[xAdjustment2[0] + 1][yAdjustment2[0]]=0;
-                                                }
+                                        if (logicBoard[xAdjustment2[0] + 1][yAdjustment2[0]]==5){
+                                            Random rand = new Random();
+                                            int money = rand.nextInt(10)+1;
+                                            money *= 1000;
+                                            JOptionPane.showMessageDialog(layeredPane2, "You got"+ " "+ String.valueOf(money)+" money",
+                                                    "congratulations", JOptionPane.PLAIN_MESSAGE);
+                                            player1.money +=money;
+                                            logicBoard[xAdjustment2[0] + 1][yAdjustment2[0]]=0;
+                                        }
 
-                                                if (logicBoard[xAdjustment2[0] + 1][yAdjustment2[0]]==6){
-                                                    Random rand = new Random();
-                                                    int trap = rand.nextInt(10)+1;
-                                                    trap *= 100;
-                                                    JOptionPane.showMessageDialog(layeredPane2, "You are in a trap\n"+"You lost "+String.valueOf(trap)+" money",
-                                                            "Oh no", JOptionPane.ERROR_MESSAGE);
-                                                    player1.money -=trap;
-                                                    logicBoard[xAdjustment2[0] + 1][yAdjustment2[0]]=0;
-                                                }
+                                        if (logicBoard[xAdjustment2[0] + 1][yAdjustment2[0]]==6){
+                                            Random rand = new Random();
+                                            int trap = rand.nextInt(10)+1;
+                                            trap *= 100;
+                                            JOptionPane.showMessageDialog(layeredPane2, "You are in a trap\n"+"You lost "+String.valueOf(trap)+" money",
+                                                    "Oh no", JOptionPane.ERROR_MESSAGE);
+                                            player1.money -=trap;
+                                            logicBoard[xAdjustment2[0] + 1][yAdjustment2[0]]=0;
+                                        }
 
-                                                if (logicBoard[xAdjustment2[0] + 1][yAdjustment2[0]]==99){
-                                                    JOptionPane.showMessageDialog(layeredPane2, "You can not return",
-                                                            "Oh no", JOptionPane.ERROR_MESSAGE);
-                                                    arr2[xAdjustment2[0] + 1][yAdjustment2[0]].setBackground(Color.white);
-                                                    xAdjustment2[0] -= 1;
-                                                    counter -= 1;
-                                                    ll[0] = counter;
-                                                }
+                                        if (logicBoard[xAdjustment2[0] + 1][yAdjustment2[0]]==99){
+                                            JOptionPane.showMessageDialog(layeredPane2, "You can not return",
+                                                    "Oh no", JOptionPane.ERROR_MESSAGE);
+                                            arr2[xAdjustment2[0] + 1][yAdjustment2[0]].setBackground(Color.white);
+                                            xAdjustment2[0] -= 1;
+                                            counter -= 1;
+                                            ll[0] = counter;
+                                        }
 
-                                                player2.x=xAdjustment2[0] + 1;
-                                                player2.y=yAdjustment2[0];
+                                        if (xAdjustment2[0]+1 == xAdjustment[0] && yAdjustment2[0]==yAdjustment[0]){
+                                            System.out.println("Yes");
+                                            if (player1.power == player2.power){
+                                                JOptionPane.showMessageDialog(layeredPane2, "Player1's power is more \n beacuse Player1 is here more",
+                                                        "Error", JOptionPane.ERROR_MESSAGE);
 
-                                                xAdjustment2[0] += 1;
-                                                counter += 1;
-                                                ll2[0] = counter;
+                                                int moneyTemp = ((player1.power - player2.power)/(player1.power + player2.power)) * player2.money;
+                                                player1.money += moneyTemp;
+                                                player2.money -= moneyTemp;
 
+                                                player1.power -= player2.power;
+                                                player2.power = 0;
 
-                                                arr2[xAdjustment2[0]-1][yAdjustment2[0]].setBackground(Color.white);
+                                                uu[0] =1;
+                                                arr2[xAdjustment2[0]+1][yAdjustment2[0]].setBackground(Color.white);
                                             }
+                                            if (player1.power > player2.power){
+                                                JOptionPane.showMessageDialog(layeredPane2, "Player1's power is more \n beacuse Player1 is here more",
+                                                        "Error", JOptionPane.ERROR_MESSAGE);
+
+                                                int moneyTemp = ((player1.power - player2.power)/(player1.power + player2.power)) * player2.money;
+                                                player1.money += moneyTemp;
+                                                player2.money -= moneyTemp;
+
+                                                player1.power -= player2.power;
+                                                player2.power = 0;
+
+                                                uu[0] =1;
+                                                arr2[xAdjustment2[0]+1][yAdjustment2[0]].setBackground(Color.white);
+                                            }
+                                            if (player1.power < player2.power){
+                                                JOptionPane.showMessageDialog(layeredPane2, "Player1's power is more \n beacuse Player1 is here more",
+                                                        "Error", JOptionPane.ERROR_MESSAGE);
+
+                                                int moneyTemp = ((player2.power - player1.power)/(player2.power + player1.power)) * player1.money;
+                                                player2.money += moneyTemp;
+                                                player1.money -= moneyTemp;
+
+                                                player2.power -= player1.power;
+                                                player1.power = 0;
+
+                                                xAdjustment[0] = 0;
+                                                yAdjustment[0] = 0;
+                                            }
+                                        }
+                                        if (uu[0]==0){
+                                            player2.x=xAdjustment2[0] + 1;
+                                            player2.y=yAdjustment2[0];
+
+                                            xAdjustment2[0] += 1;
+                                            counter += 1;
+                                            ll2[0] = counter;
+
+
+                                            arr2[xAdjustment2[0]-1][yAdjustment2[0]].setBackground(Color.white);
+                                        }
+                                        if (uu[0]==1){
+                                            arr2[xAdjustment2[0]][yAdjustment2[0]].setBackground(Color.white);
+                                            xAdjustment2[0] = 0;
+                                            yAdjustment2[0] = finalSize-1;
+                                            uu[0]=0;
+                                            counter += 1;
+                                            ll2[0] = counter;
+                                            PLaying_Game2.setVisible(false);
+                                            PLaying_Game.setVisible(true);
+                                            arr2[xAdjustment2[0]][yAdjustment2[0]].setBackground(Color.red);
+                                            switchPlayer[0] = 1;
                                         }
                                     }
                                     break;
@@ -1074,7 +1170,6 @@ public class Traveling_Salesman{
                                                 "Error", JOptionPane.ERROR_MESSAGE);
 
                                         switchPlayer[0]=1;
-                                        PlayerName2.setText("Player1");
                                         counter=0;
                                         ll2[0] = 0;
 
@@ -1182,7 +1277,8 @@ public class Traveling_Salesman{
                                                                 }
                                                                 JOptionPane.showMessageDialog(f, "You have found "+namme+"\n"+"Your money increased",
                                                                         "Treasure Confirmed", JOptionPane.PLAIN_MESSAGE);
-                                                                player1.money += 100000;
+                                                                player2.money += 100000;
+                                                                player2.treasure_founded += 1;
                                                                 f.setVisible(false);
                                                             }
                                                             if(sw==0){
@@ -1343,15 +1439,75 @@ public class Traveling_Salesman{
                                                     ll[0] = counter;
                                                 }
 
-                                                player2.x=xAdjustment2[0];
-                                                player2.y=yAdjustment2[0] + 1;
+                                                if (xAdjustment2[0] == xAdjustment[0] && yAdjustment2[0] + 1==yAdjustment[0]){
+                                                    System.out.println("Yes");
+                                                    if (player1.power == player2.power){
+                                                        JOptionPane.showMessageDialog(layeredPane2, "Player1's power is more \n beacuse Player1 is here more",
+                                                                "Error", JOptionPane.ERROR_MESSAGE);
 
-                                                yAdjustment2[0] += 1;
-                                                counter += 1;
-                                                ll2[0] = counter;
+                                                        int moneyTemp = ((player1.power - player2.power)/(player1.power + player2.power)) * player2.money;
+                                                        player1.money += moneyTemp;
+                                                        player2.money -= moneyTemp;
+
+                                                        player1.power -= player2.power;
+                                                        player2.power = 0;
+
+                                                        uu[0] =1;
+                                                        arr2[xAdjustment2[0]][yAdjustment2[0] + 1].setBackground(Color.white);
+                                                    }
+                                                    if (player1.power > player2.power){
+                                                        JOptionPane.showMessageDialog(layeredPane2, "Player1's power is more \n beacuse Player1 is here more",
+                                                                "Error", JOptionPane.ERROR_MESSAGE);
+
+                                                        int moneyTemp = ((player1.power - player2.power)/(player1.power + player2.power)) * player2.money;
+                                                        player1.money += moneyTemp;
+                                                        player2.money -= moneyTemp;
+
+                                                        player1.power -= player2.power;
+                                                        player2.power = 0;
+
+                                                        uu[0] =1;
+                                                        arr2[xAdjustment2[0]][yAdjustment2[0] + 1].setBackground(Color.white);
+                                                    }
+                                                    if (player1.power < player2.power){
+                                                        JOptionPane.showMessageDialog(layeredPane2, "Player1's power is more \n beacuse Player1 is here more",
+                                                                "Error", JOptionPane.ERROR_MESSAGE);
+
+                                                        int moneyTemp = ((player2.power - player1.power)/(player2.power + player1.power)) * player1.money;
+                                                        player2.money += moneyTemp;
+                                                        player1.money -= moneyTemp;
+
+                                                        player2.power -= player1.power;
+                                                        player1.power = 0;
+
+                                                        xAdjustment[0] = 0;
+                                                        yAdjustment[0] = 0;
+                                                    }
+                                                }
+                                                if (uu[0]==0){
+                                                    player2.x=xAdjustment2[0];
+                                                    player2.y=yAdjustment2[0] + 1;
+
+                                                    yAdjustment2[0] += 1;
+                                                    counter += 1;
+                                                    ll2[0] = counter;
 
 
-                                                arr2[xAdjustment2[0]][yAdjustment2[0]-1].setBackground(Color.white);
+                                                    arr2[xAdjustment2[0]][yAdjustment2[0]-1].setBackground(Color.white);
+                                                }
+                                                if (uu[0]==1){
+                                                    arr2[xAdjustment2[0]][yAdjustment2[0]].setBackground(Color.white);
+                                                    xAdjustment2[0] = 0;
+                                                    yAdjustment2[0] = finalSize-1;
+                                                    uu[0]=0;
+                                                    counter += 1;
+                                                    ll2[0] = counter;
+                                                    PLaying_Game2.setVisible(false);
+                                                    PLaying_Game.setVisible(true);
+                                                    arr2[xAdjustment2[0]][yAdjustment2[0]].setBackground(Color.red);
+                                                    switchPlayer[0] = 1;
+                                                }
+
                                             }
                                         }
                                     }
@@ -1367,14 +1523,11 @@ public class Traveling_Salesman{
                             int counter = ll2[0];
                             if (yy[0]==0){
                                 while (counter != dd+1) {
-
-
                                     if (counter==dd){
                                         JOptionPane.showMessageDialog(layeredPane2, "Moving is more than dice number",
                                                 "Error", JOptionPane.ERROR_MESSAGE);
 
                                         switchPlayer[0]=1;
-                                        PlayerName2.setText("Player1");
                                         counter=0;
                                         ll2[0] = 0;
 
@@ -1480,7 +1633,8 @@ public class Traveling_Salesman{
                                                                 }
                                                                 JOptionPane.showMessageDialog(f, "You have found "+namme+"\n"+"Your money increased",
                                                                         "Treasure Confirmed", JOptionPane.PLAIN_MESSAGE);
-                                                                player1.money += 100000;
+                                                                player2.money += 100000;
+                                                                player2.treasure_founded +=1;
                                                                 f.setVisible(false);
                                                             }
                                                             if(sw==0){
@@ -1641,16 +1795,73 @@ public class Traveling_Salesman{
                                                     ll[0] = counter;
                                                 }
 
-                                                player2.x=xAdjustment2[0];
-                                                player2.y=yAdjustment2[0] - 1;
+                                                if (xAdjustment2[0] == xAdjustment[0] && yAdjustment2[0] - 1==yAdjustment[0]){
+                                                    System.out.println("Yes");
+                                                    if (player1.power == player2.power){
+                                                        JOptionPane.showMessageDialog(layeredPane2, "Player1's power is more \n beacuse Player1 is here more",
+                                                                "Error", JOptionPane.ERROR_MESSAGE);
 
-                                                yAdjustment2[0] -= 1;
-                                                counter += 1;
-                                                ll2[0] = counter;
+                                                        int moneyTemp = ((player1.power - player2.power)/(player1.power + player2.power)) * player2.money;
+                                                        player1.money += moneyTemp;
+                                                        player2.money -= moneyTemp;
 
+                                                        player1.power -= player2.power;
+                                                        player2.power = 0;
 
+                                                        uu[0] =1;
+                                                        arr2[xAdjustment2[0]][yAdjustment2[0] - 1].setBackground(Color.white);
+                                                    }
+                                                    if (player1.power > player2.power){
+                                                        JOptionPane.showMessageDialog(layeredPane2, "Player1's power is more \nbeacuse Player1 is here more",
+                                                                "Error", JOptionPane.ERROR_MESSAGE);
 
-                                                arr2[xAdjustment2[0]][yAdjustment2[0]+1].setBackground(Color.white);
+                                                        int moneyTemp = ((player1.power - player2.power)/(player1.power + player2.power)) * player2.money;
+                                                        player1.money += moneyTemp;
+                                                        player2.money -= moneyTemp;
+
+                                                        player1.power -= player2.power;
+                                                        player2.power = 0;
+
+                                                        uu[0] =1;
+                                                        arr2[xAdjustment2[0]][yAdjustment2[0] - 1].setBackground(Color.white);
+                                                    }
+                                                    if (player1.power < player2.power){
+                                                        JOptionPane.showMessageDialog(layeredPane2, "Player1's power is more \n beacuse Player1 is here more",
+                                                                "Error", JOptionPane.ERROR_MESSAGE);
+
+                                                        int moneyTemp = ((player2.power - player1.power)/(player2.power + player1.power)) * player1.money;
+                                                        player2.money += moneyTemp;
+                                                        player1.money -= moneyTemp;
+
+                                                        player2.power -= player1.power;
+                                                        player1.power = 0;
+
+                                                        xAdjustment[0] = 0;
+                                                        yAdjustment[0] = 0;
+                                                    }
+                                                }
+                                                if (uu[0]==0){
+                                                    player2.x=xAdjustment2[0];
+                                                    player2.y=yAdjustment2[0] - 1;
+
+                                                    yAdjustment2[0] -= 1;
+                                                    counter += 1;
+                                                    ll2[0] = counter;
+
+                                                    arr2[xAdjustment2[0]][yAdjustment2[0]+1].setBackground(Color.white);
+                                                }
+                                                if (uu[0]==1){
+                                                    arr2[xAdjustment2[0]][yAdjustment2[0]].setBackground(Color.white);
+                                                    xAdjustment2[0] = 0;
+                                                    yAdjustment2[0] = finalSize-1;
+                                                    uu[0]=0;
+                                                    counter += 1;
+                                                    ll2[0] = counter;
+                                                    PLaying_Game2.setVisible(false);
+                                                    PLaying_Game.setVisible(true);
+                                                    arr2[xAdjustment2[0]][yAdjustment2[0]].setBackground(Color.red);
+                                                    switchPlayer[0] = 1;
+                                                }
                                             }
                                         }
                                     }
@@ -1667,6 +1878,8 @@ public class Traveling_Salesman{
 
             }
         });
+
+        /***************************************** Dice player 1*****************************/
 
 
         Dice.addKeyListener(new KeyListener() {
@@ -1688,12 +1901,9 @@ public class Traveling_Salesman{
                                     if (counter==dd){
                                         JOptionPane.showMessageDialog(layeredPane, "Moving is more than dice number",
                                                 "Error", JOptionPane.ERROR_MESSAGE);
-                                        PlayerName.setText("Player2");
                                         counter=0;
                                         ll[0] = 0;
                                         switchPlayer[0] = 2;
-
-
 
                                         for (int i = 0; i< finalSize1; i++){
                                             for (int j = 0; j< finalSize1; j++){
@@ -1706,19 +1916,15 @@ public class Traveling_Salesman{
                                         yy[0] =1;
                                         PLaying_Game.setVisible(false);
                                         PLaying_Game2.setVisible(true);
-                                        arr2[xAdjustment[0]][yAdjustment[0]].setBackground(Color.blue);
-
                                         break;
                                     }
 
                                     else{
-
                                         if (xAdjustment[0] == 0) {
                                             JOptionPane.showMessageDialog(layeredPane, "Out of board size",
                                                     "Error", JOptionPane.ERROR_MESSAGE);
                                             break;
                                         }
-
                                         else {
                                             if (logicBoard[xAdjustment[0]-1][yAdjustment[0]] == 3){
                                                 JOptionPane.showMessageDialog(layeredPane, "Here is a wall",
@@ -1727,7 +1933,6 @@ public class Traveling_Salesman{
                                             }
 
                                             else {
-
                                                 if (logicBoard[xAdjustment[0]-1][yAdjustment[0]] == 3){
                                                     JOptionPane.showMessageDialog(layeredPane, "Here is a wall",
                                                             "Error", JOptionPane.ERROR_MESSAGE);
@@ -1735,7 +1940,6 @@ public class Traveling_Salesman{
                                                 }
 
                                                 else {
-
                                                     arr[xAdjustment[0] - 1][yAdjustment[0]].setBackground(Color.blue);
 
                                                     if (logicBoard[xAdjustment[0]][yAdjustment[0]] != 1 && logicBoard[xAdjustment[0]][yAdjustment[0]] !=2 && logicBoard[xAdjustment[0]][yAdjustment[0]] !=4){
@@ -1827,6 +2031,7 @@ public class Traveling_Salesman{
                                                                     JOptionPane.showMessageDialog(f, "You have found "+namme+"\n"+"Your money increased",
                                                                             "Treasure Confirmed", JOptionPane.PLAIN_MESSAGE);
                                                                     player1.money += 100000;
+                                                                    player1.treasure_founded += 1;
                                                                     for (int i = 0; i< finalSize2; i++){
                                                                         for (int j = 0 ; j<finalSize2 ; j++){
                                                                             if (logicBoard[i][j]==21 || logicBoard[i][j]==22 || logicBoard[i][j]==23 || logicBoard[i][j]==24 || logicBoard[i][j]==25 || logicBoard[i][j]==26 || logicBoard[i][j]==27 || logicBoard[i][j]==28){
@@ -1986,14 +2191,72 @@ public class Traveling_Salesman{
                                                         counter -= 1;
                                                     }
 
+                                                    if (xAdjustment[0] - 1 == xAdjustment2[0] && yAdjustment[0] == yAdjustment2[0]){
+                                                        if (player1.power == player2.power){
+                                                            JOptionPane.showMessageDialog(layeredPane2, "Player1's power is more \n beacuse Player1 is here more",
+                                                                    "Error", JOptionPane.ERROR_MESSAGE);
 
-                                                    xAdjustment[0] -= 1;
-                                                    counter += 1;
-                                                    ll[0] = counter;
-                                                    player1.x=xAdjustment[0];
-                                                    player1.y=yAdjustment[0];
+                                                            int moneyTemp = ((player2.power - player1.power)/(player1.power + player2.power)) * player1.money;
+                                                            player2.money += moneyTemp;
+                                                            player1.money -= moneyTemp;
 
-                                                    arr[xAdjustment[0]+1][yAdjustment[0]].setBackground(Color.white);
+                                                            player2.power -= player1.power;
+                                                            player1.power = 0;
+
+                                                            uu[0] =1;
+                                                            arr[xAdjustment[0] - 1][yAdjustment[0]].setBackground(Color.white);
+                                                        }
+                                                        if (player1.power > player2.power){
+                                                            JOptionPane.showMessageDialog(layeredPane2, "Player1's power is more \nbeacuse Player1 is here more",
+                                                                    "Error", JOptionPane.ERROR_MESSAGE);
+
+                                                            int moneyTemp = ((player1.power - player2.power)/(player1.power + player2.power)) * player2.money;
+                                                            player1.money += moneyTemp;
+                                                            player2.money -= moneyTemp;
+
+                                                            player1.power -= player2.power;
+                                                            player2.power = 0;
+
+                                                            xAdjustment2[0] = 0;
+                                                            yAdjustment2[0] = finalSize-1;
+                                                        }
+                                                        if (player1.power < player2.power){
+                                                            JOptionPane.showMessageDialog(layeredPane2, "Player1's power is more \n beacuse Player1 is here more",
+                                                                    "Error", JOptionPane.ERROR_MESSAGE);
+
+                                                            int moneyTemp = ((player2.power - player1.power)/(player2.power + player1.power)) * player1.money;
+                                                            player2.money += moneyTemp;
+                                                            player1.money -= moneyTemp;
+
+                                                            player2.power -= player1.power;
+                                                            player1.power = 0;
+
+                                                            uu[0] = 1;
+                                                            arr[xAdjustment[0] - 1][yAdjustment[0]].setBackground(Color.white);
+                                                        }
+                                                    }
+
+                                                    if (uu[0]==0){
+                                                        xAdjustment[0] -= 1;
+                                                        counter += 1;
+                                                        ll[0] = counter;
+                                                        player1.x=xAdjustment[0];
+                                                        player1.y=yAdjustment[0];
+
+                                                        arr[xAdjustment[0]+1][yAdjustment[0]].setBackground(Color.white);
+                                                    }
+                                                    if (uu[0]==1){
+                                                        arr[xAdjustment[0]][yAdjustment[0]].setBackground(Color.white);
+                                                        xAdjustment[0] = 0;
+                                                        yAdjustment[0] = finalSize-1;
+                                                        uu[0]=0;
+                                                        counter += 1;
+                                                        ll[0] = counter;
+                                                        PLaying_Game.setVisible(false);
+                                                        PLaying_Game2.setVisible(true);
+                                                        arr[xAdjustment[0]][yAdjustment[0]].setBackground(Color.blue);
+                                                        switchPlayer[0] = 2;
+                                                    }
                                                 }
                                             }
                                         }
@@ -2013,7 +2276,6 @@ public class Traveling_Salesman{
                                         JOptionPane.showMessageDialog(layeredPane, "Moving is more than dice number",
                                                 "Error", JOptionPane.ERROR_MESSAGE);
 
-                                        PlayerName.setText("Player2");
                                         counter=0;
                                         ll[0] = 0;
                                         switchPlayer[0]=2;
@@ -2029,7 +2291,6 @@ public class Traveling_Salesman{
                                         }
                                         PLaying_Game.setVisible(false);
                                         PLaying_Game2.setVisible(true);
-                                        arr2[xAdjustment[0]][yAdjustment[0]].setBackground(Color.blue);
                                         yy[0] = 0;
                                         break;
                                     }
@@ -2127,6 +2388,7 @@ public class Traveling_Salesman{
                                                                 JOptionPane.showMessageDialog(f, "You have found "+namme+"\n"+"Your money increased",
                                                                         "Treasure Confirmed", JOptionPane.PLAIN_MESSAGE);
                                                                 player1.money += 100000;
+                                                                player1.treasure_founded += 1;
                                                                 f.setVisible(false);
                                                             }
                                                             if(sw==0){
@@ -2280,14 +2542,74 @@ public class Traveling_Salesman{
                                                     ll[0] = counter;
                                                 }
 
-                                                xAdjustment[0] += 1;
-                                                counter += 1;
-                                                ll[0] = counter;
+                                                if (xAdjustment[0] + 1 == xAdjustment2[0] && yAdjustment[0] == yAdjustment2[0]){
+                                                    if (player1.power == player2.power){
+                                                        JOptionPane.showMessageDialog(layeredPane2, "Player1's power is more \n beacuse Player1 is here more",
+                                                                "Error", JOptionPane.ERROR_MESSAGE);
 
-                                                player1.x=xAdjustment[0];
-                                                player1.y=yAdjustment[0];
+                                                        int moneyTemp = ((player2.power - player1.power)/(player1.power + player2.power)) * player1.money;
+                                                        player2.money += moneyTemp;
+                                                        player1.money -= moneyTemp;
 
-                                                arr[xAdjustment[0]-1][yAdjustment[0]].setBackground(Color.white);
+                                                        player2.power -= player1.power;
+                                                        player1.power = 0;
+
+                                                        uu[0] =1;
+                                                        arr[xAdjustment[0] + 1][yAdjustment[0]].setBackground(Color.white);
+                                                    }
+                                                    if (player1.power > player2.power){
+                                                        JOptionPane.showMessageDialog(layeredPane2, "Player1's power is more \nbeacuse Player1 is here more",
+                                                                "Error", JOptionPane.ERROR_MESSAGE);
+
+                                                        int moneyTemp = ((player1.power - player2.power)/(player1.power + player2.power)) * player2.money;
+                                                        player1.money += moneyTemp;
+                                                        player2.money -= moneyTemp;
+
+                                                        player1.power -= player2.power;
+                                                        player2.power = 0;
+
+                                                        xAdjustment2[0] = 0;
+                                                        yAdjustment2[0] = finalSize-1;
+                                                    }
+                                                    if (player1.power < player2.power){
+                                                        JOptionPane.showMessageDialog(layeredPane2, "Player1's power is more \n beacuse Player1 is here more",
+                                                                "Error", JOptionPane.ERROR_MESSAGE);
+
+                                                        int moneyTemp = ((player2.power - player1.power)/(player2.power + player1.power)) * player1.money;
+                                                        player2.money += moneyTemp;
+                                                        player1.money -= moneyTemp;
+
+                                                        player2.power -= player1.power;
+                                                        player1.power = 0;
+
+                                                        uu[0] = 1;
+                                                        arr[xAdjustment[0] + 1][yAdjustment[0]].setBackground(Color.white);
+                                                    }
+                                                }
+
+                                                if (uu[0]==0){
+                                                    xAdjustment[0] += 1;
+                                                    counter += 1;
+                                                    ll[0] = counter;
+
+                                                    player1.x=xAdjustment[0];
+                                                    player1.y=yAdjustment[0];
+
+                                                    arr[xAdjustment[0]-1][yAdjustment[0]].setBackground(Color.white);
+                                                }
+                                                if (uu[0]==1){
+                                                    arr[xAdjustment[0]][yAdjustment[0]].setBackground(Color.white);
+                                                    xAdjustment[0] = 0;
+                                                    yAdjustment[0] = finalSize-1;
+                                                    uu[0]=0;
+                                                    counter += 1;
+                                                    ll[0] = counter;
+                                                    PLaying_Game.setVisible(false);
+                                                    PLaying_Game2.setVisible(true);
+                                                    arr[xAdjustment[0]][yAdjustment[0]].setBackground(Color.blue);
+                                                    switchPlayer[0] = 2;
+                                                }
+
                                             }
                                         }
                                     }
@@ -2307,7 +2629,6 @@ public class Traveling_Salesman{
                                         JOptionPane.showMessageDialog(layeredPane, "Moving is more than dice number",
                                                 "Error", JOptionPane.ERROR_MESSAGE);
 
-                                        PlayerName.setText("Player2");
                                         counter=0;
                                         ll[0] = 0;
                                         switchPlayer[0]=2;
@@ -2323,7 +2644,6 @@ public class Traveling_Salesman{
                                         yy[0] = 0;
                                         PLaying_Game.setVisible(false);
                                         PLaying_Game2.setVisible(true);
-                                        arr2[xAdjustment[0]][yAdjustment[0]].setBackground(Color.blue);
                                         break;
                                     }
                                     else{
@@ -2418,6 +2738,7 @@ public class Traveling_Salesman{
                                                                 JOptionPane.showMessageDialog(f, "You have found "+namme+"\n"+"Your money increased",
                                                                         "Treasure Confirmed", JOptionPane.PLAIN_MESSAGE);
                                                                 player1.money += 100000;
+                                                                player1.treasure_founded += 1;
                                                                 f.setVisible(false);
                                                             }
                                                             if(sw==0){
@@ -2578,14 +2899,73 @@ public class Traveling_Salesman{
                                                     ll[0] = counter;
                                                 }
 
-                                                yAdjustment[0] += 1;
-                                                counter += 1;
-                                                ll[0] = counter;
+                                                if (xAdjustment[0] == xAdjustment2[0] && yAdjustment[0] + 1 == yAdjustment2[0]){
+                                                    if (player1.power == player2.power){
+                                                        JOptionPane.showMessageDialog(layeredPane2, "Player1's power is more \n beacuse Player1 is here more",
+                                                                "Error", JOptionPane.ERROR_MESSAGE);
 
-                                                player1.x=xAdjustment[0];
-                                                player1.y=yAdjustment[0];
+                                                        int moneyTemp = ((player2.power - player1.power)/(player1.power + player2.power)) * player1.money;
+                                                        player2.money += moneyTemp;
+                                                        player1.money -= moneyTemp;
 
-                                                arr[xAdjustment[0]][yAdjustment[0]-1].setBackground(Color.white);
+                                                        player2.power -= player1.power;
+                                                        player1.power = 0;
+
+                                                        uu[0] =1;
+                                                        arr[xAdjustment[0]][yAdjustment[0] + 1].setBackground(Color.white);
+                                                    }
+                                                    if (player1.power > player2.power){
+                                                        JOptionPane.showMessageDialog(layeredPane2, "Player1's power is more \nbeacuse Player1 is here more",
+                                                                "Error", JOptionPane.ERROR_MESSAGE);
+
+                                                        int moneyTemp = ((player1.power - player2.power)/(player1.power + player2.power)) * player2.money;
+                                                        player1.money += moneyTemp;
+                                                        player2.money -= moneyTemp;
+
+                                                        player1.power -= player2.power;
+                                                        player2.power = 0;
+
+                                                        xAdjustment2[0] = 0;
+                                                        yAdjustment2[0] = finalSize-1;
+                                                    }
+                                                    if (player1.power < player2.power){
+                                                        JOptionPane.showMessageDialog(layeredPane2, "Player1's power is more \n beacuse Player1 is here more",
+                                                                "Error", JOptionPane.ERROR_MESSAGE);
+
+                                                        int moneyTemp = ((player2.power - player1.power)/(player2.power + player1.power)) * player1.money;
+                                                        player2.money += moneyTemp;
+                                                        player1.money -= moneyTemp;
+
+                                                        player2.power -= player1.power;
+                                                        player1.power = 0;
+
+                                                        uu[0] = 1;
+                                                        arr[xAdjustment[0]][yAdjustment[0] + 1].setBackground(Color.white);
+                                                    }
+                                                }
+
+                                                if (uu[0]==0){
+                                                    yAdjustment[0] += 1;
+                                                    counter += 1;
+                                                    ll[0] = counter;
+
+                                                    player1.x=xAdjustment[0];
+                                                    player1.y=yAdjustment[0];
+
+                                                    arr[xAdjustment[0]][yAdjustment[0]-1].setBackground(Color.white);
+                                                }
+                                                if (uu[0]==1){
+                                                    arr[xAdjustment[0]][yAdjustment[0]].setBackground(Color.white);
+                                                    xAdjustment[0] = 0;
+                                                    yAdjustment[0] = finalSize-1;
+                                                    uu[0]=0;
+                                                    counter += 1;
+                                                    ll[0] = counter;
+                                                    PLaying_Game.setVisible(false);
+                                                    PLaying_Game2.setVisible(true);
+                                                    arr[xAdjustment[0]][yAdjustment[0]].setBackground(Color.blue);
+                                                    switchPlayer[0] = 2;
+                                                }
                                             }
                                         }
                                     }
@@ -2605,7 +2985,6 @@ public class Traveling_Salesman{
                                         JOptionPane.showMessageDialog(layeredPane, "Moving is more than dice number",
                                                 "Error", JOptionPane.ERROR_MESSAGE);
 
-                                        PlayerName.setText("Player2");
                                         counter=0;
                                         ll[0] = 0;
                                         switchPlayer[0]=2;
@@ -2621,7 +3000,7 @@ public class Traveling_Salesman{
                                         yy[0] = 0;
                                         PLaying_Game.setVisible(false);
                                         PLaying_Game2.setVisible(true);
-                                        arr2[xAdjustment[0]][yAdjustment[0]].setBackground(Color.blue);
+
                                         break;
                                     }
                                     else{
@@ -2714,6 +3093,7 @@ public class Traveling_Salesman{
                                                                 JOptionPane.showMessageDialog(f, "You have found "+namme+"\n"+"Your money increased",
                                                                         "Treasure Confirmed", JOptionPane.PLAIN_MESSAGE);
                                                                 player1.money += 100000;
+                                                                player1.treasure_founded += 1;
                                                                 f.setVisible(false);
                                                             }
                                                             if(sw==0){
@@ -2874,15 +3254,73 @@ public class Traveling_Salesman{
                                                     ll[0] = counter;
                                                 }
 
+                                                if (xAdjustment[0] == xAdjustment2[0] && yAdjustment[0] - 1 == yAdjustment2[0]){
+                                                    if (player1.power == player2.power){
+                                                        JOptionPane.showMessageDialog(layeredPane2, "Player1's power is more \n beacuse Player1 is here more",
+                                                                "Error", JOptionPane.ERROR_MESSAGE);
 
-                                                yAdjustment[0] -= 1;
-                                                counter += 1;
-                                                ll[0] = counter;
+                                                        int moneyTemp = ((player2.power - player1.power)/(player1.power + player2.power)) * player1.money;
+                                                        player2.money += moneyTemp;
+                                                        player1.money -= moneyTemp;
 
-                                                player1.x=xAdjustment[0];
-                                                player1.y=yAdjustment[0];
+                                                        player2.power -= player1.power;
+                                                        player1.power = 0;
 
-                                                arr[xAdjustment[0]][yAdjustment[0]+1].setBackground(Color.white);
+                                                        uu[0] =1;
+                                                        arr[xAdjustment[0]][yAdjustment[0] - 1].setBackground(Color.white);
+                                                    }
+                                                    if (player1.power > player2.power){
+                                                        JOptionPane.showMessageDialog(layeredPane2, "Player1's power is more \nbeacuse Player1 is here more",
+                                                                "Error", JOptionPane.ERROR_MESSAGE);
+
+                                                        int moneyTemp = ((player1.power - player2.power)/(player1.power + player2.power)) * player2.money;
+                                                        player1.money += moneyTemp;
+                                                        player2.money -= moneyTemp;
+
+                                                        player1.power -= player2.power;
+                                                        player2.power = 0;
+
+                                                        xAdjustment2[0] = 0;
+                                                        yAdjustment2[0] = finalSize-1;
+                                                    }
+                                                    if (player1.power < player2.power){
+                                                        JOptionPane.showMessageDialog(layeredPane2, "Player1's power is more \n beacuse Player1 is here more",
+                                                                "Error", JOptionPane.ERROR_MESSAGE);
+
+                                                        int moneyTemp = ((player2.power - player1.power)/(player2.power + player1.power)) * player1.money;
+                                                        player2.money += moneyTemp;
+                                                        player1.money -= moneyTemp;
+
+                                                        player2.power -= player1.power;
+                                                        player1.power = 0;
+
+                                                        uu[0] = 1;
+                                                        arr[xAdjustment[0]][yAdjustment[0] - 1].setBackground(Color.white);
+                                                    }
+                                                }
+
+                                                if (uu[0]==0){
+                                                    yAdjustment[0] -= 1;
+                                                    counter += 1;
+                                                    ll[0] = counter;
+
+                                                    player1.x=xAdjustment[0];
+                                                    player1.y=yAdjustment[0];
+
+                                                    arr[xAdjustment[0]][yAdjustment[0]+1].setBackground(Color.white);
+                                                }
+                                                if (uu[0]==1){
+                                                    arr[xAdjustment[0]][yAdjustment[0]].setBackground(Color.white);
+                                                    xAdjustment[0] = 0;
+                                                    yAdjustment[0] = finalSize-1;
+                                                    uu[0]=0;
+                                                    counter += 1;
+                                                    ll[0] = counter;
+                                                    PLaying_Game.setVisible(false);
+                                                    PLaying_Game2.setVisible(true);
+                                                    arr[xAdjustment[0]][yAdjustment[0]].setBackground(Color.blue);
+                                                    switchPlayer[0] = 2;
+                                                }
                                             }
                                         }
                                     }
@@ -2922,7 +3360,7 @@ public class Traveling_Salesman{
             @Override
             public void actionPerformed(ActionEvent e) {
                 StartingFrame.setVisible(false);
-                PLaying_Game2.setVisible(true);
+                PLaying_Game.setVisible(true);
             }
         });
 

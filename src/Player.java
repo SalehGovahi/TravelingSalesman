@@ -1,6 +1,6 @@
 public class Player {
-    int money = 0;
-    int power = 0;
+    int money = 100;
+    int power = 100;
     int treasure_founded = 0;
     int x;
     int y;
