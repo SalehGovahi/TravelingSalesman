@@ -42,6 +42,9 @@ public class Traveling_Salesman{
         final int[] xAdjustment2 = {0};
         final int[] yAdjustment2 = {0};
 
+        QuestClass myQuest = new QuestClass();
+        String questName = myQuest.questName();
+
         final int[][] treasureCodes = {new int[50]};
         final int[] treasureIndex = {0};
 
@@ -200,7 +203,7 @@ public class Traveling_Salesman{
 
             public void actionPerformed(ActionEvent e) {
                 String data[][]={ {"Player1",String.valueOf(player1.power),String.valueOf(player1.money),String.valueOf(player1.treasure_founded)},
-                        {"Player2",String.valueOf(player2.power),String.valueOf(player2.money),String.valueOf(player1.treasure_founded)}};
+                        {"Player2",String.valueOf(player2.power),String.valueOf(player2.money),String.valueOf(player2.treasure_founded)}};
 
                 String column[]={"Player","Power","Money" , "Founded treasure"};
 
@@ -243,10 +246,39 @@ public class Traveling_Salesman{
             }
         });
 
+        JButton Quest1 = new JButton("Quest");
+        Quest1.setBounds(120,365,100,50);
+        Quest1.setBackground(Color.black);
+        Quest1.setForeground(Color.white);
+        Quest1.setBorder(blackline);
+        Quest1.setFocusPainted(false);
+        Quest1.setFont(new Font("Arial", Font.PLAIN, 30));
+        Quest1.setVisible(true);
+        Quest1.addMouseListener(new MouseAdapter() {
+            public void mouseEntered(MouseEvent evt) {
+                Quest1.setBackground(Color.white);
+                Quest1.setForeground(Color.black);
+                Quest1.setBorder(BorderFactory.createLineBorder(Color.black));
+            }
+            public void mouseExited(MouseEvent evt) {
+                Quest1.setBackground(Color.black);
+                Quest1.setForeground(Color.white);
+                Quest1.setBorder(blackline);
+            }
+        });
+        Quest1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(layeredPane, "Quest is " + questName,
+                        "Quest", JOptionPane.PLAIN_MESSAGE);
+            }
+        });
+
         layeredPane.add(ShowScore);
         layeredPane.add(PlayerName);
         layeredPane.add(DiceNumber);
         layeredPane.add(Dice);
+        layeredPane.add(Quest1);
         layeredPane.setBackground(new Color(16,5,47));
         layeredPane.setForeground(new Color(16,5,47));
         PLaying_Game.getContentPane().setForeground(new Color(16,5,47));
@@ -359,7 +391,7 @@ public class Traveling_Salesman{
         arr2[0][size - 1].setBackground(Color.red);
 
         JButton ShowScore2 = new JButton("Score Board");
-        ShowScore2.setBounds(120,300,140,50);
+        ShowScore2.setBounds(120,275,140,50);
         ShowScore2.setBackground(Color.black);
         ShowScore2.setForeground(Color.white);
         ShowScore2.setBorder(blackline);
@@ -384,7 +416,7 @@ public class Traveling_Salesman{
 
             public void actionPerformed(ActionEvent e) {
                 String data[][]={ {"Player1",String.valueOf(player1.power),String.valueOf(player1.money),String.valueOf(player1.treasure_founded)},
-                        {"Player2",String.valueOf(player2.power),String.valueOf(player2.money),String.valueOf(player1.treasure_founded)}};
+                        {"Player2",String.valueOf(player2.power),String.valueOf(player2.money),String.valueOf(player2.treasure_founded)}};
 
                 String column[]={"Player","Power","Money" , "Founded treasure"};
 
@@ -427,10 +459,42 @@ public class Traveling_Salesman{
             }
         });
 
+
+        JButton Quest2 = new JButton("Quest");
+        Quest2.setBounds(120,365,100,50);
+        Quest2.setBackground(Color.black);
+        Quest2.setForeground(Color.white);
+        Quest2.setBorder(blackline);
+        Quest2.setFocusPainted(false);
+        Quest2.setFont(new Font("Arial", Font.PLAIN, 30));
+        Quest2.setVisible(true);
+        Quest2.addMouseListener(new MouseAdapter() {
+
+            public void mouseEntered(MouseEvent evt) {
+                Quest2.setBackground(Color.white);
+                Quest2.setForeground(Color.black);
+                Quest2.setBorder(BorderFactory.createLineBorder(Color.black));
+            }
+            public void mouseExited(MouseEvent evt) {
+                Quest2.setBackground(Color.black);
+                Quest2.setForeground(Color.white);
+                Quest2.setBorder(blackline);
+            }
+        });
+        Quest2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(layeredPane2, "Quest is " + questName,
+                        "Quest", JOptionPane.PLAIN_MESSAGE);
+            }
+        });
+
+
         layeredPane2.add(ShowScore2);
         layeredPane2.add(PlayerName2);
         layeredPane2.add(DiceNumber2);
         layeredPane2.add(Dice2);
+        layeredPane2.add(Quest2);
         layeredPane2.setBackground(new Color(16,5,47));
         layeredPane2.setForeground(new Color(16,5,47));
         PLaying_Game2.getContentPane().setForeground(new Color(16,5,47));
@@ -584,7 +648,12 @@ public class Traveling_Salesman{
                                                                 namme = "Dragon scroll";
                                                             }
                                                             JOptionPane.showMessageDialog(f, "You have found "+namme+"\n"+"Your money increased",
-                                                                    "Treasure Confirmed", JOptionPane.PLAIN_MESSAGE);
+                                                                    "Treasure Confirmed", JOptionPane.OK_OPTION);
+                                                            if(name == myQuest.quest){
+                                                                JOptionPane.showMessageDialog(f, "Quest Done",
+                                                                        "Treasure Confirmed", JOptionPane.PLAIN_MESSAGE);
+                                                                myQuest.questName();
+                                                            }
                                                             player2.money += 100000;
                                                             player2.treasure_founded += 1;
                                                             for (int i = 0; i< finalSize2; i++){
@@ -716,6 +785,305 @@ public class Traveling_Salesman{
                                                 treasureIndex[0] +=1;
                                                 treasureCodes[0][treasureIndex[0]] = yAdjustment2[0];
                                                 treasureIndex[0] +=1;
+                                            }
+
+                                            if (logicBoard[xAdjustment2[0] - 1][yAdjustment2[0]]==4){
+                                                Border blackline2 = BorderFactory.createLineBorder(Color.white);
+                                                JFrame f=new JFrame("Market");
+                                                f.getContentPane().setBackground(new Color(16,5,47));
+                                                JLabel l2=new JLabel("Market");
+                                                l2.setBounds(240, 30 , 300,60);
+                                                l2.setFont(new Font("Arial", Font.PLAIN, 30));
+                                                l2.setForeground(Color.white);
+                                                JButton b = new JButton("Buy treasure place");
+                                                b.setFont(new Font("Arial", Font.BOLD, 10));
+                                                b.setBounds(140,110, 130,60);
+                                                b.setBackground(Color.black);
+                                                b.setForeground(Color.white);
+                                                b.setBorder(blackline2);
+                                                b.setFocusPainted(false);
+                                                b.addMouseListener(new MouseAdapter() {
+
+                                                    public void mouseEntered(MouseEvent evt) {
+                                                        b.setBackground(Color.white);
+                                                        b.setForeground(Color.black);
+                                                        b.setBorder(BorderFactory.createLineBorder(Color.black));
+                                                    }
+
+                                                    public void mouseExited(MouseEvent evt) {
+                                                        b.setBackground(Color.black);
+                                                        b.setForeground(Color.white);
+                                                        b.setBorder(blackline2);
+                                                    }
+
+                                                    @Override
+                                                    public void mouseClicked(MouseEvent e) {
+
+                                                    }
+                                                });
+
+
+                                                JButton b2 = new JButton("Buy weapon");
+                                                b2.setFont(new Font("Arial", Font.BOLD, 15));
+                                                b2.setBounds(300,110, 130,60);
+                                                b2.setBackground(Color.black);
+                                                b2.setForeground(Color.white);
+                                                b2.setBorder(blackline2);
+                                                b2.setFocusPainted(false);
+                                                b2.addMouseListener(new MouseAdapter() {
+
+                                                    public void mouseEntered(MouseEvent evt) {
+                                                        b2.setBackground(Color.white);
+                                                        b2.setForeground(Color.black);
+                                                        b2.setBorder(BorderFactory.createLineBorder(Color.black));
+                                                    }
+
+                                                    public void mouseExited(MouseEvent evt) {
+                                                        b2.setBackground(Color.black);
+                                                        b2.setForeground(Color.white);
+                                                        b2.setBorder(blackline2);
+                                                    }
+
+                                                    @Override
+                                                    public void mouseClicked(MouseEvent e) {
+                                                        f.dispose();
+                                                        JFrame h = new JFrame("Weapons");
+                                                        h.setSize(600,400);
+                                                        h.getContentPane().setBackground(new Color(16,5,47));
+                                                        h.setForeground(Color.white);
+
+                                                        JLabel l3=new JLabel("Weapons");
+                                                        l3.setBounds(230, 30 , 300,60);
+                                                        l3.setFont(new Font("Arial", Font.PLAIN, 30));
+                                                        l3.setForeground(Color.white);
+
+                                                        ImageIcon weapon1 = new ImageIcon("Assets/weapon3.png");
+                                                        JButton w1 = new JButton();
+                                                        w1.setIcon((weapon1));
+                                                        w1.setBounds(50,110,120,80);
+                                                        w1.setBackground(Color.black);
+                                                        w1.setForeground(Color.white);
+                                                        w1.setBorder(blackline2);
+                                                        w1.setFocusPainted(false);
+                                                        w1.addMouseListener(new MouseAdapter() {
+                                                            @Override
+                                                            public void mouseEntered(MouseEvent e) {
+                                                                w1.setIcon(null);
+                                                                w1.setText("5000");
+                                                                w1.setBackground(Color.white);
+                                                                w1.setForeground(Color.black);
+                                                                w1.setBorder(BorderFactory.createLineBorder(Color.black));
+                                                                w1.setFont(new Font("Arial", Font.BOLD, 30));
+                                                            }
+
+                                                            @Override
+                                                            public void mouseExited(MouseEvent e) {
+                                                                w1.setBackground(Color.black);
+                                                                w1.setForeground(Color.white);
+                                                                w1.setBorder(blackline2);
+                                                                w1.setText(null);
+                                                                w1.setIcon((weapon1));
+                                                            }
+
+                                                            @Override
+                                                            public void mouseClicked(MouseEvent e) {
+                                                                super.mouseClicked(e);
+                                                            }
+                                                        });
+
+                                                        ImageIcon weapon2 = new ImageIcon("Assets/weapon2.png");
+                                                        JButton w2 = new JButton();
+                                                        w2.setIcon((weapon2));
+                                                        w2.setBounds(230,110,120,80);
+                                                        w2.setBackground(Color.black);
+                                                        w2.setForeground(Color.white);
+                                                        w2.setBorder(blackline2);
+                                                        w2.setFocusPainted(false);
+                                                        w2.addMouseListener(new MouseAdapter() {
+                                                            @Override
+                                                            public void mouseEntered(MouseEvent e) {
+                                                                w2.setIcon(null);
+                                                                w2.setText("6000");
+                                                                w2.setBackground(Color.white);
+                                                                w2.setForeground(Color.black);
+                                                                w2.setBorder(BorderFactory.createLineBorder(Color.black));
+                                                                w2.setFont(new Font("Arial", Font.BOLD, 30));
+                                                            }
+
+                                                            @Override
+                                                            public void mouseExited(MouseEvent e) {
+                                                                w2.setBackground(Color.black);
+                                                                w2.setForeground(Color.white);
+                                                                w2.setBorder(blackline2);
+                                                                w2.setText(null);
+                                                                w2.setIcon((weapon2));
+                                                            }
+
+                                                            @Override
+                                                            public void mouseClicked(MouseEvent e) {
+                                                                super.mouseClicked(e);
+                                                            }
+                                                        });
+
+                                                        ImageIcon weapon3 = new ImageIcon("Assets/weapon1.png");
+                                                        JButton w3 = new JButton();
+                                                        w3.setIcon((weapon3));
+                                                        w3.setBounds(410,110,120,80);
+                                                        w3.setBackground(Color.black);
+                                                        w3.setForeground(Color.white);
+                                                        w3.setBorder(blackline2);
+                                                        w3.setFocusPainted(false);
+                                                        w3.addMouseListener(new MouseAdapter() {
+                                                            @Override
+                                                            public void mouseEntered(MouseEvent e) {
+                                                                w3.setIcon(null);
+                                                                w3.setText("7000");
+                                                                w3.setBackground(Color.white);
+                                                                w3.setForeground(Color.black);
+                                                                w3.setBorder(BorderFactory.createLineBorder(Color.black));
+                                                                w3.setFont(new Font("Arial", Font.BOLD, 30));
+                                                            }
+
+                                                            @Override
+                                                            public void mouseExited(MouseEvent e) {
+                                                                w3.setBackground(Color.black);
+                                                                w3.setForeground(Color.white);
+                                                                w3.setBorder(blackline2);
+                                                                w3.setText(null);
+                                                                w3.setIcon((weapon3));
+                                                            }
+
+                                                            @Override
+                                                            public void mouseClicked(MouseEvent e) {
+                                                                super.mouseClicked(e);
+                                                            }
+                                                        });
+
+                                                        ImageIcon weapon4 = new ImageIcon("Assets/weapon4.png");
+                                                        JButton w4 = new JButton();
+                                                        w4.setIcon((weapon4));
+                                                        w4.setBounds(50,230,120,80);
+                                                        w4.setBackground(Color.black);
+                                                        w4.setForeground(Color.white);
+                                                        w4.setBorder(blackline2);
+                                                        w4.setFocusPainted(false);
+                                                        w4.addMouseListener(new MouseAdapter() {
+                                                            @Override
+                                                            public void mouseEntered(MouseEvent e) {
+                                                                w4.setIcon(null);
+                                                                w4.setText("8000");
+                                                                w4.setBackground(Color.white);
+                                                                w4.setForeground(Color.black);
+                                                                w4.setBorder(BorderFactory.createLineBorder(Color.black));
+                                                                w4.setFont(new Font("Arial", Font.BOLD, 30));
+                                                            }
+
+                                                            @Override
+                                                            public void mouseExited(MouseEvent e) {
+                                                                w4.setBackground(Color.black);
+                                                                w4.setForeground(Color.white);
+                                                                w4.setBorder(blackline2);
+                                                                w4.setText(null);
+                                                                w4.setIcon((weapon4));
+                                                            }
+
+                                                            @Override
+                                                            public void mouseClicked(MouseEvent e) {
+                                                                super.mouseClicked(e);
+                                                            }
+                                                        });
+
+                                                        ImageIcon weapon5 = new ImageIcon("Assets/weapon5.png");
+                                                        JButton w5 = new JButton();
+                                                        w5.setIcon((weapon5));
+                                                        w5.setBounds(230,230,120,80);
+                                                        w5.setBackground(Color.black);
+                                                        w5.setForeground(Color.white);
+                                                        w5.setBorder(blackline2);
+                                                        w5.setFocusPainted(false);
+                                                        w5.addMouseListener(new MouseAdapter() {
+                                                            @Override
+                                                            public void mouseEntered(MouseEvent e) {
+                                                                w5.setIcon(null);
+                                                                w5.setText("9000");
+                                                                w5.setBackground(Color.white);
+                                                                w5.setForeground(Color.black);
+                                                                w5.setBorder(BorderFactory.createLineBorder(Color.black));
+                                                                w5.setFont(new Font("Arial", Font.BOLD, 30));
+                                                            }
+
+                                                            @Override
+                                                            public void mouseExited(MouseEvent e) {
+                                                                w5.setBackground(Color.black);
+                                                                w5.setForeground(Color.white);
+                                                                w5.setBorder(blackline2);
+                                                                w5.setText(null);
+                                                                w5.setIcon((weapon5));
+                                                            }
+
+                                                            @Override
+                                                            public void mouseClicked(MouseEvent e) {
+                                                                super.mouseClicked(e);
+                                                            }
+                                                        });
+
+                                                        ImageIcon weapon6 = new ImageIcon("Assets/weapon6.png");
+                                                        JButton w6 = new JButton();
+                                                        w6.setIcon((weapon6));
+                                                        w6.setBounds(410,230,120,80);
+                                                        w6.setBackground(Color.black);
+                                                        w6.setForeground(Color.white);
+                                                        w6.setBorder(blackline2);
+                                                        w6.setFocusPainted(false);
+                                                        w6.addMouseListener(new MouseAdapter() {
+                                                            @Override
+                                                            public void mouseEntered(MouseEvent e) {
+                                                                w6.setIcon(null);
+                                                                w6.setText("10000");
+                                                                w6.setBackground(Color.white);
+                                                                w6.setForeground(Color.black);
+                                                                w6.setBorder(BorderFactory.createLineBorder(Color.black));
+                                                                w6.setFont(new Font("Arial", Font.BOLD, 30));
+                                                            }
+
+                                                            @Override
+                                                            public void mouseExited(MouseEvent e) {
+                                                                w6.setBackground(Color.black);
+                                                                w6.setForeground(Color.white);
+                                                                w6.setBorder(blackline2);
+                                                                w6.setText(null);
+                                                                w6.setIcon((weapon6));
+                                                            }
+
+                                                            @Override
+                                                            public void mouseClicked(MouseEvent e) {
+                                                                super.mouseClicked(e);
+                                                            }
+                                                        });
+
+
+                                                        h.add(w1);
+                                                        h.add(w2);
+                                                        h.add(w3);
+                                                        h.add(w4);
+                                                        h.add(w5);
+                                                        h.add(w6);
+                                                        h.add(l3);
+
+                                                        h.setLocationRelativeTo(null);
+                                                        h.setLayout(null);
+                                                        h.setVisible(true);
+
+                                                    }
+
+                                                });
+
+
+                                                f.add(l2); f.add(b);f.add(b2);
+                                                f.setSize(600,250);
+                                                f.setLocationRelativeTo(null);
+                                                f.setLayout(null);
+                                                f.setVisible(true);
                                             }
 
                                             if (logicBoard[xAdjustment2[0] - 1][yAdjustment2[0]]==5){
@@ -928,9 +1296,13 @@ public class Traveling_Salesman{
                                                         }
                                                         JOptionPane.showMessageDialog(f, "You have found "+namme+"\n"+"Your money increased",
                                                                 "Treasure Confirmed", JOptionPane.PLAIN_MESSAGE);
+                                                        if(name == myQuest.quest){
+                                                            JOptionPane.showMessageDialog(f, "Quest Done",
+                                                                    "Treasure Confirmed", JOptionPane.PLAIN_MESSAGE);
+                                                            myQuest.questName();
+                                                        }
                                                         player2.money += 100000;
                                                         player2.treasure_founded += 1;
-                                                        f.setVisible(false);
                                                     }
                                                     if(sw==0){
                                                         JOptionPane.showMessageDialog(f, "This is not a trasure code",
@@ -1052,6 +1424,305 @@ public class Traveling_Salesman{
                                             treasureIndex[0] +=1;
                                             treasureCodes[0][treasureIndex[0]] = yAdjustment2[0];
                                             treasureIndex[0] +=1;
+                                        }
+
+                                        if (logicBoard[xAdjustment2[0] + 1][yAdjustment2[0]]==4){
+                                            Border blackline2 = BorderFactory.createLineBorder(Color.white);
+                                            JFrame f=new JFrame("Market");
+                                            f.getContentPane().setBackground(new Color(16,5,47));
+                                            JLabel l2=new JLabel("Market");
+                                            l2.setBounds(240, 30 , 300,60);
+                                            l2.setFont(new Font("Arial", Font.PLAIN, 30));
+                                            l2.setForeground(Color.white);
+                                            JButton b = new JButton("Buy treasure place");
+                                            b.setFont(new Font("Arial", Font.BOLD, 10));
+                                            b.setBounds(140,110, 130,60);
+                                            b.setBackground(Color.black);
+                                            b.setForeground(Color.white);
+                                            b.setBorder(blackline2);
+                                            b.setFocusPainted(false);
+                                            b.addMouseListener(new MouseAdapter() {
+
+                                                public void mouseEntered(MouseEvent evt) {
+                                                    b.setBackground(Color.white);
+                                                    b.setForeground(Color.black);
+                                                    b.setBorder(BorderFactory.createLineBorder(Color.black));
+                                                }
+
+                                                public void mouseExited(MouseEvent evt) {
+                                                    b.setBackground(Color.black);
+                                                    b.setForeground(Color.white);
+                                                    b.setBorder(blackline2);
+                                                }
+
+                                                @Override
+                                                public void mouseClicked(MouseEvent e) {
+
+                                                }
+                                            });
+
+
+                                            JButton b2 = new JButton("Buy weapon");
+                                            b2.setFont(new Font("Arial", Font.BOLD, 15));
+                                            b2.setBounds(300,110, 130,60);
+                                            b2.setBackground(Color.black);
+                                            b2.setForeground(Color.white);
+                                            b2.setBorder(blackline2);
+                                            b2.setFocusPainted(false);
+                                            b2.addMouseListener(new MouseAdapter() {
+
+                                                public void mouseEntered(MouseEvent evt) {
+                                                    b2.setBackground(Color.white);
+                                                    b2.setForeground(Color.black);
+                                                    b2.setBorder(BorderFactory.createLineBorder(Color.black));
+                                                }
+
+                                                public void mouseExited(MouseEvent evt) {
+                                                    b2.setBackground(Color.black);
+                                                    b2.setForeground(Color.white);
+                                                    b2.setBorder(blackline2);
+                                                }
+
+                                                @Override
+                                                public void mouseClicked(MouseEvent e) {
+                                                    f.dispose();
+                                                    JFrame h = new JFrame("Weapons");
+                                                    h.setSize(600,400);
+                                                    h.getContentPane().setBackground(new Color(16,5,47));
+                                                    h.setForeground(Color.white);
+
+                                                    JLabel l3=new JLabel("Weapons");
+                                                    l3.setBounds(230, 30 , 300,60);
+                                                    l3.setFont(new Font("Arial", Font.PLAIN, 30));
+                                                    l3.setForeground(Color.white);
+
+                                                    ImageIcon weapon1 = new ImageIcon("Assets/weapon3.png");
+                                                    JButton w1 = new JButton();
+                                                    w1.setIcon((weapon1));
+                                                    w1.setBounds(50,110,120,80);
+                                                    w1.setBackground(Color.black);
+                                                    w1.setForeground(Color.white);
+                                                    w1.setBorder(blackline2);
+                                                    w1.setFocusPainted(false);
+                                                    w1.addMouseListener(new MouseAdapter() {
+                                                        @Override
+                                                        public void mouseEntered(MouseEvent e) {
+                                                            w1.setIcon(null);
+                                                            w1.setText("5000");
+                                                            w1.setBackground(Color.white);
+                                                            w1.setForeground(Color.black);
+                                                            w1.setBorder(BorderFactory.createLineBorder(Color.black));
+                                                            w1.setFont(new Font("Arial", Font.BOLD, 30));
+                                                        }
+
+                                                        @Override
+                                                        public void mouseExited(MouseEvent e) {
+                                                            w1.setBackground(Color.black);
+                                                            w1.setForeground(Color.white);
+                                                            w1.setBorder(blackline2);
+                                                            w1.setText(null);
+                                                            w1.setIcon((weapon1));
+                                                        }
+
+                                                        @Override
+                                                        public void mouseClicked(MouseEvent e) {
+                                                            super.mouseClicked(e);
+                                                        }
+                                                    });
+
+                                                    ImageIcon weapon2 = new ImageIcon("Assets/weapon2.png");
+                                                    JButton w2 = new JButton();
+                                                    w2.setIcon((weapon2));
+                                                    w2.setBounds(230,110,120,80);
+                                                    w2.setBackground(Color.black);
+                                                    w2.setForeground(Color.white);
+                                                    w2.setBorder(blackline2);
+                                                    w2.setFocusPainted(false);
+                                                    w2.addMouseListener(new MouseAdapter() {
+                                                        @Override
+                                                        public void mouseEntered(MouseEvent e) {
+                                                            w2.setIcon(null);
+                                                            w2.setText("6000");
+                                                            w2.setBackground(Color.white);
+                                                            w2.setForeground(Color.black);
+                                                            w2.setBorder(BorderFactory.createLineBorder(Color.black));
+                                                            w2.setFont(new Font("Arial", Font.BOLD, 30));
+                                                        }
+
+                                                        @Override
+                                                        public void mouseExited(MouseEvent e) {
+                                                            w2.setBackground(Color.black);
+                                                            w2.setForeground(Color.white);
+                                                            w2.setBorder(blackline2);
+                                                            w2.setText(null);
+                                                            w2.setIcon((weapon2));
+                                                        }
+
+                                                        @Override
+                                                        public void mouseClicked(MouseEvent e) {
+                                                            super.mouseClicked(e);
+                                                        }
+                                                    });
+
+                                                    ImageIcon weapon3 = new ImageIcon("Assets/weapon1.png");
+                                                    JButton w3 = new JButton();
+                                                    w3.setIcon((weapon3));
+                                                    w3.setBounds(410,110,120,80);
+                                                    w3.setBackground(Color.black);
+                                                    w3.setForeground(Color.white);
+                                                    w3.setBorder(blackline2);
+                                                    w3.setFocusPainted(false);
+                                                    w3.addMouseListener(new MouseAdapter() {
+                                                        @Override
+                                                        public void mouseEntered(MouseEvent e) {
+                                                            w3.setIcon(null);
+                                                            w3.setText("7000");
+                                                            w3.setBackground(Color.white);
+                                                            w3.setForeground(Color.black);
+                                                            w3.setBorder(BorderFactory.createLineBorder(Color.black));
+                                                            w3.setFont(new Font("Arial", Font.BOLD, 30));
+                                                        }
+
+                                                        @Override
+                                                        public void mouseExited(MouseEvent e) {
+                                                            w3.setBackground(Color.black);
+                                                            w3.setForeground(Color.white);
+                                                            w3.setBorder(blackline2);
+                                                            w3.setText(null);
+                                                            w3.setIcon((weapon3));
+                                                        }
+
+                                                        @Override
+                                                        public void mouseClicked(MouseEvent e) {
+                                                            super.mouseClicked(e);
+                                                        }
+                                                    });
+
+                                                    ImageIcon weapon4 = new ImageIcon("Assets/weapon4.png");
+                                                    JButton w4 = new JButton();
+                                                    w4.setIcon((weapon4));
+                                                    w4.setBounds(50,230,120,80);
+                                                    w4.setBackground(Color.black);
+                                                    w4.setForeground(Color.white);
+                                                    w4.setBorder(blackline2);
+                                                    w4.setFocusPainted(false);
+                                                    w4.addMouseListener(new MouseAdapter() {
+                                                        @Override
+                                                        public void mouseEntered(MouseEvent e) {
+                                                            w4.setIcon(null);
+                                                            w4.setText("8000");
+                                                            w4.setBackground(Color.white);
+                                                            w4.setForeground(Color.black);
+                                                            w4.setBorder(BorderFactory.createLineBorder(Color.black));
+                                                            w4.setFont(new Font("Arial", Font.BOLD, 30));
+                                                        }
+
+                                                        @Override
+                                                        public void mouseExited(MouseEvent e) {
+                                                            w4.setBackground(Color.black);
+                                                            w4.setForeground(Color.white);
+                                                            w4.setBorder(blackline2);
+                                                            w4.setText(null);
+                                                            w4.setIcon((weapon4));
+                                                        }
+
+                                                        @Override
+                                                        public void mouseClicked(MouseEvent e) {
+                                                            super.mouseClicked(e);
+                                                        }
+                                                    });
+
+                                                    ImageIcon weapon5 = new ImageIcon("Assets/weapon5.png");
+                                                    JButton w5 = new JButton();
+                                                    w5.setIcon((weapon5));
+                                                    w5.setBounds(230,230,120,80);
+                                                    w5.setBackground(Color.black);
+                                                    w5.setForeground(Color.white);
+                                                    w5.setBorder(blackline2);
+                                                    w5.setFocusPainted(false);
+                                                    w5.addMouseListener(new MouseAdapter() {
+                                                        @Override
+                                                        public void mouseEntered(MouseEvent e) {
+                                                            w5.setIcon(null);
+                                                            w5.setText("9000");
+                                                            w5.setBackground(Color.white);
+                                                            w5.setForeground(Color.black);
+                                                            w5.setBorder(BorderFactory.createLineBorder(Color.black));
+                                                            w5.setFont(new Font("Arial", Font.BOLD, 30));
+                                                        }
+
+                                                        @Override
+                                                        public void mouseExited(MouseEvent e) {
+                                                            w5.setBackground(Color.black);
+                                                            w5.setForeground(Color.white);
+                                                            w5.setBorder(blackline2);
+                                                            w5.setText(null);
+                                                            w5.setIcon((weapon5));
+                                                        }
+
+                                                        @Override
+                                                        public void mouseClicked(MouseEvent e) {
+                                                            super.mouseClicked(e);
+                                                        }
+                                                    });
+
+                                                    ImageIcon weapon6 = new ImageIcon("Assets/weapon6.png");
+                                                    JButton w6 = new JButton();
+                                                    w6.setIcon((weapon6));
+                                                    w6.setBounds(410,230,120,80);
+                                                    w6.setBackground(Color.black);
+                                                    w6.setForeground(Color.white);
+                                                    w6.setBorder(blackline2);
+                                                    w6.setFocusPainted(false);
+                                                    w6.addMouseListener(new MouseAdapter() {
+                                                        @Override
+                                                        public void mouseEntered(MouseEvent e) {
+                                                            w6.setIcon(null);
+                                                            w6.setText("10000");
+                                                            w6.setBackground(Color.white);
+                                                            w6.setForeground(Color.black);
+                                                            w6.setBorder(BorderFactory.createLineBorder(Color.black));
+                                                            w6.setFont(new Font("Arial", Font.BOLD, 30));
+                                                        }
+
+                                                        @Override
+                                                        public void mouseExited(MouseEvent e) {
+                                                            w6.setBackground(Color.black);
+                                                            w6.setForeground(Color.white);
+                                                            w6.setBorder(blackline2);
+                                                            w6.setText(null);
+                                                            w6.setIcon((weapon6));
+                                                        }
+
+                                                        @Override
+                                                        public void mouseClicked(MouseEvent e) {
+                                                            super.mouseClicked(e);
+                                                        }
+                                                    });
+
+
+                                                    h.add(w1);
+                                                    h.add(w2);
+                                                    h.add(w3);
+                                                    h.add(w4);
+                                                    h.add(w5);
+                                                    h.add(w6);
+                                                    h.add(l3);
+
+                                                    h.setLocationRelativeTo(null);
+                                                    h.setLayout(null);
+                                                    h.setVisible(true);
+
+                                                }
+
+                                            });
+
+
+                                            f.add(l2); f.add(b);f.add(b2);
+                                            f.setSize(600,250);
+                                            f.setLocationRelativeTo(null);
+                                            f.setLayout(null);
+                                            f.setVisible(true);
                                         }
 
                                         if (logicBoard[xAdjustment2[0] + 1][yAdjustment2[0]]==5){
@@ -1277,6 +1948,11 @@ public class Traveling_Salesman{
                                                                 }
                                                                 JOptionPane.showMessageDialog(f, "You have found "+namme+"\n"+"Your money increased",
                                                                         "Treasure Confirmed", JOptionPane.PLAIN_MESSAGE);
+                                                                if(name == myQuest.quest){
+                                                                    JOptionPane.showMessageDialog(f, "Quest Done",
+                                                                            "Treasure Confirmed", JOptionPane.PLAIN_MESSAGE);
+                                                                    myQuest.questName();
+                                                                }
                                                                 player2.money += 100000;
                                                                 player2.treasure_founded += 1;
                                                                 f.setVisible(false);
@@ -1408,6 +2084,305 @@ public class Traveling_Salesman{
                                                     treasureIndex[0] +=1;
                                                     treasureCodes[0][treasureIndex[0]] = yAdjustment2[0] + 1;
                                                     treasureIndex[0] +=1;
+                                                }
+
+                                                if (logicBoard[xAdjustment2[0]][yAdjustment2[0] +1]==4){
+                                                    Border blackline2 = BorderFactory.createLineBorder(Color.white);
+                                                    JFrame f=new JFrame("Market");
+                                                    f.getContentPane().setBackground(new Color(16,5,47));
+                                                    JLabel l2=new JLabel("Market");
+                                                    l2.setBounds(240, 30 , 300,60);
+                                                    l2.setFont(new Font("Arial", Font.PLAIN, 30));
+                                                    l2.setForeground(Color.white);
+                                                    JButton b = new JButton("Buy treasure place");
+                                                    b.setFont(new Font("Arial", Font.BOLD, 10));
+                                                    b.setBounds(140,110, 130,60);
+                                                    b.setBackground(Color.black);
+                                                    b.setForeground(Color.white);
+                                                    b.setBorder(blackline2);
+                                                    b.setFocusPainted(false);
+                                                    b.addMouseListener(new MouseAdapter() {
+
+                                                        public void mouseEntered(MouseEvent evt) {
+                                                            b.setBackground(Color.white);
+                                                            b.setForeground(Color.black);
+                                                            b.setBorder(BorderFactory.createLineBorder(Color.black));
+                                                        }
+
+                                                        public void mouseExited(MouseEvent evt) {
+                                                            b.setBackground(Color.black);
+                                                            b.setForeground(Color.white);
+                                                            b.setBorder(blackline2);
+                                                        }
+
+                                                        @Override
+                                                        public void mouseClicked(MouseEvent e) {
+
+                                                        }
+                                                    });
+
+
+                                                    JButton b2 = new JButton("Buy weapon");
+                                                    b2.setFont(new Font("Arial", Font.BOLD, 15));
+                                                    b2.setBounds(300,110, 130,60);
+                                                    b2.setBackground(Color.black);
+                                                    b2.setForeground(Color.white);
+                                                    b2.setBorder(blackline2);
+                                                    b2.setFocusPainted(false);
+                                                    b2.addMouseListener(new MouseAdapter() {
+
+                                                        public void mouseEntered(MouseEvent evt) {
+                                                            b2.setBackground(Color.white);
+                                                            b2.setForeground(Color.black);
+                                                            b2.setBorder(BorderFactory.createLineBorder(Color.black));
+                                                        }
+
+                                                        public void mouseExited(MouseEvent evt) {
+                                                            b2.setBackground(Color.black);
+                                                            b2.setForeground(Color.white);
+                                                            b2.setBorder(blackline2);
+                                                        }
+
+                                                        @Override
+                                                        public void mouseClicked(MouseEvent e) {
+                                                            f.dispose();
+                                                            JFrame h = new JFrame("Weapons");
+                                                            h.setSize(600,400);
+                                                            h.getContentPane().setBackground(new Color(16,5,47));
+                                                            h.setForeground(Color.white);
+
+                                                            JLabel l3=new JLabel("Weapons");
+                                                            l3.setBounds(230, 30 , 300,60);
+                                                            l3.setFont(new Font("Arial", Font.PLAIN, 30));
+                                                            l3.setForeground(Color.white);
+
+                                                            ImageIcon weapon1 = new ImageIcon("Assets/weapon3.png");
+                                                            JButton w1 = new JButton();
+                                                            w1.setIcon((weapon1));
+                                                            w1.setBounds(50,110,120,80);
+                                                            w1.setBackground(Color.black);
+                                                            w1.setForeground(Color.white);
+                                                            w1.setBorder(blackline2);
+                                                            w1.setFocusPainted(false);
+                                                            w1.addMouseListener(new MouseAdapter() {
+                                                                @Override
+                                                                public void mouseEntered(MouseEvent e) {
+                                                                    w1.setIcon(null);
+                                                                    w1.setText("5000");
+                                                                    w1.setBackground(Color.white);
+                                                                    w1.setForeground(Color.black);
+                                                                    w1.setBorder(BorderFactory.createLineBorder(Color.black));
+                                                                    w1.setFont(new Font("Arial", Font.BOLD, 30));
+                                                                }
+
+                                                                @Override
+                                                                public void mouseExited(MouseEvent e) {
+                                                                    w1.setBackground(Color.black);
+                                                                    w1.setForeground(Color.white);
+                                                                    w1.setBorder(blackline2);
+                                                                    w1.setText(null);
+                                                                    w1.setIcon((weapon1));
+                                                                }
+
+                                                                @Override
+                                                                public void mouseClicked(MouseEvent e) {
+                                                                    super.mouseClicked(e);
+                                                                }
+                                                            });
+
+                                                            ImageIcon weapon2 = new ImageIcon("Assets/weapon2.png");
+                                                            JButton w2 = new JButton();
+                                                            w2.setIcon((weapon2));
+                                                            w2.setBounds(230,110,120,80);
+                                                            w2.setBackground(Color.black);
+                                                            w2.setForeground(Color.white);
+                                                            w2.setBorder(blackline2);
+                                                            w2.setFocusPainted(false);
+                                                            w2.addMouseListener(new MouseAdapter() {
+                                                                @Override
+                                                                public void mouseEntered(MouseEvent e) {
+                                                                    w2.setIcon(null);
+                                                                    w2.setText("6000");
+                                                                    w2.setBackground(Color.white);
+                                                                    w2.setForeground(Color.black);
+                                                                    w2.setBorder(BorderFactory.createLineBorder(Color.black));
+                                                                    w2.setFont(new Font("Arial", Font.BOLD, 30));
+                                                                }
+
+                                                                @Override
+                                                                public void mouseExited(MouseEvent e) {
+                                                                    w2.setBackground(Color.black);
+                                                                    w2.setForeground(Color.white);
+                                                                    w2.setBorder(blackline2);
+                                                                    w2.setText(null);
+                                                                    w2.setIcon((weapon2));
+                                                                }
+
+                                                                @Override
+                                                                public void mouseClicked(MouseEvent e) {
+                                                                    super.mouseClicked(e);
+                                                                }
+                                                            });
+
+                                                            ImageIcon weapon3 = new ImageIcon("Assets/weapon1.png");
+                                                            JButton w3 = new JButton();
+                                                            w3.setIcon((weapon3));
+                                                            w3.setBounds(410,110,120,80);
+                                                            w3.setBackground(Color.black);
+                                                            w3.setForeground(Color.white);
+                                                            w3.setBorder(blackline2);
+                                                            w3.setFocusPainted(false);
+                                                            w3.addMouseListener(new MouseAdapter() {
+                                                                @Override
+                                                                public void mouseEntered(MouseEvent e) {
+                                                                    w3.setIcon(null);
+                                                                    w3.setText("7000");
+                                                                    w3.setBackground(Color.white);
+                                                                    w3.setForeground(Color.black);
+                                                                    w3.setBorder(BorderFactory.createLineBorder(Color.black));
+                                                                    w3.setFont(new Font("Arial", Font.BOLD, 30));
+                                                                }
+
+                                                                @Override
+                                                                public void mouseExited(MouseEvent e) {
+                                                                    w3.setBackground(Color.black);
+                                                                    w3.setForeground(Color.white);
+                                                                    w3.setBorder(blackline2);
+                                                                    w3.setText(null);
+                                                                    w3.setIcon((weapon3));
+                                                                }
+
+                                                                @Override
+                                                                public void mouseClicked(MouseEvent e) {
+                                                                    super.mouseClicked(e);
+                                                                }
+                                                            });
+
+                                                            ImageIcon weapon4 = new ImageIcon("Assets/weapon4.png");
+                                                            JButton w4 = new JButton();
+                                                            w4.setIcon((weapon4));
+                                                            w4.setBounds(50,230,120,80);
+                                                            w4.setBackground(Color.black);
+                                                            w4.setForeground(Color.white);
+                                                            w4.setBorder(blackline2);
+                                                            w4.setFocusPainted(false);
+                                                            w4.addMouseListener(new MouseAdapter() {
+                                                                @Override
+                                                                public void mouseEntered(MouseEvent e) {
+                                                                    w4.setIcon(null);
+                                                                    w4.setText("8000");
+                                                                    w4.setBackground(Color.white);
+                                                                    w4.setForeground(Color.black);
+                                                                    w4.setBorder(BorderFactory.createLineBorder(Color.black));
+                                                                    w4.setFont(new Font("Arial", Font.BOLD, 30));
+                                                                }
+
+                                                                @Override
+                                                                public void mouseExited(MouseEvent e) {
+                                                                    w4.setBackground(Color.black);
+                                                                    w4.setForeground(Color.white);
+                                                                    w4.setBorder(blackline2);
+                                                                    w4.setText(null);
+                                                                    w4.setIcon((weapon4));
+                                                                }
+
+                                                                @Override
+                                                                public void mouseClicked(MouseEvent e) {
+                                                                    super.mouseClicked(e);
+                                                                }
+                                                            });
+
+                                                            ImageIcon weapon5 = new ImageIcon("Assets/weapon5.png");
+                                                            JButton w5 = new JButton();
+                                                            w5.setIcon((weapon5));
+                                                            w5.setBounds(230,230,120,80);
+                                                            w5.setBackground(Color.black);
+                                                            w5.setForeground(Color.white);
+                                                            w5.setBorder(blackline2);
+                                                            w5.setFocusPainted(false);
+                                                            w5.addMouseListener(new MouseAdapter() {
+                                                                @Override
+                                                                public void mouseEntered(MouseEvent e) {
+                                                                    w5.setIcon(null);
+                                                                    w5.setText("9000");
+                                                                    w5.setBackground(Color.white);
+                                                                    w5.setForeground(Color.black);
+                                                                    w5.setBorder(BorderFactory.createLineBorder(Color.black));
+                                                                    w5.setFont(new Font("Arial", Font.BOLD, 30));
+                                                                }
+
+                                                                @Override
+                                                                public void mouseExited(MouseEvent e) {
+                                                                    w5.setBackground(Color.black);
+                                                                    w5.setForeground(Color.white);
+                                                                    w5.setBorder(blackline2);
+                                                                    w5.setText(null);
+                                                                    w5.setIcon((weapon5));
+                                                                }
+
+                                                                @Override
+                                                                public void mouseClicked(MouseEvent e) {
+                                                                    super.mouseClicked(e);
+                                                                }
+                                                            });
+
+                                                            ImageIcon weapon6 = new ImageIcon("Assets/weapon6.png");
+                                                            JButton w6 = new JButton();
+                                                            w6.setIcon((weapon6));
+                                                            w6.setBounds(410,230,120,80);
+                                                            w6.setBackground(Color.black);
+                                                            w6.setForeground(Color.white);
+                                                            w6.setBorder(blackline2);
+                                                            w6.setFocusPainted(false);
+                                                            w6.addMouseListener(new MouseAdapter() {
+                                                                @Override
+                                                                public void mouseEntered(MouseEvent e) {
+                                                                    w6.setIcon(null);
+                                                                    w6.setText("10000");
+                                                                    w6.setBackground(Color.white);
+                                                                    w6.setForeground(Color.black);
+                                                                    w6.setBorder(BorderFactory.createLineBorder(Color.black));
+                                                                    w6.setFont(new Font("Arial", Font.BOLD, 30));
+                                                                }
+
+                                                                @Override
+                                                                public void mouseExited(MouseEvent e) {
+                                                                    w6.setBackground(Color.black);
+                                                                    w6.setForeground(Color.white);
+                                                                    w6.setBorder(blackline2);
+                                                                    w6.setText(null);
+                                                                    w6.setIcon((weapon6));
+                                                                }
+
+                                                                @Override
+                                                                public void mouseClicked(MouseEvent e) {
+                                                                    super.mouseClicked(e);
+                                                                }
+                                                            });
+
+
+                                                            h.add(w1);
+                                                            h.add(w2);
+                                                            h.add(w3);
+                                                            h.add(w4);
+                                                            h.add(w5);
+                                                            h.add(w6);
+                                                            h.add(l3);
+
+                                                            h.setLocationRelativeTo(null);
+                                                            h.setLayout(null);
+                                                            h.setVisible(true);
+
+                                                        }
+
+                                                    });
+
+
+                                                    f.add(l2); f.add(b);f.add(b2);
+                                                    f.setSize(600,250);
+                                                    f.setLocationRelativeTo(null);
+                                                    f.setLayout(null);
+                                                    f.setVisible(true);
                                                 }
 
                                                 if (logicBoard[xAdjustment2[0]][yAdjustment2[0] +1]==5){
@@ -1633,6 +2608,11 @@ public class Traveling_Salesman{
                                                                 }
                                                                 JOptionPane.showMessageDialog(f, "You have found "+namme+"\n"+"Your money increased",
                                                                         "Treasure Confirmed", JOptionPane.PLAIN_MESSAGE);
+                                                                if(name == myQuest.quest){
+                                                                    JOptionPane.showMessageDialog(f, "Quest Done",
+                                                                            "Treasure Confirmed", JOptionPane.PLAIN_MESSAGE);
+                                                                    myQuest.questName();
+                                                                }
                                                                 player2.money += 100000;
                                                                 player2.treasure_founded +=1;
                                                                 f.setVisible(false);
@@ -1764,6 +2744,305 @@ public class Traveling_Salesman{
                                                     treasureIndex[0] +=1;
                                                     treasureCodes[0][treasureIndex[0]] = yAdjustment2[0] - 1;
                                                     treasureIndex[0] +=1;
+                                                }
+
+                                                if (logicBoard[xAdjustment2[0]][yAdjustment2[0] -1]==4){
+                                                    Border blackline2 = BorderFactory.createLineBorder(Color.white);
+                                                    JFrame f=new JFrame("Market");
+                                                    f.getContentPane().setBackground(new Color(16,5,47));
+                                                    JLabel l2=new JLabel("Market");
+                                                    l2.setBounds(240, 30 , 300,60);
+                                                    l2.setFont(new Font("Arial", Font.PLAIN, 30));
+                                                    l2.setForeground(Color.white);
+                                                    JButton b = new JButton("Buy treasure place");
+                                                    b.setFont(new Font("Arial", Font.BOLD, 10));
+                                                    b.setBounds(140,110, 130,60);
+                                                    b.setBackground(Color.black);
+                                                    b.setForeground(Color.white);
+                                                    b.setBorder(blackline2);
+                                                    b.setFocusPainted(false);
+                                                    b.addMouseListener(new MouseAdapter() {
+
+                                                        public void mouseEntered(MouseEvent evt) {
+                                                            b.setBackground(Color.white);
+                                                            b.setForeground(Color.black);
+                                                            b.setBorder(BorderFactory.createLineBorder(Color.black));
+                                                        }
+
+                                                        public void mouseExited(MouseEvent evt) {
+                                                            b.setBackground(Color.black);
+                                                            b.setForeground(Color.white);
+                                                            b.setBorder(blackline2);
+                                                        }
+
+                                                        @Override
+                                                        public void mouseClicked(MouseEvent e) {
+
+                                                        }
+                                                    });
+
+
+                                                    JButton b2 = new JButton("Buy weapon");
+                                                    b2.setFont(new Font("Arial", Font.BOLD, 15));
+                                                    b2.setBounds(300,110, 130,60);
+                                                    b2.setBackground(Color.black);
+                                                    b2.setForeground(Color.white);
+                                                    b2.setBorder(blackline2);
+                                                    b2.setFocusPainted(false);
+                                                    b2.addMouseListener(new MouseAdapter() {
+
+                                                        public void mouseEntered(MouseEvent evt) {
+                                                            b2.setBackground(Color.white);
+                                                            b2.setForeground(Color.black);
+                                                            b2.setBorder(BorderFactory.createLineBorder(Color.black));
+                                                        }
+
+                                                        public void mouseExited(MouseEvent evt) {
+                                                            b2.setBackground(Color.black);
+                                                            b2.setForeground(Color.white);
+                                                            b2.setBorder(blackline2);
+                                                        }
+
+                                                        @Override
+                                                        public void mouseClicked(MouseEvent e) {
+                                                            f.dispose();
+                                                            JFrame h = new JFrame("Weapons");
+                                                            h.setSize(600,400);
+                                                            h.getContentPane().setBackground(new Color(16,5,47));
+                                                            h.setForeground(Color.white);
+
+                                                            JLabel l3=new JLabel("Weapons");
+                                                            l3.setBounds(230, 30 , 300,60);
+                                                            l3.setFont(new Font("Arial", Font.PLAIN, 30));
+                                                            l3.setForeground(Color.white);
+
+                                                            ImageIcon weapon1 = new ImageIcon("Assets/weapon3.png");
+                                                            JButton w1 = new JButton();
+                                                            w1.setIcon((weapon1));
+                                                            w1.setBounds(50,110,120,80);
+                                                            w1.setBackground(Color.black);
+                                                            w1.setForeground(Color.white);
+                                                            w1.setBorder(blackline2);
+                                                            w1.setFocusPainted(false);
+                                                            w1.addMouseListener(new MouseAdapter() {
+                                                                @Override
+                                                                public void mouseEntered(MouseEvent e) {
+                                                                    w1.setIcon(null);
+                                                                    w1.setText("5000");
+                                                                    w1.setBackground(Color.white);
+                                                                    w1.setForeground(Color.black);
+                                                                    w1.setBorder(BorderFactory.createLineBorder(Color.black));
+                                                                    w1.setFont(new Font("Arial", Font.BOLD, 30));
+                                                                }
+
+                                                                @Override
+                                                                public void mouseExited(MouseEvent e) {
+                                                                    w1.setBackground(Color.black);
+                                                                    w1.setForeground(Color.white);
+                                                                    w1.setBorder(blackline2);
+                                                                    w1.setText(null);
+                                                                    w1.setIcon((weapon1));
+                                                                }
+
+                                                                @Override
+                                                                public void mouseClicked(MouseEvent e) {
+                                                                    super.mouseClicked(e);
+                                                                }
+                                                            });
+
+                                                            ImageIcon weapon2 = new ImageIcon("Assets/weapon2.png");
+                                                            JButton w2 = new JButton();
+                                                            w2.setIcon((weapon2));
+                                                            w2.setBounds(230,110,120,80);
+                                                            w2.setBackground(Color.black);
+                                                            w2.setForeground(Color.white);
+                                                            w2.setBorder(blackline2);
+                                                            w2.setFocusPainted(false);
+                                                            w2.addMouseListener(new MouseAdapter() {
+                                                                @Override
+                                                                public void mouseEntered(MouseEvent e) {
+                                                                    w2.setIcon(null);
+                                                                    w2.setText("6000");
+                                                                    w2.setBackground(Color.white);
+                                                                    w2.setForeground(Color.black);
+                                                                    w2.setBorder(BorderFactory.createLineBorder(Color.black));
+                                                                    w2.setFont(new Font("Arial", Font.BOLD, 30));
+                                                                }
+
+                                                                @Override
+                                                                public void mouseExited(MouseEvent e) {
+                                                                    w2.setBackground(Color.black);
+                                                                    w2.setForeground(Color.white);
+                                                                    w2.setBorder(blackline2);
+                                                                    w2.setText(null);
+                                                                    w2.setIcon((weapon2));
+                                                                }
+
+                                                                @Override
+                                                                public void mouseClicked(MouseEvent e) {
+                                                                    super.mouseClicked(e);
+                                                                }
+                                                            });
+
+                                                            ImageIcon weapon3 = new ImageIcon("Assets/weapon1.png");
+                                                            JButton w3 = new JButton();
+                                                            w3.setIcon((weapon3));
+                                                            w3.setBounds(410,110,120,80);
+                                                            w3.setBackground(Color.black);
+                                                            w3.setForeground(Color.white);
+                                                            w3.setBorder(blackline2);
+                                                            w3.setFocusPainted(false);
+                                                            w3.addMouseListener(new MouseAdapter() {
+                                                                @Override
+                                                                public void mouseEntered(MouseEvent e) {
+                                                                    w3.setIcon(null);
+                                                                    w3.setText("7000");
+                                                                    w3.setBackground(Color.white);
+                                                                    w3.setForeground(Color.black);
+                                                                    w3.setBorder(BorderFactory.createLineBorder(Color.black));
+                                                                    w3.setFont(new Font("Arial", Font.BOLD, 30));
+                                                                }
+
+                                                                @Override
+                                                                public void mouseExited(MouseEvent e) {
+                                                                    w3.setBackground(Color.black);
+                                                                    w3.setForeground(Color.white);
+                                                                    w3.setBorder(blackline2);
+                                                                    w3.setText(null);
+                                                                    w3.setIcon((weapon3));
+                                                                }
+
+                                                                @Override
+                                                                public void mouseClicked(MouseEvent e) {
+                                                                    super.mouseClicked(e);
+                                                                }
+                                                            });
+
+                                                            ImageIcon weapon4 = new ImageIcon("Assets/weapon4.png");
+                                                            JButton w4 = new JButton();
+                                                            w4.setIcon((weapon4));
+                                                            w4.setBounds(50,230,120,80);
+                                                            w4.setBackground(Color.black);
+                                                            w4.setForeground(Color.white);
+                                                            w4.setBorder(blackline2);
+                                                            w4.setFocusPainted(false);
+                                                            w4.addMouseListener(new MouseAdapter() {
+                                                                @Override
+                                                                public void mouseEntered(MouseEvent e) {
+                                                                    w4.setIcon(null);
+                                                                    w4.setText("8000");
+                                                                    w4.setBackground(Color.white);
+                                                                    w4.setForeground(Color.black);
+                                                                    w4.setBorder(BorderFactory.createLineBorder(Color.black));
+                                                                    w4.setFont(new Font("Arial", Font.BOLD, 30));
+                                                                }
+
+                                                                @Override
+                                                                public void mouseExited(MouseEvent e) {
+                                                                    w4.setBackground(Color.black);
+                                                                    w4.setForeground(Color.white);
+                                                                    w4.setBorder(blackline2);
+                                                                    w4.setText(null);
+                                                                    w4.setIcon((weapon4));
+                                                                }
+
+                                                                @Override
+                                                                public void mouseClicked(MouseEvent e) {
+                                                                    super.mouseClicked(e);
+                                                                }
+                                                            });
+
+                                                            ImageIcon weapon5 = new ImageIcon("Assets/weapon5.png");
+                                                            JButton w5 = new JButton();
+                                                            w5.setIcon((weapon5));
+                                                            w5.setBounds(230,230,120,80);
+                                                            w5.setBackground(Color.black);
+                                                            w5.setForeground(Color.white);
+                                                            w5.setBorder(blackline2);
+                                                            w5.setFocusPainted(false);
+                                                            w5.addMouseListener(new MouseAdapter() {
+                                                                @Override
+                                                                public void mouseEntered(MouseEvent e) {
+                                                                    w5.setIcon(null);
+                                                                    w5.setText("9000");
+                                                                    w5.setBackground(Color.white);
+                                                                    w5.setForeground(Color.black);
+                                                                    w5.setBorder(BorderFactory.createLineBorder(Color.black));
+                                                                    w5.setFont(new Font("Arial", Font.BOLD, 30));
+                                                                }
+
+                                                                @Override
+                                                                public void mouseExited(MouseEvent e) {
+                                                                    w5.setBackground(Color.black);
+                                                                    w5.setForeground(Color.white);
+                                                                    w5.setBorder(blackline2);
+                                                                    w5.setText(null);
+                                                                    w5.setIcon((weapon5));
+                                                                }
+
+                                                                @Override
+                                                                public void mouseClicked(MouseEvent e) {
+                                                                    super.mouseClicked(e);
+                                                                }
+                                                            });
+
+                                                            ImageIcon weapon6 = new ImageIcon("Assets/weapon6.png");
+                                                            JButton w6 = new JButton();
+                                                            w6.setIcon((weapon6));
+                                                            w6.setBounds(410,230,120,80);
+                                                            w6.setBackground(Color.black);
+                                                            w6.setForeground(Color.white);
+                                                            w6.setBorder(blackline2);
+                                                            w6.setFocusPainted(false);
+                                                            w6.addMouseListener(new MouseAdapter() {
+                                                                @Override
+                                                                public void mouseEntered(MouseEvent e) {
+                                                                    w6.setIcon(null);
+                                                                    w6.setText("10000");
+                                                                    w6.setBackground(Color.white);
+                                                                    w6.setForeground(Color.black);
+                                                                    w6.setBorder(BorderFactory.createLineBorder(Color.black));
+                                                                    w6.setFont(new Font("Arial", Font.BOLD, 30));
+                                                                }
+
+                                                                @Override
+                                                                public void mouseExited(MouseEvent e) {
+                                                                    w6.setBackground(Color.black);
+                                                                    w6.setForeground(Color.white);
+                                                                    w6.setBorder(blackline2);
+                                                                    w6.setText(null);
+                                                                    w6.setIcon((weapon6));
+                                                                }
+
+                                                                @Override
+                                                                public void mouseClicked(MouseEvent e) {
+                                                                    super.mouseClicked(e);
+                                                                }
+                                                            });
+
+
+                                                            h.add(w1);
+                                                            h.add(w2);
+                                                            h.add(w3);
+                                                            h.add(w4);
+                                                            h.add(w5);
+                                                            h.add(w6);
+                                                            h.add(l3);
+
+                                                            h.setLocationRelativeTo(null);
+                                                            h.setLayout(null);
+                                                            h.setVisible(true);
+
+                                                        }
+
+                                                    });
+
+
+                                                    f.add(l2); f.add(b);f.add(b2);
+                                                    f.setSize(600,250);
+                                                    f.setLocationRelativeTo(null);
+                                                    f.setLayout(null);
+                                                    f.setVisible(true);
                                                 }
 
                                                 if (logicBoard[xAdjustment2[0]][yAdjustment2[0] -1]==5){
@@ -2030,6 +3309,11 @@ public class Traveling_Salesman{
                                                                     }
                                                                     JOptionPane.showMessageDialog(f, "You have found "+namme+"\n"+"Your money increased",
                                                                             "Treasure Confirmed", JOptionPane.PLAIN_MESSAGE);
+                                                                    if(name == myQuest.quest){
+                                                                        JOptionPane.showMessageDialog(f, "Quest Done",
+                                                                                "Treasure Confirmed", JOptionPane.PLAIN_MESSAGE);
+                                                                        myQuest.questName();
+                                                                    }
                                                                     player1.money += 100000;
                                                                     player1.treasure_founded += 1;
                                                                     for (int i = 0; i< finalSize2; i++){
@@ -2163,6 +3447,305 @@ public class Traveling_Salesman{
                                                         treasureIndex[0] +=1;
                                                     }
 
+                                                    if (logicBoard[xAdjustment[0] - 1][yAdjustment[0]]==4){
+                                                        Border blackline2 = BorderFactory.createLineBorder(Color.white);
+                                                        JFrame f=new JFrame("Market");
+                                                        f.getContentPane().setBackground(new Color(16,5,47));
+                                                        JLabel l2=new JLabel("Market");
+                                                        l2.setBounds(240, 30 , 300,60);
+                                                        l2.setFont(new Font("Arial", Font.PLAIN, 30));
+                                                        l2.setForeground(Color.white);
+                                                        JButton b = new JButton("Buy treasure place");
+                                                        b.setFont(new Font("Arial", Font.BOLD, 10));
+                                                        b.setBounds(140,110, 130,60);
+                                                        b.setBackground(Color.black);
+                                                        b.setForeground(Color.white);
+                                                        b.setBorder(blackline2);
+                                                        b.setFocusPainted(false);
+                                                        b.addMouseListener(new MouseAdapter() {
+
+                                                            public void mouseEntered(MouseEvent evt) {
+                                                                b.setBackground(Color.white);
+                                                                b.setForeground(Color.black);
+                                                                b.setBorder(BorderFactory.createLineBorder(Color.black));
+                                                            }
+
+                                                            public void mouseExited(MouseEvent evt) {
+                                                                b.setBackground(Color.black);
+                                                                b.setForeground(Color.white);
+                                                                b.setBorder(blackline2);
+                                                            }
+
+                                                            @Override
+                                                            public void mouseClicked(MouseEvent e) {
+
+                                                            }
+                                                        });
+
+
+                                                        JButton b2 = new JButton("Buy weapon");
+                                                        b2.setFont(new Font("Arial", Font.BOLD, 15));
+                                                        b2.setBounds(300,110, 130,60);
+                                                        b2.setBackground(Color.black);
+                                                        b2.setForeground(Color.white);
+                                                        b2.setBorder(blackline2);
+                                                        b2.setFocusPainted(false);
+                                                        b2.addMouseListener(new MouseAdapter() {
+
+                                                            public void mouseEntered(MouseEvent evt) {
+                                                                b2.setBackground(Color.white);
+                                                                b2.setForeground(Color.black);
+                                                                b2.setBorder(BorderFactory.createLineBorder(Color.black));
+                                                            }
+
+                                                            public void mouseExited(MouseEvent evt) {
+                                                                b2.setBackground(Color.black);
+                                                                b2.setForeground(Color.white);
+                                                                b2.setBorder(blackline2);
+                                                            }
+
+                                                            @Override
+                                                            public void mouseClicked(MouseEvent e) {
+                                                                f.dispose();
+                                                                JFrame h = new JFrame("Weapons");
+                                                                h.setSize(600,400);
+                                                                h.getContentPane().setBackground(new Color(16,5,47));
+                                                                h.setForeground(Color.white);
+
+                                                                JLabel l3=new JLabel("Weapons");
+                                                                l3.setBounds(230, 30 , 300,60);
+                                                                l3.setFont(new Font("Arial", Font.PLAIN, 30));
+                                                                l3.setForeground(Color.white);
+
+                                                                ImageIcon weapon1 = new ImageIcon("Assets/weapon3.png");
+                                                                JButton w1 = new JButton();
+                                                                w1.setIcon((weapon1));
+                                                                w1.setBounds(50,110,120,80);
+                                                                w1.setBackground(Color.black);
+                                                                w1.setForeground(Color.white);
+                                                                w1.setBorder(blackline2);
+                                                                w1.setFocusPainted(false);
+                                                                w1.addMouseListener(new MouseAdapter() {
+                                                                    @Override
+                                                                    public void mouseEntered(MouseEvent e) {
+                                                                        w1.setIcon(null);
+                                                                        w1.setText("5000");
+                                                                        w1.setBackground(Color.white);
+                                                                        w1.setForeground(Color.black);
+                                                                        w1.setBorder(BorderFactory.createLineBorder(Color.black));
+                                                                        w1.setFont(new Font("Arial", Font.BOLD, 30));
+                                                                    }
+
+                                                                    @Override
+                                                                    public void mouseExited(MouseEvent e) {
+                                                                        w1.setBackground(Color.black);
+                                                                        w1.setForeground(Color.white);
+                                                                        w1.setBorder(blackline2);
+                                                                        w1.setText(null);
+                                                                        w1.setIcon((weapon1));
+                                                                    }
+
+                                                                    @Override
+                                                                    public void mouseClicked(MouseEvent e) {
+                                                                        super.mouseClicked(e);
+                                                                    }
+                                                                });
+
+                                                                ImageIcon weapon2 = new ImageIcon("Assets/weapon2.png");
+                                                                JButton w2 = new JButton();
+                                                                w2.setIcon((weapon2));
+                                                                w2.setBounds(230,110,120,80);
+                                                                w2.setBackground(Color.black);
+                                                                w2.setForeground(Color.white);
+                                                                w2.setBorder(blackline2);
+                                                                w2.setFocusPainted(false);
+                                                                w2.addMouseListener(new MouseAdapter() {
+                                                                    @Override
+                                                                    public void mouseEntered(MouseEvent e) {
+                                                                        w2.setIcon(null);
+                                                                        w2.setText("6000");
+                                                                        w2.setBackground(Color.white);
+                                                                        w2.setForeground(Color.black);
+                                                                        w2.setBorder(BorderFactory.createLineBorder(Color.black));
+                                                                        w2.setFont(new Font("Arial", Font.BOLD, 30));
+                                                                    }
+
+                                                                    @Override
+                                                                    public void mouseExited(MouseEvent e) {
+                                                                        w2.setBackground(Color.black);
+                                                                        w2.setForeground(Color.white);
+                                                                        w2.setBorder(blackline2);
+                                                                        w2.setText(null);
+                                                                        w2.setIcon((weapon2));
+                                                                    }
+
+                                                                    @Override
+                                                                    public void mouseClicked(MouseEvent e) {
+                                                                        super.mouseClicked(e);
+                                                                    }
+                                                                });
+
+                                                                ImageIcon weapon3 = new ImageIcon("Assets/weapon1.png");
+                                                                JButton w3 = new JButton();
+                                                                w3.setIcon((weapon3));
+                                                                w3.setBounds(410,110,120,80);
+                                                                w3.setBackground(Color.black);
+                                                                w3.setForeground(Color.white);
+                                                                w3.setBorder(blackline2);
+                                                                w3.setFocusPainted(false);
+                                                                w3.addMouseListener(new MouseAdapter() {
+                                                                    @Override
+                                                                    public void mouseEntered(MouseEvent e) {
+                                                                        w3.setIcon(null);
+                                                                        w3.setText("7000");
+                                                                        w3.setBackground(Color.white);
+                                                                        w3.setForeground(Color.black);
+                                                                        w3.setBorder(BorderFactory.createLineBorder(Color.black));
+                                                                        w3.setFont(new Font("Arial", Font.BOLD, 30));
+                                                                    }
+
+                                                                    @Override
+                                                                    public void mouseExited(MouseEvent e) {
+                                                                        w3.setBackground(Color.black);
+                                                                        w3.setForeground(Color.white);
+                                                                        w3.setBorder(blackline2);
+                                                                        w3.setText(null);
+                                                                        w3.setIcon((weapon3));
+                                                                    }
+
+                                                                    @Override
+                                                                    public void mouseClicked(MouseEvent e) {
+                                                                        super.mouseClicked(e);
+                                                                    }
+                                                                });
+
+                                                                ImageIcon weapon4 = new ImageIcon("Assets/weapon4.png");
+                                                                JButton w4 = new JButton();
+                                                                w4.setIcon((weapon4));
+                                                                w4.setBounds(50,230,120,80);
+                                                                w4.setBackground(Color.black);
+                                                                w4.setForeground(Color.white);
+                                                                w4.setBorder(blackline2);
+                                                                w4.setFocusPainted(false);
+                                                                w4.addMouseListener(new MouseAdapter() {
+                                                                    @Override
+                                                                    public void mouseEntered(MouseEvent e) {
+                                                                        w4.setIcon(null);
+                                                                        w4.setText("8000");
+                                                                        w4.setBackground(Color.white);
+                                                                        w4.setForeground(Color.black);
+                                                                        w4.setBorder(BorderFactory.createLineBorder(Color.black));
+                                                                        w4.setFont(new Font("Arial", Font.BOLD, 30));
+                                                                    }
+
+                                                                    @Override
+                                                                    public void mouseExited(MouseEvent e) {
+                                                                        w4.setBackground(Color.black);
+                                                                        w4.setForeground(Color.white);
+                                                                        w4.setBorder(blackline2);
+                                                                        w4.setText(null);
+                                                                        w4.setIcon((weapon4));
+                                                                    }
+
+                                                                    @Override
+                                                                    public void mouseClicked(MouseEvent e) {
+                                                                        super.mouseClicked(e);
+                                                                    }
+                                                                });
+
+                                                                ImageIcon weapon5 = new ImageIcon("Assets/weapon5.png");
+                                                                JButton w5 = new JButton();
+                                                                w5.setIcon((weapon5));
+                                                                w5.setBounds(230,230,120,80);
+                                                                w5.setBackground(Color.black);
+                                                                w5.setForeground(Color.white);
+                                                                w5.setBorder(blackline2);
+                                                                w5.setFocusPainted(false);
+                                                                w5.addMouseListener(new MouseAdapter() {
+                                                                    @Override
+                                                                    public void mouseEntered(MouseEvent e) {
+                                                                        w5.setIcon(null);
+                                                                        w5.setText("9000");
+                                                                        w5.setBackground(Color.white);
+                                                                        w5.setForeground(Color.black);
+                                                                        w5.setBorder(BorderFactory.createLineBorder(Color.black));
+                                                                        w5.setFont(new Font("Arial", Font.BOLD, 30));
+                                                                    }
+
+                                                                    @Override
+                                                                    public void mouseExited(MouseEvent e) {
+                                                                        w5.setBackground(Color.black);
+                                                                        w5.setForeground(Color.white);
+                                                                        w5.setBorder(blackline2);
+                                                                        w5.setText(null);
+                                                                        w5.setIcon((weapon5));
+                                                                    }
+
+                                                                    @Override
+                                                                    public void mouseClicked(MouseEvent e) {
+                                                                        super.mouseClicked(e);
+                                                                    }
+                                                                });
+
+                                                                ImageIcon weapon6 = new ImageIcon("Assets/weapon6.png");
+                                                                JButton w6 = new JButton();
+                                                                w6.setIcon((weapon6));
+                                                                w6.setBounds(410,230,120,80);
+                                                                w6.setBackground(Color.black);
+                                                                w6.setForeground(Color.white);
+                                                                w6.setBorder(blackline2);
+                                                                w6.setFocusPainted(false);
+                                                                w6.addMouseListener(new MouseAdapter() {
+                                                                    @Override
+                                                                    public void mouseEntered(MouseEvent e) {
+                                                                        w6.setIcon(null);
+                                                                        w6.setText("10000");
+                                                                        w6.setBackground(Color.white);
+                                                                        w6.setForeground(Color.black);
+                                                                        w6.setBorder(BorderFactory.createLineBorder(Color.black));
+                                                                        w6.setFont(new Font("Arial", Font.BOLD, 30));
+                                                                    }
+
+                                                                    @Override
+                                                                    public void mouseExited(MouseEvent e) {
+                                                                        w6.setBackground(Color.black);
+                                                                        w6.setForeground(Color.white);
+                                                                        w6.setBorder(blackline2);
+                                                                        w6.setText(null);
+                                                                        w6.setIcon((weapon6));
+                                                                    }
+
+                                                                    @Override
+                                                                    public void mouseClicked(MouseEvent e) {
+                                                                        super.mouseClicked(e);
+                                                                    }
+                                                                });
+
+
+                                                                h.add(w1);
+                                                                h.add(w2);
+                                                                h.add(w3);
+                                                                h.add(w4);
+                                                                h.add(w5);
+                                                                h.add(w6);
+                                                                h.add(l3);
+
+                                                                h.setLocationRelativeTo(null);
+                                                                h.setLayout(null);
+                                                                h.setVisible(true);
+
+                                                            }
+
+                                                        });
+
+
+                                                        f.add(l2); f.add(b);f.add(b2);
+                                                        f.setSize(600,250);
+                                                        f.setLocationRelativeTo(null);
+                                                        f.setLayout(null);
+                                                        f.setVisible(true);
+                                                    }
+
                                                     if (logicBoard[xAdjustment[0] - 1][yAdjustment[0]]==5){
                                                         Random rand = new Random();
                                                         int money = rand.nextInt(10)+1;
@@ -2248,7 +3831,7 @@ public class Traveling_Salesman{
                                                     if (uu[0]==1){
                                                         arr[xAdjustment[0]][yAdjustment[0]].setBackground(Color.white);
                                                         xAdjustment[0] = 0;
-                                                        yAdjustment[0] = finalSize-1;
+                                                        yAdjustment[0] = 0;
                                                         uu[0]=0;
                                                         counter += 1;
                                                         ll[0] = counter;
@@ -2387,6 +3970,11 @@ public class Traveling_Salesman{
                                                                 }
                                                                 JOptionPane.showMessageDialog(f, "You have found "+namme+"\n"+"Your money increased",
                                                                         "Treasure Confirmed", JOptionPane.PLAIN_MESSAGE);
+                                                                if(name == myQuest.quest){
+                                                                    JOptionPane.showMessageDialog(f, "Quest Done",
+                                                                            "Treasure Confirmed", JOptionPane.PLAIN_MESSAGE);
+                                                                    myQuest.questName();
+                                                                }
                                                                 player1.money += 100000;
                                                                 player1.treasure_founded += 1;
                                                                 f.setVisible(false);
@@ -2513,6 +4101,305 @@ public class Traveling_Salesman{
                                                     treasureIndex[0] +=1;
                                                 }
 
+                                                if (logicBoard[xAdjustment[0] + 1][yAdjustment[0]]==4){
+                                                    Border blackline2 = BorderFactory.createLineBorder(Color.white);
+                                                    JFrame f=new JFrame("Market");
+                                                    f.getContentPane().setBackground(new Color(16,5,47));
+                                                    JLabel l2=new JLabel("Market");
+                                                    l2.setBounds(240, 30 , 300,60);
+                                                    l2.setFont(new Font("Arial", Font.PLAIN, 30));
+                                                    l2.setForeground(Color.white);
+                                                    JButton b = new JButton("Buy treasure place");
+                                                    b.setFont(new Font("Arial", Font.BOLD, 10));
+                                                    b.setBounds(140,110, 130,60);
+                                                    b.setBackground(Color.black);
+                                                    b.setForeground(Color.white);
+                                                    b.setBorder(blackline2);
+                                                    b.setFocusPainted(false);
+                                                    b.addMouseListener(new MouseAdapter() {
+
+                                                        public void mouseEntered(MouseEvent evt) {
+                                                            b.setBackground(Color.white);
+                                                            b.setForeground(Color.black);
+                                                            b.setBorder(BorderFactory.createLineBorder(Color.black));
+                                                        }
+
+                                                        public void mouseExited(MouseEvent evt) {
+                                                            b.setBackground(Color.black);
+                                                            b.setForeground(Color.white);
+                                                            b.setBorder(blackline2);
+                                                        }
+
+                                                        @Override
+                                                        public void mouseClicked(MouseEvent e) {
+
+                                                        }
+                                                    });
+
+
+                                                    JButton b2 = new JButton("Buy weapon");
+                                                    b2.setFont(new Font("Arial", Font.BOLD, 15));
+                                                    b2.setBounds(300,110, 130,60);
+                                                    b2.setBackground(Color.black);
+                                                    b2.setForeground(Color.white);
+                                                    b2.setBorder(blackline2);
+                                                    b2.setFocusPainted(false);
+                                                    b2.addMouseListener(new MouseAdapter() {
+
+                                                        public void mouseEntered(MouseEvent evt) {
+                                                            b2.setBackground(Color.white);
+                                                            b2.setForeground(Color.black);
+                                                            b2.setBorder(BorderFactory.createLineBorder(Color.black));
+                                                        }
+
+                                                        public void mouseExited(MouseEvent evt) {
+                                                            b2.setBackground(Color.black);
+                                                            b2.setForeground(Color.white);
+                                                            b2.setBorder(blackline2);
+                                                        }
+
+                                                        @Override
+                                                        public void mouseClicked(MouseEvent e) {
+                                                            f.dispose();
+                                                            JFrame h = new JFrame("Weapons");
+                                                            h.setSize(600,400);
+                                                            h.getContentPane().setBackground(new Color(16,5,47));
+                                                            h.setForeground(Color.white);
+
+                                                            JLabel l3=new JLabel("Weapons");
+                                                            l3.setBounds(230, 30 , 300,60);
+                                                            l3.setFont(new Font("Arial", Font.PLAIN, 30));
+                                                            l3.setForeground(Color.white);
+
+                                                            ImageIcon weapon1 = new ImageIcon("Assets/weapon3.png");
+                                                            JButton w1 = new JButton();
+                                                            w1.setIcon((weapon1));
+                                                            w1.setBounds(50,110,120,80);
+                                                            w1.setBackground(Color.black);
+                                                            w1.setForeground(Color.white);
+                                                            w1.setBorder(blackline2);
+                                                            w1.setFocusPainted(false);
+                                                            w1.addMouseListener(new MouseAdapter() {
+                                                                @Override
+                                                                public void mouseEntered(MouseEvent e) {
+                                                                    w1.setIcon(null);
+                                                                    w1.setText("5000");
+                                                                    w1.setBackground(Color.white);
+                                                                    w1.setForeground(Color.black);
+                                                                    w1.setBorder(BorderFactory.createLineBorder(Color.black));
+                                                                    w1.setFont(new Font("Arial", Font.BOLD, 30));
+                                                                }
+
+                                                                @Override
+                                                                public void mouseExited(MouseEvent e) {
+                                                                    w1.setBackground(Color.black);
+                                                                    w1.setForeground(Color.white);
+                                                                    w1.setBorder(blackline2);
+                                                                    w1.setText(null);
+                                                                    w1.setIcon((weapon1));
+                                                                }
+
+                                                                @Override
+                                                                public void mouseClicked(MouseEvent e) {
+                                                                    super.mouseClicked(e);
+                                                                }
+                                                            });
+
+                                                            ImageIcon weapon2 = new ImageIcon("Assets/weapon2.png");
+                                                            JButton w2 = new JButton();
+                                                            w2.setIcon((weapon2));
+                                                            w2.setBounds(230,110,120,80);
+                                                            w2.setBackground(Color.black);
+                                                            w2.setForeground(Color.white);
+                                                            w2.setBorder(blackline2);
+                                                            w2.setFocusPainted(false);
+                                                            w2.addMouseListener(new MouseAdapter() {
+                                                                @Override
+                                                                public void mouseEntered(MouseEvent e) {
+                                                                    w2.setIcon(null);
+                                                                    w2.setText("6000");
+                                                                    w2.setBackground(Color.white);
+                                                                    w2.setForeground(Color.black);
+                                                                    w2.setBorder(BorderFactory.createLineBorder(Color.black));
+                                                                    w2.setFont(new Font("Arial", Font.BOLD, 30));
+                                                                }
+
+                                                                @Override
+                                                                public void mouseExited(MouseEvent e) {
+                                                                    w2.setBackground(Color.black);
+                                                                    w2.setForeground(Color.white);
+                                                                    w2.setBorder(blackline2);
+                                                                    w2.setText(null);
+                                                                    w2.setIcon((weapon2));
+                                                                }
+
+                                                                @Override
+                                                                public void mouseClicked(MouseEvent e) {
+                                                                    super.mouseClicked(e);
+                                                                }
+                                                            });
+
+                                                            ImageIcon weapon3 = new ImageIcon("Assets/weapon1.png");
+                                                            JButton w3 = new JButton();
+                                                            w3.setIcon((weapon3));
+                                                            w3.setBounds(410,110,120,80);
+                                                            w3.setBackground(Color.black);
+                                                            w3.setForeground(Color.white);
+                                                            w3.setBorder(blackline2);
+                                                            w3.setFocusPainted(false);
+                                                            w3.addMouseListener(new MouseAdapter() {
+                                                                @Override
+                                                                public void mouseEntered(MouseEvent e) {
+                                                                    w3.setIcon(null);
+                                                                    w3.setText("7000");
+                                                                    w3.setBackground(Color.white);
+                                                                    w3.setForeground(Color.black);
+                                                                    w3.setBorder(BorderFactory.createLineBorder(Color.black));
+                                                                    w3.setFont(new Font("Arial", Font.BOLD, 30));
+                                                                }
+
+                                                                @Override
+                                                                public void mouseExited(MouseEvent e) {
+                                                                    w3.setBackground(Color.black);
+                                                                    w3.setForeground(Color.white);
+                                                                    w3.setBorder(blackline2);
+                                                                    w3.setText(null);
+                                                                    w3.setIcon((weapon3));
+                                                                }
+
+                                                                @Override
+                                                                public void mouseClicked(MouseEvent e) {
+                                                                    super.mouseClicked(e);
+                                                                }
+                                                            });
+
+                                                            ImageIcon weapon4 = new ImageIcon("Assets/weapon4.png");
+                                                            JButton w4 = new JButton();
+                                                            w4.setIcon((weapon4));
+                                                            w4.setBounds(50,230,120,80);
+                                                            w4.setBackground(Color.black);
+                                                            w4.setForeground(Color.white);
+                                                            w4.setBorder(blackline2);
+                                                            w4.setFocusPainted(false);
+                                                            w4.addMouseListener(new MouseAdapter() {
+                                                                @Override
+                                                                public void mouseEntered(MouseEvent e) {
+                                                                    w4.setIcon(null);
+                                                                    w4.setText("8000");
+                                                                    w4.setBackground(Color.white);
+                                                                    w4.setForeground(Color.black);
+                                                                    w4.setBorder(BorderFactory.createLineBorder(Color.black));
+                                                                    w4.setFont(new Font("Arial", Font.BOLD, 30));
+                                                                }
+
+                                                                @Override
+                                                                public void mouseExited(MouseEvent e) {
+                                                                    w4.setBackground(Color.black);
+                                                                    w4.setForeground(Color.white);
+                                                                    w4.setBorder(blackline2);
+                                                                    w4.setText(null);
+                                                                    w4.setIcon((weapon4));
+                                                                }
+
+                                                                @Override
+                                                                public void mouseClicked(MouseEvent e) {
+                                                                    super.mouseClicked(e);
+                                                                }
+                                                            });
+
+                                                            ImageIcon weapon5 = new ImageIcon("Assets/weapon5.png");
+                                                            JButton w5 = new JButton();
+                                                            w5.setIcon((weapon5));
+                                                            w5.setBounds(230,230,120,80);
+                                                            w5.setBackground(Color.black);
+                                                            w5.setForeground(Color.white);
+                                                            w5.setBorder(blackline2);
+                                                            w5.setFocusPainted(false);
+                                                            w5.addMouseListener(new MouseAdapter() {
+                                                                @Override
+                                                                public void mouseEntered(MouseEvent e) {
+                                                                    w5.setIcon(null);
+                                                                    w5.setText("9000");
+                                                                    w5.setBackground(Color.white);
+                                                                    w5.setForeground(Color.black);
+                                                                    w5.setBorder(BorderFactory.createLineBorder(Color.black));
+                                                                    w5.setFont(new Font("Arial", Font.BOLD, 30));
+                                                                }
+
+                                                                @Override
+                                                                public void mouseExited(MouseEvent e) {
+                                                                    w5.setBackground(Color.black);
+                                                                    w5.setForeground(Color.white);
+                                                                    w5.setBorder(blackline2);
+                                                                    w5.setText(null);
+                                                                    w5.setIcon((weapon5));
+                                                                }
+
+                                                                @Override
+                                                                public void mouseClicked(MouseEvent e) {
+                                                                    super.mouseClicked(e);
+                                                                }
+                                                            });
+
+                                                            ImageIcon weapon6 = new ImageIcon("Assets/weapon6.png");
+                                                            JButton w6 = new JButton();
+                                                            w6.setIcon((weapon6));
+                                                            w6.setBounds(410,230,120,80);
+                                                            w6.setBackground(Color.black);
+                                                            w6.setForeground(Color.white);
+                                                            w6.setBorder(blackline2);
+                                                            w6.setFocusPainted(false);
+                                                            w6.addMouseListener(new MouseAdapter() {
+                                                                @Override
+                                                                public void mouseEntered(MouseEvent e) {
+                                                                    w6.setIcon(null);
+                                                                    w6.setText("10000");
+                                                                    w6.setBackground(Color.white);
+                                                                    w6.setForeground(Color.black);
+                                                                    w6.setBorder(BorderFactory.createLineBorder(Color.black));
+                                                                    w6.setFont(new Font("Arial", Font.BOLD, 30));
+                                                                }
+
+                                                                @Override
+                                                                public void mouseExited(MouseEvent e) {
+                                                                    w6.setBackground(Color.black);
+                                                                    w6.setForeground(Color.white);
+                                                                    w6.setBorder(blackline2);
+                                                                    w6.setText(null);
+                                                                    w6.setIcon((weapon6));
+                                                                }
+
+                                                                @Override
+                                                                public void mouseClicked(MouseEvent e) {
+                                                                    super.mouseClicked(e);
+                                                                }
+                                                            });
+
+
+                                                            h.add(w1);
+                                                            h.add(w2);
+                                                            h.add(w3);
+                                                            h.add(w4);
+                                                            h.add(w5);
+                                                            h.add(w6);
+                                                            h.add(l3);
+
+                                                            h.setLocationRelativeTo(null);
+                                                            h.setLayout(null);
+                                                            h.setVisible(true);
+
+                                                        }
+
+                                                    });
+
+
+                                                    f.add(l2); f.add(b);f.add(b2);
+                                                    f.setSize(600,250);
+                                                    f.setLocationRelativeTo(null);
+                                                    f.setLayout(null);
+                                                    f.setVisible(true);
+                                                }
+
                                                 if (logicBoard[xAdjustment[0] + 1][yAdjustment[0]]==5){
                                                     Random rand = new Random();
                                                     int money = rand.nextInt(10)+1;
@@ -2600,7 +4487,7 @@ public class Traveling_Salesman{
                                                 if (uu[0]==1){
                                                     arr[xAdjustment[0]][yAdjustment[0]].setBackground(Color.white);
                                                     xAdjustment[0] = 0;
-                                                    yAdjustment[0] = finalSize-1;
+                                                    yAdjustment[0] = 0;
                                                     uu[0]=0;
                                                     counter += 1;
                                                     ll[0] = counter;
@@ -2737,6 +4624,11 @@ public class Traveling_Salesman{
                                                                 }
                                                                 JOptionPane.showMessageDialog(f, "You have found "+namme+"\n"+"Your money increased",
                                                                         "Treasure Confirmed", JOptionPane.PLAIN_MESSAGE);
+                                                                if(name == myQuest.quest){
+                                                                    JOptionPane.showMessageDialog(f, "Quest Done",
+                                                                            "Treasure Confirmed", JOptionPane.PLAIN_MESSAGE);
+                                                                    myQuest.questName();
+                                                                }
                                                                 player1.money += 100000;
                                                                 player1.treasure_founded += 1;
                                                                 f.setVisible(false);
@@ -2870,6 +4762,305 @@ public class Traveling_Salesman{
                                                     treasureIndex[0] +=1;
                                                 }
 
+                                                if (logicBoard[xAdjustment[0]][yAdjustment[0] +1]==4){
+                                                    Border blackline2 = BorderFactory.createLineBorder(Color.white);
+                                                    JFrame f=new JFrame("Market");
+                                                    f.getContentPane().setBackground(new Color(16,5,47));
+                                                    JLabel l2=new JLabel("Market");
+                                                    l2.setBounds(240, 30 , 300,60);
+                                                    l2.setFont(new Font("Arial", Font.PLAIN, 30));
+                                                    l2.setForeground(Color.white);
+                                                    JButton b = new JButton("Buy treasure place");
+                                                    b.setFont(new Font("Arial", Font.BOLD, 10));
+                                                    b.setBounds(140,110, 130,60);
+                                                    b.setBackground(Color.black);
+                                                    b.setForeground(Color.white);
+                                                    b.setBorder(blackline2);
+                                                    b.setFocusPainted(false);
+                                                    b.addMouseListener(new MouseAdapter() {
+
+                                                        public void mouseEntered(MouseEvent evt) {
+                                                            b.setBackground(Color.white);
+                                                            b.setForeground(Color.black);
+                                                            b.setBorder(BorderFactory.createLineBorder(Color.black));
+                                                        }
+
+                                                        public void mouseExited(MouseEvent evt) {
+                                                            b.setBackground(Color.black);
+                                                            b.setForeground(Color.white);
+                                                            b.setBorder(blackline2);
+                                                        }
+
+                                                        @Override
+                                                        public void mouseClicked(MouseEvent e) {
+
+                                                        }
+                                                    });
+
+
+                                                    JButton b2 = new JButton("Buy weapon");
+                                                    b2.setFont(new Font("Arial", Font.BOLD, 15));
+                                                    b2.setBounds(300,110, 130,60);
+                                                    b2.setBackground(Color.black);
+                                                    b2.setForeground(Color.white);
+                                                    b2.setBorder(blackline2);
+                                                    b2.setFocusPainted(false);
+                                                    b2.addMouseListener(new MouseAdapter() {
+
+                                                        public void mouseEntered(MouseEvent evt) {
+                                                            b2.setBackground(Color.white);
+                                                            b2.setForeground(Color.black);
+                                                            b2.setBorder(BorderFactory.createLineBorder(Color.black));
+                                                        }
+
+                                                        public void mouseExited(MouseEvent evt) {
+                                                            b2.setBackground(Color.black);
+                                                            b2.setForeground(Color.white);
+                                                            b2.setBorder(blackline2);
+                                                        }
+
+                                                        @Override
+                                                        public void mouseClicked(MouseEvent e) {
+                                                            f.dispose();
+                                                            JFrame h = new JFrame("Weapons");
+                                                            h.setSize(600,400);
+                                                            h.getContentPane().setBackground(new Color(16,5,47));
+                                                            h.setForeground(Color.white);
+
+                                                            JLabel l3=new JLabel("Weapons");
+                                                            l3.setBounds(230, 30 , 300,60);
+                                                            l3.setFont(new Font("Arial", Font.PLAIN, 30));
+                                                            l3.setForeground(Color.white);
+
+                                                            ImageIcon weapon1 = new ImageIcon("Assets/weapon3.png");
+                                                            JButton w1 = new JButton();
+                                                            w1.setIcon((weapon1));
+                                                            w1.setBounds(50,110,120,80);
+                                                            w1.setBackground(Color.black);
+                                                            w1.setForeground(Color.white);
+                                                            w1.setBorder(blackline2);
+                                                            w1.setFocusPainted(false);
+                                                            w1.addMouseListener(new MouseAdapter() {
+                                                                @Override
+                                                                public void mouseEntered(MouseEvent e) {
+                                                                    w1.setIcon(null);
+                                                                    w1.setText("5000");
+                                                                    w1.setBackground(Color.white);
+                                                                    w1.setForeground(Color.black);
+                                                                    w1.setBorder(BorderFactory.createLineBorder(Color.black));
+                                                                    w1.setFont(new Font("Arial", Font.BOLD, 30));
+                                                                }
+
+                                                                @Override
+                                                                public void mouseExited(MouseEvent e) {
+                                                                    w1.setBackground(Color.black);
+                                                                    w1.setForeground(Color.white);
+                                                                    w1.setBorder(blackline2);
+                                                                    w1.setText(null);
+                                                                    w1.setIcon((weapon1));
+                                                                }
+
+                                                                @Override
+                                                                public void mouseClicked(MouseEvent e) {
+                                                                    super.mouseClicked(e);
+                                                                }
+                                                            });
+
+                                                            ImageIcon weapon2 = new ImageIcon("Assets/weapon2.png");
+                                                            JButton w2 = new JButton();
+                                                            w2.setIcon((weapon2));
+                                                            w2.setBounds(230,110,120,80);
+                                                            w2.setBackground(Color.black);
+                                                            w2.setForeground(Color.white);
+                                                            w2.setBorder(blackline2);
+                                                            w2.setFocusPainted(false);
+                                                            w2.addMouseListener(new MouseAdapter() {
+                                                                @Override
+                                                                public void mouseEntered(MouseEvent e) {
+                                                                    w2.setIcon(null);
+                                                                    w2.setText("6000");
+                                                                    w2.setBackground(Color.white);
+                                                                    w2.setForeground(Color.black);
+                                                                    w2.setBorder(BorderFactory.createLineBorder(Color.black));
+                                                                    w2.setFont(new Font("Arial", Font.BOLD, 30));
+                                                                }
+
+                                                                @Override
+                                                                public void mouseExited(MouseEvent e) {
+                                                                    w2.setBackground(Color.black);
+                                                                    w2.setForeground(Color.white);
+                                                                    w2.setBorder(blackline2);
+                                                                    w2.setText(null);
+                                                                    w2.setIcon((weapon2));
+                                                                }
+
+                                                                @Override
+                                                                public void mouseClicked(MouseEvent e) {
+                                                                    super.mouseClicked(e);
+                                                                }
+                                                            });
+
+                                                            ImageIcon weapon3 = new ImageIcon("Assets/weapon1.png");
+                                                            JButton w3 = new JButton();
+                                                            w3.setIcon((weapon3));
+                                                            w3.setBounds(410,110,120,80);
+                                                            w3.setBackground(Color.black);
+                                                            w3.setForeground(Color.white);
+                                                            w3.setBorder(blackline2);
+                                                            w3.setFocusPainted(false);
+                                                            w3.addMouseListener(new MouseAdapter() {
+                                                                @Override
+                                                                public void mouseEntered(MouseEvent e) {
+                                                                    w3.setIcon(null);
+                                                                    w3.setText("7000");
+                                                                    w3.setBackground(Color.white);
+                                                                    w3.setForeground(Color.black);
+                                                                    w3.setBorder(BorderFactory.createLineBorder(Color.black));
+                                                                    w3.setFont(new Font("Arial", Font.BOLD, 30));
+                                                                }
+
+                                                                @Override
+                                                                public void mouseExited(MouseEvent e) {
+                                                                    w3.setBackground(Color.black);
+                                                                    w3.setForeground(Color.white);
+                                                                    w3.setBorder(blackline2);
+                                                                    w3.setText(null);
+                                                                    w3.setIcon((weapon3));
+                                                                }
+
+                                                                @Override
+                                                                public void mouseClicked(MouseEvent e) {
+                                                                    super.mouseClicked(e);
+                                                                }
+                                                            });
+
+                                                            ImageIcon weapon4 = new ImageIcon("Assets/weapon4.png");
+                                                            JButton w4 = new JButton();
+                                                            w4.setIcon((weapon4));
+                                                            w4.setBounds(50,230,120,80);
+                                                            w4.setBackground(Color.black);
+                                                            w4.setForeground(Color.white);
+                                                            w4.setBorder(blackline2);
+                                                            w4.setFocusPainted(false);
+                                                            w4.addMouseListener(new MouseAdapter() {
+                                                                @Override
+                                                                public void mouseEntered(MouseEvent e) {
+                                                                    w4.setIcon(null);
+                                                                    w4.setText("8000");
+                                                                    w4.setBackground(Color.white);
+                                                                    w4.setForeground(Color.black);
+                                                                    w4.setBorder(BorderFactory.createLineBorder(Color.black));
+                                                                    w4.setFont(new Font("Arial", Font.BOLD, 30));
+                                                                }
+
+                                                                @Override
+                                                                public void mouseExited(MouseEvent e) {
+                                                                    w4.setBackground(Color.black);
+                                                                    w4.setForeground(Color.white);
+                                                                    w4.setBorder(blackline2);
+                                                                    w4.setText(null);
+                                                                    w4.setIcon((weapon4));
+                                                                }
+
+                                                                @Override
+                                                                public void mouseClicked(MouseEvent e) {
+                                                                    super.mouseClicked(e);
+                                                                }
+                                                            });
+
+                                                            ImageIcon weapon5 = new ImageIcon("Assets/weapon5.png");
+                                                            JButton w5 = new JButton();
+                                                            w5.setIcon((weapon5));
+                                                            w5.setBounds(230,230,120,80);
+                                                            w5.setBackground(Color.black);
+                                                            w5.setForeground(Color.white);
+                                                            w5.setBorder(blackline2);
+                                                            w5.setFocusPainted(false);
+                                                            w5.addMouseListener(new MouseAdapter() {
+                                                                @Override
+                                                                public void mouseEntered(MouseEvent e) {
+                                                                    w5.setIcon(null);
+                                                                    w5.setText("9000");
+                                                                    w5.setBackground(Color.white);
+                                                                    w5.setForeground(Color.black);
+                                                                    w5.setBorder(BorderFactory.createLineBorder(Color.black));
+                                                                    w5.setFont(new Font("Arial", Font.BOLD, 30));
+                                                                }
+
+                                                                @Override
+                                                                public void mouseExited(MouseEvent e) {
+                                                                    w5.setBackground(Color.black);
+                                                                    w5.setForeground(Color.white);
+                                                                    w5.setBorder(blackline2);
+                                                                    w5.setText(null);
+                                                                    w5.setIcon((weapon5));
+                                                                }
+
+                                                                @Override
+                                                                public void mouseClicked(MouseEvent e) {
+                                                                    super.mouseClicked(e);
+                                                                }
+                                                            });
+
+                                                            ImageIcon weapon6 = new ImageIcon("Assets/weapon6.png");
+                                                            JButton w6 = new JButton();
+                                                            w6.setIcon((weapon6));
+                                                            w6.setBounds(410,230,120,80);
+                                                            w6.setBackground(Color.black);
+                                                            w6.setForeground(Color.white);
+                                                            w6.setBorder(blackline2);
+                                                            w6.setFocusPainted(false);
+                                                            w6.addMouseListener(new MouseAdapter() {
+                                                                @Override
+                                                                public void mouseEntered(MouseEvent e) {
+                                                                    w6.setIcon(null);
+                                                                    w6.setText("10000");
+                                                                    w6.setBackground(Color.white);
+                                                                    w6.setForeground(Color.black);
+                                                                    w6.setBorder(BorderFactory.createLineBorder(Color.black));
+                                                                    w6.setFont(new Font("Arial", Font.BOLD, 30));
+                                                                }
+
+                                                                @Override
+                                                                public void mouseExited(MouseEvent e) {
+                                                                    w6.setBackground(Color.black);
+                                                                    w6.setForeground(Color.white);
+                                                                    w6.setBorder(blackline2);
+                                                                    w6.setText(null);
+                                                                    w6.setIcon((weapon6));
+                                                                }
+
+                                                                @Override
+                                                                public void mouseClicked(MouseEvent e) {
+                                                                    super.mouseClicked(e);
+                                                                }
+                                                            });
+
+
+                                                            h.add(w1);
+                                                            h.add(w2);
+                                                            h.add(w3);
+                                                            h.add(w4);
+                                                            h.add(w5);
+                                                            h.add(w6);
+                                                            h.add(l3);
+
+                                                            h.setLocationRelativeTo(null);
+                                                            h.setLayout(null);
+                                                            h.setVisible(true);
+
+                                                        }
+
+                                                    });
+
+
+                                                    f.add(l2); f.add(b);f.add(b2);
+                                                    f.setSize(600,250);
+                                                    f.setLocationRelativeTo(null);
+                                                    f.setLayout(null);
+                                                    f.setVisible(true);
+                                                }
+
                                                 if (logicBoard[xAdjustment[0]][yAdjustment[0] +1]==5){
                                                     Random rand = new Random();
                                                     int money = rand.nextInt(10)+1;
@@ -2945,19 +5136,19 @@ public class Traveling_Salesman{
                                                 }
 
                                                 if (uu[0]==0){
+                                                    player1.x=xAdjustment[0];
+                                                    player1.y=yAdjustment[0] + 1;
+
                                                     yAdjustment[0] += 1;
                                                     counter += 1;
                                                     ll[0] = counter;
-
-                                                    player1.x=xAdjustment[0];
-                                                    player1.y=yAdjustment[0];
 
                                                     arr[xAdjustment[0]][yAdjustment[0]-1].setBackground(Color.white);
                                                 }
                                                 if (uu[0]==1){
                                                     arr[xAdjustment[0]][yAdjustment[0]].setBackground(Color.white);
                                                     xAdjustment[0] = 0;
-                                                    yAdjustment[0] = finalSize-1;
+                                                    yAdjustment[0] = 0;
                                                     uu[0]=0;
                                                     counter += 1;
                                                     ll[0] = counter;
@@ -3092,6 +5283,11 @@ public class Traveling_Salesman{
                                                                 }
                                                                 JOptionPane.showMessageDialog(f, "You have found "+namme+"\n"+"Your money increased",
                                                                         "Treasure Confirmed", JOptionPane.PLAIN_MESSAGE);
+                                                                if(name == myQuest.quest){
+                                                                    JOptionPane.showMessageDialog(f, "Quest Done",
+                                                                            "Treasure Confirmed", JOptionPane.PLAIN_MESSAGE);
+                                                                    myQuest.questName();
+                                                                }
                                                                 player1.money += 100000;
                                                                 player1.treasure_founded += 1;
                                                                 f.setVisible(false);
@@ -3225,6 +5421,305 @@ public class Traveling_Salesman{
                                                     treasureIndex[0] +=1;
                                                 }
 
+                                                if (logicBoard[xAdjustment[0]][yAdjustment[0] -1]==4){
+                                                    Border blackline2 = BorderFactory.createLineBorder(Color.white);
+                                                    JFrame f=new JFrame("Market");
+                                                    f.getContentPane().setBackground(new Color(16,5,47));
+                                                    JLabel l2=new JLabel("Market");
+                                                    l2.setBounds(240, 30 , 300,60);
+                                                    l2.setFont(new Font("Arial", Font.PLAIN, 30));
+                                                    l2.setForeground(Color.white);
+                                                    JButton b = new JButton("Buy treasure place");
+                                                    b.setFont(new Font("Arial", Font.BOLD, 10));
+                                                    b.setBounds(140,110, 130,60);
+                                                    b.setBackground(Color.black);
+                                                    b.setForeground(Color.white);
+                                                    b.setBorder(blackline2);
+                                                    b.setFocusPainted(false);
+                                                    b.addMouseListener(new MouseAdapter() {
+
+                                                        public void mouseEntered(MouseEvent evt) {
+                                                            b.setBackground(Color.white);
+                                                            b.setForeground(Color.black);
+                                                            b.setBorder(BorderFactory.createLineBorder(Color.black));
+                                                        }
+
+                                                        public void mouseExited(MouseEvent evt) {
+                                                            b.setBackground(Color.black);
+                                                            b.setForeground(Color.white);
+                                                            b.setBorder(blackline2);
+                                                        }
+
+                                                        @Override
+                                                        public void mouseClicked(MouseEvent e) {
+
+                                                        }
+                                                    });
+
+
+                                                    JButton b2 = new JButton("Buy weapon");
+                                                    b2.setFont(new Font("Arial", Font.BOLD, 15));
+                                                    b2.setBounds(300,110, 130,60);
+                                                    b2.setBackground(Color.black);
+                                                    b2.setForeground(Color.white);
+                                                    b2.setBorder(blackline2);
+                                                    b2.setFocusPainted(false);
+                                                    b2.addMouseListener(new MouseAdapter() {
+
+                                                        public void mouseEntered(MouseEvent evt) {
+                                                            b2.setBackground(Color.white);
+                                                            b2.setForeground(Color.black);
+                                                            b2.setBorder(BorderFactory.createLineBorder(Color.black));
+                                                        }
+
+                                                        public void mouseExited(MouseEvent evt) {
+                                                            b2.setBackground(Color.black);
+                                                            b2.setForeground(Color.white);
+                                                            b2.setBorder(blackline2);
+                                                        }
+
+                                                        @Override
+                                                        public void mouseClicked(MouseEvent e) {
+                                                            f.dispose();
+                                                            JFrame h = new JFrame("Weapons");
+                                                            h.setSize(600,400);
+                                                            h.getContentPane().setBackground(new Color(16,5,47));
+                                                            h.setForeground(Color.white);
+
+                                                            JLabel l3=new JLabel("Weapons");
+                                                            l3.setBounds(230, 30 , 300,60);
+                                                            l3.setFont(new Font("Arial", Font.PLAIN, 30));
+                                                            l3.setForeground(Color.white);
+
+                                                            ImageIcon weapon1 = new ImageIcon("Assets/weapon3.png");
+                                                            JButton w1 = new JButton();
+                                                            w1.setIcon((weapon1));
+                                                            w1.setBounds(50,110,120,80);
+                                                            w1.setBackground(Color.black);
+                                                            w1.setForeground(Color.white);
+                                                            w1.setBorder(blackline2);
+                                                            w1.setFocusPainted(false);
+                                                            w1.addMouseListener(new MouseAdapter() {
+                                                                @Override
+                                                                public void mouseEntered(MouseEvent e) {
+                                                                    w1.setIcon(null);
+                                                                    w1.setText("5000");
+                                                                    w1.setBackground(Color.white);
+                                                                    w1.setForeground(Color.black);
+                                                                    w1.setBorder(BorderFactory.createLineBorder(Color.black));
+                                                                    w1.setFont(new Font("Arial", Font.BOLD, 30));
+                                                                }
+
+                                                                @Override
+                                                                public void mouseExited(MouseEvent e) {
+                                                                    w1.setBackground(Color.black);
+                                                                    w1.setForeground(Color.white);
+                                                                    w1.setBorder(blackline2);
+                                                                    w1.setText(null);
+                                                                    w1.setIcon((weapon1));
+                                                                }
+
+                                                                @Override
+                                                                public void mouseClicked(MouseEvent e) {
+                                                                    super.mouseClicked(e);
+                                                                }
+                                                            });
+
+                                                            ImageIcon weapon2 = new ImageIcon("Assets/weapon2.png");
+                                                            JButton w2 = new JButton();
+                                                            w2.setIcon((weapon2));
+                                                            w2.setBounds(230,110,120,80);
+                                                            w2.setBackground(Color.black);
+                                                            w2.setForeground(Color.white);
+                                                            w2.setBorder(blackline2);
+                                                            w2.setFocusPainted(false);
+                                                            w2.addMouseListener(new MouseAdapter() {
+                                                                @Override
+                                                                public void mouseEntered(MouseEvent e) {
+                                                                    w2.setIcon(null);
+                                                                    w2.setText("6000");
+                                                                    w2.setBackground(Color.white);
+                                                                    w2.setForeground(Color.black);
+                                                                    w2.setBorder(BorderFactory.createLineBorder(Color.black));
+                                                                    w2.setFont(new Font("Arial", Font.BOLD, 30));
+                                                                }
+
+                                                                @Override
+                                                                public void mouseExited(MouseEvent e) {
+                                                                    w2.setBackground(Color.black);
+                                                                    w2.setForeground(Color.white);
+                                                                    w2.setBorder(blackline2);
+                                                                    w2.setText(null);
+                                                                    w2.setIcon((weapon2));
+                                                                }
+
+                                                                @Override
+                                                                public void mouseClicked(MouseEvent e) {
+                                                                    super.mouseClicked(e);
+                                                                }
+                                                            });
+
+                                                            ImageIcon weapon3 = new ImageIcon("Assets/weapon1.png");
+                                                            JButton w3 = new JButton();
+                                                            w3.setIcon((weapon3));
+                                                            w3.setBounds(410,110,120,80);
+                                                            w3.setBackground(Color.black);
+                                                            w3.setForeground(Color.white);
+                                                            w3.setBorder(blackline2);
+                                                            w3.setFocusPainted(false);
+                                                            w3.addMouseListener(new MouseAdapter() {
+                                                                @Override
+                                                                public void mouseEntered(MouseEvent e) {
+                                                                    w3.setIcon(null);
+                                                                    w3.setText("7000");
+                                                                    w3.setBackground(Color.white);
+                                                                    w3.setForeground(Color.black);
+                                                                    w3.setBorder(BorderFactory.createLineBorder(Color.black));
+                                                                    w3.setFont(new Font("Arial", Font.BOLD, 30));
+                                                                }
+
+                                                                @Override
+                                                                public void mouseExited(MouseEvent e) {
+                                                                    w3.setBackground(Color.black);
+                                                                    w3.setForeground(Color.white);
+                                                                    w3.setBorder(blackline2);
+                                                                    w3.setText(null);
+                                                                    w3.setIcon((weapon3));
+                                                                }
+
+                                                                @Override
+                                                                public void mouseClicked(MouseEvent e) {
+                                                                    super.mouseClicked(e);
+                                                                }
+                                                            });
+
+                                                            ImageIcon weapon4 = new ImageIcon("Assets/weapon4.png");
+                                                            JButton w4 = new JButton();
+                                                            w4.setIcon((weapon4));
+                                                            w4.setBounds(50,230,120,80);
+                                                            w4.setBackground(Color.black);
+                                                            w4.setForeground(Color.white);
+                                                            w4.setBorder(blackline2);
+                                                            w4.setFocusPainted(false);
+                                                            w4.addMouseListener(new MouseAdapter() {
+                                                                @Override
+                                                                public void mouseEntered(MouseEvent e) {
+                                                                    w4.setIcon(null);
+                                                                    w4.setText("8000");
+                                                                    w4.setBackground(Color.white);
+                                                                    w4.setForeground(Color.black);
+                                                                    w4.setBorder(BorderFactory.createLineBorder(Color.black));
+                                                                    w4.setFont(new Font("Arial", Font.BOLD, 30));
+                                                                }
+
+                                                                @Override
+                                                                public void mouseExited(MouseEvent e) {
+                                                                    w4.setBackground(Color.black);
+                                                                    w4.setForeground(Color.white);
+                                                                    w4.setBorder(blackline2);
+                                                                    w4.setText(null);
+                                                                    w4.setIcon((weapon4));
+                                                                }
+
+                                                                @Override
+                                                                public void mouseClicked(MouseEvent e) {
+                                                                    super.mouseClicked(e);
+                                                                }
+                                                            });
+
+                                                            ImageIcon weapon5 = new ImageIcon("Assets/weapon5.png");
+                                                            JButton w5 = new JButton();
+                                                            w5.setIcon((weapon5));
+                                                            w5.setBounds(230,230,120,80);
+                                                            w5.setBackground(Color.black);
+                                                            w5.setForeground(Color.white);
+                                                            w5.setBorder(blackline2);
+                                                            w5.setFocusPainted(false);
+                                                            w5.addMouseListener(new MouseAdapter() {
+                                                                @Override
+                                                                public void mouseEntered(MouseEvent e) {
+                                                                    w5.setIcon(null);
+                                                                    w5.setText("9000");
+                                                                    w5.setBackground(Color.white);
+                                                                    w5.setForeground(Color.black);
+                                                                    w5.setBorder(BorderFactory.createLineBorder(Color.black));
+                                                                    w5.setFont(new Font("Arial", Font.BOLD, 30));
+                                                                }
+
+                                                                @Override
+                                                                public void mouseExited(MouseEvent e) {
+                                                                    w5.setBackground(Color.black);
+                                                                    w5.setForeground(Color.white);
+                                                                    w5.setBorder(blackline2);
+                                                                    w5.setText(null);
+                                                                    w5.setIcon((weapon5));
+                                                                }
+
+                                                                @Override
+                                                                public void mouseClicked(MouseEvent e) {
+                                                                    super.mouseClicked(e);
+                                                                }
+                                                            });
+
+                                                            ImageIcon weapon6 = new ImageIcon("Assets/weapon6.png");
+                                                            JButton w6 = new JButton();
+                                                            w6.setIcon((weapon6));
+                                                            w6.setBounds(410,230,120,80);
+                                                            w6.setBackground(Color.black);
+                                                            w6.setForeground(Color.white);
+                                                            w6.setBorder(blackline2);
+                                                            w6.setFocusPainted(false);
+                                                            w6.addMouseListener(new MouseAdapter() {
+                                                                @Override
+                                                                public void mouseEntered(MouseEvent e) {
+                                                                    w6.setIcon(null);
+                                                                    w6.setText("10000");
+                                                                    w6.setBackground(Color.white);
+                                                                    w6.setForeground(Color.black);
+                                                                    w6.setBorder(BorderFactory.createLineBorder(Color.black));
+                                                                    w6.setFont(new Font("Arial", Font.BOLD, 30));
+                                                                }
+
+                                                                @Override
+                                                                public void mouseExited(MouseEvent e) {
+                                                                    w6.setBackground(Color.black);
+                                                                    w6.setForeground(Color.white);
+                                                                    w6.setBorder(blackline2);
+                                                                    w6.setText(null);
+                                                                    w6.setIcon((weapon6));
+                                                                }
+
+                                                                @Override
+                                                                public void mouseClicked(MouseEvent e) {
+                                                                    super.mouseClicked(e);
+                                                                }
+                                                            });
+
+
+                                                            h.add(w1);
+                                                            h.add(w2);
+                                                            h.add(w3);
+                                                            h.add(w4);
+                                                            h.add(w5);
+                                                            h.add(w6);
+                                                            h.add(l3);
+
+                                                            h.setLocationRelativeTo(null);
+                                                            h.setLayout(null);
+                                                            h.setVisible(true);
+
+                                                        }
+
+                                                    });
+
+
+                                                    f.add(l2); f.add(b);f.add(b2);
+                                                    f.setSize(600,250);
+                                                    f.setLocationRelativeTo(null);
+                                                    f.setLayout(null);
+                                                    f.setVisible(true);
+                                                }
+
                                                 if (logicBoard[xAdjustment[0]][yAdjustment[0] -1]==5){
                                                     Random rand = new Random();
                                                     int money = rand.nextInt(10)+1;
@@ -3312,7 +5807,7 @@ public class Traveling_Salesman{
                                                 if (uu[0]==1){
                                                     arr[xAdjustment[0]][yAdjustment[0]].setBackground(Color.white);
                                                     xAdjustment[0] = 0;
-                                                    yAdjustment[0] = finalSize-1;
+                                                    yAdjustment[0] = 0;
                                                     uu[0]=0;
                                                     counter += 1;
                                                     ll[0] = counter;
