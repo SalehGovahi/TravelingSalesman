@@ -561,7 +561,7 @@ public class Traveling_Salesman{
 
                                             arr2[xAdjustment2[0] - 1][yAdjustment2[0]].setBackground(Color.red);
 
-                                            if (logicBoard[xAdjustment2[0]][yAdjustment2[0]] != 1 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=2 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=4){
+                                            if (logicBoard[xAdjustment2[0]][yAdjustment2[0]] != 1 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=21 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=22 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=23 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=24 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=25 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=26 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=27 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=28 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=4){
                                                 logicBoard[xAdjustment2[0]][yAdjustment2[0]] = 99;
                                             }
 
@@ -805,20 +805,46 @@ public class Traveling_Salesman{
                                                 b.addMouseListener(new MouseAdapter() {
 
                                                     public void mouseEntered(MouseEvent evt) {
+                                                        b.setText("7000");
                                                         b.setBackground(Color.white);
                                                         b.setForeground(Color.black);
                                                         b.setBorder(BorderFactory.createLineBorder(Color.black));
+                                                        b.setFont(new Font("Arial", Font.BOLD, 30));
                                                     }
 
                                                     public void mouseExited(MouseEvent evt) {
                                                         b.setBackground(Color.black);
                                                         b.setForeground(Color.white);
                                                         b.setBorder(blackline2);
+                                                        b.setText("Buy treasure place");
+                                                        b.setFont(new Font("Arial", Font.BOLD, 10));
                                                     }
 
                                                     @Override
                                                     public void mouseClicked(MouseEvent e) {
 
+                                                    }
+                                                });
+                                                b.addActionListener(new ActionListener() {
+                                                    @Override
+                                                    public void actionPerformed(ActionEvent e) {
+                                                        if (player2.money > 7000){
+                                                            int sw = 0;
+                                                            for (int i = 0 ;i<finalSize1 && sw ==0 ; i++){
+                                                                for (int j = 0 ; j<finalSize1 && sw ==0 ; j++){
+                                                                    if (logicBoard[i][j] == 21 || logicBoard[i][j] == 22 || logicBoard[i][j] == 23 || logicBoard[i][j] ==24 || logicBoard[i][j] ==25 || logicBoard[i][j] == 26 || logicBoard[i][j] ==27 || logicBoard[i][j] ==28){
+                                                                        JOptionPane.showMessageDialog(f, "Treasure place : " + String.valueOf(i+1) + " " + String.valueOf(j+1),
+                                                                                "Weapon Buying Confirmed", JOptionPane.PLAIN_MESSAGE);
+                                                                        sw = 1;
+                                                                    }
+                                                                }
+                                                            }
+                                                            player2.money -= 7000;
+                                                        }
+                                                        else {
+                                                            JOptionPane.showMessageDialog(f, "Your money is low",
+                                                                    "Error", JOptionPane.ERROR_MESSAGE);
+                                                        }
                                                     }
                                                 });
 
@@ -890,6 +916,23 @@ public class Traveling_Salesman{
                                                                 super.mouseClicked(e);
                                                             }
                                                         });
+                                                        w1.addActionListener(new ActionListener() {
+                                                            @Override
+                                                            public void actionPerformed(ActionEvent e) {
+                                                                if (player2.money > 5000){
+                                                                    JOptionPane.showMessageDialog(f, "Weapon bought",
+                                                                            "Weapon Buying Confirmed", JOptionPane.PLAIN_MESSAGE);
+                                                                    player2.power += 5000;
+                                                                    player2.money -= 5000;
+                                                                    System.out.println(player2.power);
+                                                                }
+                                                                else {
+                                                                    JOptionPane.showMessageDialog(f, "Your money is low",
+                                                                            "Error", JOptionPane.ERROR_MESSAGE);
+                                                                }
+                                                            }
+                                                        });
+
 
                                                         ImageIcon weapon2 = new ImageIcon("Assets/weapon2.png");
                                                         JButton w2 = new JButton();
@@ -922,6 +965,22 @@ public class Traveling_Salesman{
                                                             @Override
                                                             public void mouseClicked(MouseEvent e) {
                                                                 super.mouseClicked(e);
+                                                            }
+                                                        });
+                                                        w2.addActionListener(new ActionListener() {
+                                                            @Override
+                                                            public void actionPerformed(ActionEvent e) {
+                                                                if (player2.money > 6000){
+                                                                    JOptionPane.showMessageDialog(f, "Weapon bought",
+                                                                            "Weapon Buying Confirmed", JOptionPane.PLAIN_MESSAGE);
+                                                                    player2.power += 6000;
+                                                                    player2.money -= 6000;
+                                                                    System.out.println(player2.power);
+                                                                }
+                                                                else {
+                                                                    JOptionPane.showMessageDialog(f, "Your money is low",
+                                                                            "Error", JOptionPane.ERROR_MESSAGE);
+                                                                }
                                                             }
                                                         });
 
@@ -958,6 +1017,22 @@ public class Traveling_Salesman{
                                                                 super.mouseClicked(e);
                                                             }
                                                         });
+                                                        w3.addActionListener(new ActionListener() {
+                                                            @Override
+                                                            public void actionPerformed(ActionEvent e) {
+                                                                if (player2.money > 7000){
+                                                                    JOptionPane.showMessageDialog(f, "Weapon bought",
+                                                                            "Weapon Buying Confirmed", JOptionPane.PLAIN_MESSAGE);
+                                                                    player2.power += 7000;
+                                                                    player2.money -= 7000;
+                                                                    System.out.println(player2.power);
+                                                                }
+                                                                else {
+                                                                    JOptionPane.showMessageDialog(f, "Your money is low",
+                                                                            "Error", JOptionPane.ERROR_MESSAGE);
+                                                                }
+                                                            }
+                                                        });
 
                                                         ImageIcon weapon4 = new ImageIcon("Assets/weapon4.png");
                                                         JButton w4 = new JButton();
@@ -990,6 +1065,22 @@ public class Traveling_Salesman{
                                                             @Override
                                                             public void mouseClicked(MouseEvent e) {
                                                                 super.mouseClicked(e);
+                                                            }
+                                                        });
+                                                        w4.addActionListener(new ActionListener() {
+                                                            @Override
+                                                            public void actionPerformed(ActionEvent e) {
+                                                                if (player2.money > 8000){
+                                                                    JOptionPane.showMessageDialog(f, "Weapon bought",
+                                                                            "Weapon Buying Confirmed", JOptionPane.PLAIN_MESSAGE);
+                                                                    player2.power += 8000;
+                                                                    player2.money -= 8000;
+                                                                    System.out.println(player2.power);
+                                                                }
+                                                                else {
+                                                                    JOptionPane.showMessageDialog(f, "Your money is low",
+                                                                            "Error", JOptionPane.ERROR_MESSAGE);
+                                                                }
                                                             }
                                                         });
 
@@ -1026,6 +1117,22 @@ public class Traveling_Salesman{
                                                                 super.mouseClicked(e);
                                                             }
                                                         });
+                                                        w5.addActionListener(new ActionListener() {
+                                                            @Override
+                                                            public void actionPerformed(ActionEvent e) {
+                                                                if (player2.money > 9000){
+                                                                    JOptionPane.showMessageDialog(f, "Weapon bought",
+                                                                            "Weapon Buying Confirmed", JOptionPane.PLAIN_MESSAGE);
+                                                                    player2.power += 9000;
+                                                                    player2.money -= 9000;
+                                                                    System.out.println(player2.power);
+                                                                }
+                                                                else {
+                                                                    JOptionPane.showMessageDialog(f, "Your money is low",
+                                                                            "Error", JOptionPane.ERROR_MESSAGE);
+                                                                }
+                                                            }
+                                                        });
 
                                                         ImageIcon weapon6 = new ImageIcon("Assets/weapon6.png");
                                                         JButton w6 = new JButton();
@@ -1058,6 +1165,22 @@ public class Traveling_Salesman{
                                                             @Override
                                                             public void mouseClicked(MouseEvent e) {
                                                                 super.mouseClicked(e);
+                                                            }
+                                                        });
+                                                        w6.addActionListener(new ActionListener() {
+                                                            @Override
+                                                            public void actionPerformed(ActionEvent e) {
+                                                                if (player2.money > 10000){
+                                                                    JOptionPane.showMessageDialog(f, "Weapon bought",
+                                                                            "Weapon Buying Confirmed", JOptionPane.PLAIN_MESSAGE);
+                                                                    player2.power += 10000;
+                                                                    player2.money -= 10000;
+                                                                    System.out.println(player2.power);
+                                                                }
+                                                                else {
+                                                                    JOptionPane.showMessageDialog(f, "Your money is low",
+                                                                            "Error", JOptionPane.ERROR_MESSAGE);
+                                                                }
                                                             }
                                                         });
 
@@ -1102,7 +1225,7 @@ public class Traveling_Salesman{
                                                 trap *= 100;
                                                 JOptionPane.showMessageDialog(layeredPane2, "You are in a trap\n"+"You lost "+String.valueOf(trap)+" money",
                                                         "Oh no", JOptionPane.ERROR_MESSAGE);
-                                                player1.money -=trap;
+                                                player2.money -=trap;
                                                 logicBoard[xAdjustment2[0] - 1][yAdjustment2[0]]=0;
                                             }
 
@@ -1222,7 +1345,7 @@ public class Traveling_Salesman{
                                     else {
                                         arr2[xAdjustment2[0] + 1][yAdjustment2[0]].setBackground(Color.red);
 
-                                        if (logicBoard[xAdjustment2[0]][yAdjustment2[0]] != 1 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=2 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=4){
+                                        if (logicBoard[xAdjustment2[0]][yAdjustment2[0]] != 1 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=21 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=22 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=23 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=24 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=25 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=26 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=27 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=28 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=4){
                                             logicBoard[xAdjustment2[0]][yAdjustment2[0]] = 99;
                                         }
 
@@ -1444,20 +1567,46 @@ public class Traveling_Salesman{
                                             b.addMouseListener(new MouseAdapter() {
 
                                                 public void mouseEntered(MouseEvent evt) {
+                                                    b.setText("7000");
                                                     b.setBackground(Color.white);
                                                     b.setForeground(Color.black);
                                                     b.setBorder(BorderFactory.createLineBorder(Color.black));
+                                                    b.setFont(new Font("Arial", Font.BOLD, 30));
                                                 }
 
                                                 public void mouseExited(MouseEvent evt) {
                                                     b.setBackground(Color.black);
                                                     b.setForeground(Color.white);
                                                     b.setBorder(blackline2);
+                                                    b.setText("Buy treasure place");
+                                                    b.setFont(new Font("Arial", Font.BOLD, 10));
                                                 }
 
                                                 @Override
                                                 public void mouseClicked(MouseEvent e) {
 
+                                                }
+                                            });
+                                            b.addActionListener(new ActionListener() {
+                                                @Override
+                                                public void actionPerformed(ActionEvent e) {
+                                                    if (player2.money > 7000){
+                                                        int sw = 0;
+                                                        for (int i = 0 ;i<finalSize1 && sw ==0 ; i++){
+                                                            for (int j = 0 ; j<finalSize1 && sw ==0 ; j++){
+                                                                if (logicBoard[i][j] == 21 || logicBoard[i][j] == 22 || logicBoard[i][j] == 23 || logicBoard[i][j] ==24 || logicBoard[i][j] ==25 || logicBoard[i][j] == 26 || logicBoard[i][j] ==27 || logicBoard[i][j] ==28){
+                                                                    JOptionPane.showMessageDialog(f, "Treasure place : " + String.valueOf(i+1) + " " + String.valueOf(j+1),
+                                                                            "Weapon Buying Confirmed", JOptionPane.PLAIN_MESSAGE);
+                                                                    sw = 1;
+                                                                }
+                                                            }
+                                                        }
+                                                        player2.money -= 7000;
+                                                    }
+                                                    else {
+                                                        JOptionPane.showMessageDialog(f, "Your money is low",
+                                                                "Error", JOptionPane.ERROR_MESSAGE);
+                                                    }
                                                 }
                                             });
 
@@ -1529,6 +1678,23 @@ public class Traveling_Salesman{
                                                             super.mouseClicked(e);
                                                         }
                                                     });
+                                                    w1.addActionListener(new ActionListener() {
+                                                        @Override
+                                                        public void actionPerformed(ActionEvent e) {
+                                                            if (player2.money > 5000){
+                                                                JOptionPane.showMessageDialog(f, "Weapon bought",
+                                                                        "Weapon Buying Confirmed", JOptionPane.PLAIN_MESSAGE);
+                                                                player2.power += 5000;
+                                                                player2.money -= 5000;
+                                                                System.out.println(player2.power);
+                                                            }
+                                                            else {
+                                                                JOptionPane.showMessageDialog(f, "Your money is low",
+                                                                        "Error", JOptionPane.ERROR_MESSAGE);
+                                                            }
+                                                        }
+                                                    });
+
 
                                                     ImageIcon weapon2 = new ImageIcon("Assets/weapon2.png");
                                                     JButton w2 = new JButton();
@@ -1561,6 +1727,22 @@ public class Traveling_Salesman{
                                                         @Override
                                                         public void mouseClicked(MouseEvent e) {
                                                             super.mouseClicked(e);
+                                                        }
+                                                    });
+                                                    w2.addActionListener(new ActionListener() {
+                                                        @Override
+                                                        public void actionPerformed(ActionEvent e) {
+                                                            if (player2.money > 6000){
+                                                                JOptionPane.showMessageDialog(f, "Weapon bought",
+                                                                        "Weapon Buying Confirmed", JOptionPane.PLAIN_MESSAGE);
+                                                                player2.power += 6000;
+                                                                player2.money -= 6000;
+                                                                System.out.println(player2.power);
+                                                            }
+                                                            else {
+                                                                JOptionPane.showMessageDialog(f, "Your money is low",
+                                                                        "Error", JOptionPane.ERROR_MESSAGE);
+                                                            }
                                                         }
                                                     });
 
@@ -1597,6 +1779,22 @@ public class Traveling_Salesman{
                                                             super.mouseClicked(e);
                                                         }
                                                     });
+                                                    w3.addActionListener(new ActionListener() {
+                                                        @Override
+                                                        public void actionPerformed(ActionEvent e) {
+                                                            if (player2.money > 7000){
+                                                                JOptionPane.showMessageDialog(f, "Weapon bought",
+                                                                        "Weapon Buying Confirmed", JOptionPane.PLAIN_MESSAGE);
+                                                                player2.power += 7000;
+                                                                player2.money -= 7000;
+                                                                System.out.println(player2.power);
+                                                            }
+                                                            else {
+                                                                JOptionPane.showMessageDialog(f, "Your money is low",
+                                                                        "Error", JOptionPane.ERROR_MESSAGE);
+                                                            }
+                                                        }
+                                                    });
 
                                                     ImageIcon weapon4 = new ImageIcon("Assets/weapon4.png");
                                                     JButton w4 = new JButton();
@@ -1629,6 +1827,22 @@ public class Traveling_Salesman{
                                                         @Override
                                                         public void mouseClicked(MouseEvent e) {
                                                             super.mouseClicked(e);
+                                                        }
+                                                    });
+                                                    w4.addActionListener(new ActionListener() {
+                                                        @Override
+                                                        public void actionPerformed(ActionEvent e) {
+                                                            if (player2.money > 8000){
+                                                                JOptionPane.showMessageDialog(f, "Weapon bought",
+                                                                        "Weapon Buying Confirmed", JOptionPane.PLAIN_MESSAGE);
+                                                                player2.power += 8000;
+                                                                player2.money -= 8000;
+                                                                System.out.println(player2.power);
+                                                            }
+                                                            else {
+                                                                JOptionPane.showMessageDialog(f, "Your money is low",
+                                                                        "Error", JOptionPane.ERROR_MESSAGE);
+                                                            }
                                                         }
                                                     });
 
@@ -1665,6 +1879,22 @@ public class Traveling_Salesman{
                                                             super.mouseClicked(e);
                                                         }
                                                     });
+                                                    w5.addActionListener(new ActionListener() {
+                                                        @Override
+                                                        public void actionPerformed(ActionEvent e) {
+                                                            if (player2.money > 9000){
+                                                                JOptionPane.showMessageDialog(f, "Weapon bought",
+                                                                        "Weapon Buying Confirmed", JOptionPane.PLAIN_MESSAGE);
+                                                                player2.power += 9000;
+                                                                player2.money -= 9000;
+                                                                System.out.println(player2.power);
+                                                            }
+                                                            else {
+                                                                JOptionPane.showMessageDialog(f, "Your money is low",
+                                                                        "Error", JOptionPane.ERROR_MESSAGE);
+                                                            }
+                                                        }
+                                                    });
 
                                                     ImageIcon weapon6 = new ImageIcon("Assets/weapon6.png");
                                                     JButton w6 = new JButton();
@@ -1699,6 +1929,22 @@ public class Traveling_Salesman{
                                                             super.mouseClicked(e);
                                                         }
                                                     });
+                                                    w6.addActionListener(new ActionListener() {
+                                                        @Override
+                                                        public void actionPerformed(ActionEvent e) {
+                                                            if (player2.money > 10000){
+                                                                JOptionPane.showMessageDialog(f, "Weapon bought",
+                                                                        "Weapon Buying Confirmed", JOptionPane.PLAIN_MESSAGE);
+                                                                player2.power += 10000;
+                                                                player2.money -= 10000;
+                                                                System.out.println(player2.power);
+                                                            }
+                                                            else {
+                                                                JOptionPane.showMessageDialog(f, "Your money is low",
+                                                                        "Error", JOptionPane.ERROR_MESSAGE);
+                                                            }
+                                                        }
+                                                    });
 
 
                                                     h.add(w1);
@@ -1731,7 +1977,7 @@ public class Traveling_Salesman{
                                             money *= 1000;
                                             JOptionPane.showMessageDialog(layeredPane2, "You got"+ " "+ String.valueOf(money)+" money",
                                                     "congratulations", JOptionPane.PLAIN_MESSAGE);
-                                            player1.money +=money;
+                                            player2.money +=money;
                                             logicBoard[xAdjustment2[0] + 1][yAdjustment2[0]]=0;
                                         }
 
@@ -1874,7 +2120,7 @@ public class Traveling_Salesman{
                                             else {
                                                 arr2[xAdjustment2[0]][yAdjustment2[0] +1].setBackground(Color.red);
 
-                                                if (logicBoard[xAdjustment2[0]][yAdjustment2[0]] != 1 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=2 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=4){
+                                                if (logicBoard[xAdjustment2[0]][yAdjustment2[0]] != 1 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=21 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=22 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=23 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=24 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=25 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=26 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=27 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=28 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=4){
                                                     logicBoard[xAdjustment2[0]][yAdjustment2[0]] = 99;
                                                 }
 
@@ -2104,20 +2350,46 @@ public class Traveling_Salesman{
                                                     b.addMouseListener(new MouseAdapter() {
 
                                                         public void mouseEntered(MouseEvent evt) {
+                                                            b.setText("7000");
                                                             b.setBackground(Color.white);
                                                             b.setForeground(Color.black);
                                                             b.setBorder(BorderFactory.createLineBorder(Color.black));
+                                                            b.setFont(new Font("Arial", Font.BOLD, 30));
                                                         }
 
                                                         public void mouseExited(MouseEvent evt) {
                                                             b.setBackground(Color.black);
                                                             b.setForeground(Color.white);
                                                             b.setBorder(blackline2);
+                                                            b.setText("Buy treasure place");
+                                                            b.setFont(new Font("Arial", Font.BOLD, 10));
                                                         }
 
                                                         @Override
                                                         public void mouseClicked(MouseEvent e) {
 
+                                                        }
+                                                    });
+                                                    b.addActionListener(new ActionListener() {
+                                                        @Override
+                                                        public void actionPerformed(ActionEvent e) {
+                                                            if (player2.money > 7000){
+                                                                int sw = 0;
+                                                                for (int i = 0 ;i<finalSize1 && sw ==0 ; i++){
+                                                                    for (int j = 0 ; j<finalSize1 && sw ==0 ; j++){
+                                                                        if (logicBoard[i][j] == 21 || logicBoard[i][j] == 22 || logicBoard[i][j] == 23 || logicBoard[i][j] ==24 || logicBoard[i][j] ==25 || logicBoard[i][j] == 26 || logicBoard[i][j] ==27 || logicBoard[i][j] ==28){
+                                                                            JOptionPane.showMessageDialog(f, "Treasure place : " + String.valueOf(i+1) + " " + String.valueOf(j+1),
+                                                                                    "Weapon Buying Confirmed", JOptionPane.PLAIN_MESSAGE);
+                                                                            sw = 1;
+                                                                        }
+                                                                    }
+                                                                }
+                                                                player2.money -= 7000;
+                                                            }
+                                                            else {
+                                                                JOptionPane.showMessageDialog(f, "Your money is low",
+                                                                        "Error", JOptionPane.ERROR_MESSAGE);
+                                                            }
                                                         }
                                                     });
 
@@ -2189,6 +2461,23 @@ public class Traveling_Salesman{
                                                                     super.mouseClicked(e);
                                                                 }
                                                             });
+                                                            w1.addActionListener(new ActionListener() {
+                                                                @Override
+                                                                public void actionPerformed(ActionEvent e) {
+                                                                    if (player2.money > 5000){
+                                                                        JOptionPane.showMessageDialog(f, "Weapon bought",
+                                                                                "Weapon Buying Confirmed", JOptionPane.PLAIN_MESSAGE);
+                                                                        player2.power += 5000;
+                                                                        player2.money -= 5000;
+                                                                        System.out.println(player2.power);
+                                                                    }
+                                                                    else {
+                                                                        JOptionPane.showMessageDialog(f, "Your money is low",
+                                                                                "Error", JOptionPane.ERROR_MESSAGE);
+                                                                    }
+                                                                }
+                                                            });
+
 
                                                             ImageIcon weapon2 = new ImageIcon("Assets/weapon2.png");
                                                             JButton w2 = new JButton();
@@ -2221,6 +2510,22 @@ public class Traveling_Salesman{
                                                                 @Override
                                                                 public void mouseClicked(MouseEvent e) {
                                                                     super.mouseClicked(e);
+                                                                }
+                                                            });
+                                                            w2.addActionListener(new ActionListener() {
+                                                                @Override
+                                                                public void actionPerformed(ActionEvent e) {
+                                                                    if (player2.money > 6000){
+                                                                        JOptionPane.showMessageDialog(f, "Weapon bought",
+                                                                                "Weapon Buying Confirmed", JOptionPane.PLAIN_MESSAGE);
+                                                                        player2.power += 6000;
+                                                                        player2.money -= 6000;
+                                                                        System.out.println(player2.power);
+                                                                    }
+                                                                    else {
+                                                                        JOptionPane.showMessageDialog(f, "Your money is low",
+                                                                                "Error", JOptionPane.ERROR_MESSAGE);
+                                                                    }
                                                                 }
                                                             });
 
@@ -2257,6 +2562,22 @@ public class Traveling_Salesman{
                                                                     super.mouseClicked(e);
                                                                 }
                                                             });
+                                                            w3.addActionListener(new ActionListener() {
+                                                                @Override
+                                                                public void actionPerformed(ActionEvent e) {
+                                                                    if (player2.money > 7000){
+                                                                        JOptionPane.showMessageDialog(f, "Weapon bought",
+                                                                                "Weapon Buying Confirmed", JOptionPane.PLAIN_MESSAGE);
+                                                                        player2.power += 7000;
+                                                                        player2.money -= 7000;
+                                                                        System.out.println(player2.power);
+                                                                    }
+                                                                    else {
+                                                                        JOptionPane.showMessageDialog(f, "Your money is low",
+                                                                                "Error", JOptionPane.ERROR_MESSAGE);
+                                                                    }
+                                                                }
+                                                            });
 
                                                             ImageIcon weapon4 = new ImageIcon("Assets/weapon4.png");
                                                             JButton w4 = new JButton();
@@ -2289,6 +2610,22 @@ public class Traveling_Salesman{
                                                                 @Override
                                                                 public void mouseClicked(MouseEvent e) {
                                                                     super.mouseClicked(e);
+                                                                }
+                                                            });
+                                                            w4.addActionListener(new ActionListener() {
+                                                                @Override
+                                                                public void actionPerformed(ActionEvent e) {
+                                                                    if (player2.money > 8000){
+                                                                        JOptionPane.showMessageDialog(f, "Weapon bought",
+                                                                                "Weapon Buying Confirmed", JOptionPane.PLAIN_MESSAGE);
+                                                                        player2.power += 8000;
+                                                                        player2.money -= 8000;
+                                                                        System.out.println(player2.power);
+                                                                    }
+                                                                    else {
+                                                                        JOptionPane.showMessageDialog(f, "Your money is low",
+                                                                                "Error", JOptionPane.ERROR_MESSAGE);
+                                                                    }
                                                                 }
                                                             });
 
@@ -2325,6 +2662,22 @@ public class Traveling_Salesman{
                                                                     super.mouseClicked(e);
                                                                 }
                                                             });
+                                                            w5.addActionListener(new ActionListener() {
+                                                                @Override
+                                                                public void actionPerformed(ActionEvent e) {
+                                                                    if (player2.money > 9000){
+                                                                        JOptionPane.showMessageDialog(f, "Weapon bought",
+                                                                                "Weapon Buying Confirmed", JOptionPane.PLAIN_MESSAGE);
+                                                                        player2.power += 9000;
+                                                                        player2.money -= 9000;
+                                                                        System.out.println(player2.power);
+                                                                    }
+                                                                    else {
+                                                                        JOptionPane.showMessageDialog(f, "Your money is low",
+                                                                                "Error", JOptionPane.ERROR_MESSAGE);
+                                                                    }
+                                                                }
+                                                            });
 
                                                             ImageIcon weapon6 = new ImageIcon("Assets/weapon6.png");
                                                             JButton w6 = new JButton();
@@ -2359,6 +2712,22 @@ public class Traveling_Salesman{
                                                                     super.mouseClicked(e);
                                                                 }
                                                             });
+                                                            w6.addActionListener(new ActionListener() {
+                                                                @Override
+                                                                public void actionPerformed(ActionEvent e) {
+                                                                    if (player2.money > 10000){
+                                                                        JOptionPane.showMessageDialog(f, "Weapon bought",
+                                                                                "Weapon Buying Confirmed", JOptionPane.PLAIN_MESSAGE);
+                                                                        player2.power += 10000;
+                                                                        player2.money -= 10000;
+                                                                        System.out.println(player2.power);
+                                                                    }
+                                                                    else {
+                                                                        JOptionPane.showMessageDialog(f, "Your money is low",
+                                                                                "Error", JOptionPane.ERROR_MESSAGE);
+                                                                    }
+                                                                }
+                                                            });
 
 
                                                             h.add(w1);
@@ -2391,7 +2760,7 @@ public class Traveling_Salesman{
                                                     money *= 1000;
                                                     JOptionPane.showMessageDialog(layeredPane2, "You got"+ " "+ String.valueOf(money)+" money",
                                                             "congratulations", JOptionPane.PLAIN_MESSAGE);
-                                                    player1.money +=money;
+                                                    player2.money +=money;
                                                     logicBoard[xAdjustment2[0]][yAdjustment2[0] +1]=0;
                                                 }
 
@@ -2534,7 +2903,7 @@ public class Traveling_Salesman{
 
                                             else {
                                                 arr2[xAdjustment2[0]][yAdjustment2[0] -1].setBackground(Color.red);
-                                                if (logicBoard[xAdjustment2[0]][yAdjustment2[0]] != 1 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=2 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=4){
+                                                if (logicBoard[xAdjustment2[0]][yAdjustment2[0]] != 1 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=21 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=22 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=23 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=24 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=25 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=26 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=27 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=28 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=4){
                                                     logicBoard[xAdjustment2[0]][yAdjustment2[0]] = 99;
                                                 }
 
@@ -2764,20 +3133,46 @@ public class Traveling_Salesman{
                                                     b.addMouseListener(new MouseAdapter() {
 
                                                         public void mouseEntered(MouseEvent evt) {
+                                                            b.setText("7000");
                                                             b.setBackground(Color.white);
                                                             b.setForeground(Color.black);
                                                             b.setBorder(BorderFactory.createLineBorder(Color.black));
+                                                            b.setFont(new Font("Arial", Font.BOLD, 30));
                                                         }
 
                                                         public void mouseExited(MouseEvent evt) {
                                                             b.setBackground(Color.black);
                                                             b.setForeground(Color.white);
                                                             b.setBorder(blackline2);
+                                                            b.setText("Buy treasure place");
+                                                            b.setFont(new Font("Arial", Font.BOLD, 10));
                                                         }
 
                                                         @Override
                                                         public void mouseClicked(MouseEvent e) {
 
+                                                        }
+                                                    });
+                                                    b.addActionListener(new ActionListener() {
+                                                        @Override
+                                                        public void actionPerformed(ActionEvent e) {
+                                                            if (player2.money > 7000){
+                                                                int sw = 0;
+                                                                for (int i = 0 ;i<finalSize1 && sw ==0 ; i++){
+                                                                    for (int j = 0 ; j<finalSize1 && sw ==0 ; j++){
+                                                                        if (logicBoard[i][j] == 21 || logicBoard[i][j] == 22 || logicBoard[i][j] == 23 || logicBoard[i][j] ==24 || logicBoard[i][j] ==25 || logicBoard[i][j] == 26 || logicBoard[i][j] ==27 || logicBoard[i][j] ==28){
+                                                                            JOptionPane.showMessageDialog(f, "Treasure place : " + String.valueOf(i+1) + " " + String.valueOf(j+1),
+                                                                                    "Weapon Buying Confirmed", JOptionPane.PLAIN_MESSAGE);
+                                                                            sw = 1;
+                                                                        }
+                                                                    }
+                                                                }
+                                                                player2.money -= 7000;
+                                                            }
+                                                            else {
+                                                                JOptionPane.showMessageDialog(f, "Your money is low",
+                                                                        "Error", JOptionPane.ERROR_MESSAGE);
+                                                            }
                                                         }
                                                     });
 
@@ -2849,6 +3244,23 @@ public class Traveling_Salesman{
                                                                     super.mouseClicked(e);
                                                                 }
                                                             });
+                                                            w1.addActionListener(new ActionListener() {
+                                                                @Override
+                                                                public void actionPerformed(ActionEvent e) {
+                                                                    if (player2.money > 5000){
+                                                                        JOptionPane.showMessageDialog(f, "Weapon bought",
+                                                                                "Weapon Buying Confirmed", JOptionPane.PLAIN_MESSAGE);
+                                                                        player2.power += 5000;
+                                                                        player2.money -= 5000;
+                                                                        System.out.println(player2.power);
+                                                                    }
+                                                                    else {
+                                                                        JOptionPane.showMessageDialog(f, "Your money is low",
+                                                                                "Error", JOptionPane.ERROR_MESSAGE);
+                                                                    }
+                                                                }
+                                                            });
+
 
                                                             ImageIcon weapon2 = new ImageIcon("Assets/weapon2.png");
                                                             JButton w2 = new JButton();
@@ -2881,6 +3293,22 @@ public class Traveling_Salesman{
                                                                 @Override
                                                                 public void mouseClicked(MouseEvent e) {
                                                                     super.mouseClicked(e);
+                                                                }
+                                                            });
+                                                            w2.addActionListener(new ActionListener() {
+                                                                @Override
+                                                                public void actionPerformed(ActionEvent e) {
+                                                                    if (player2.money > 6000){
+                                                                        JOptionPane.showMessageDialog(f, "Weapon bought",
+                                                                                "Weapon Buying Confirmed", JOptionPane.PLAIN_MESSAGE);
+                                                                        player2.power += 6000;
+                                                                        player2.money -= 6000;
+                                                                        System.out.println(player2.power);
+                                                                    }
+                                                                    else {
+                                                                        JOptionPane.showMessageDialog(f, "Your money is low",
+                                                                                "Error", JOptionPane.ERROR_MESSAGE);
+                                                                    }
                                                                 }
                                                             });
 
@@ -2917,6 +3345,22 @@ public class Traveling_Salesman{
                                                                     super.mouseClicked(e);
                                                                 }
                                                             });
+                                                            w3.addActionListener(new ActionListener() {
+                                                                @Override
+                                                                public void actionPerformed(ActionEvent e) {
+                                                                    if (player2.money > 7000){
+                                                                        JOptionPane.showMessageDialog(f, "Weapon bought",
+                                                                                "Weapon Buying Confirmed", JOptionPane.PLAIN_MESSAGE);
+                                                                        player2.power += 7000;
+                                                                        player2.money -= 7000;
+                                                                        System.out.println(player2.power);
+                                                                    }
+                                                                    else {
+                                                                        JOptionPane.showMessageDialog(f, "Your money is low",
+                                                                                "Error", JOptionPane.ERROR_MESSAGE);
+                                                                    }
+                                                                }
+                                                            });
 
                                                             ImageIcon weapon4 = new ImageIcon("Assets/weapon4.png");
                                                             JButton w4 = new JButton();
@@ -2949,6 +3393,22 @@ public class Traveling_Salesman{
                                                                 @Override
                                                                 public void mouseClicked(MouseEvent e) {
                                                                     super.mouseClicked(e);
+                                                                }
+                                                            });
+                                                            w4.addActionListener(new ActionListener() {
+                                                                @Override
+                                                                public void actionPerformed(ActionEvent e) {
+                                                                    if (player2.money > 8000){
+                                                                        JOptionPane.showMessageDialog(f, "Weapon bought",
+                                                                                "Weapon Buying Confirmed", JOptionPane.PLAIN_MESSAGE);
+                                                                        player2.power += 8000;
+                                                                        player2.money -= 8000;
+                                                                        System.out.println(player2.power);
+                                                                    }
+                                                                    else {
+                                                                        JOptionPane.showMessageDialog(f, "Your money is low",
+                                                                                "Error", JOptionPane.ERROR_MESSAGE);
+                                                                    }
                                                                 }
                                                             });
 
@@ -2985,6 +3445,22 @@ public class Traveling_Salesman{
                                                                     super.mouseClicked(e);
                                                                 }
                                                             });
+                                                            w5.addActionListener(new ActionListener() {
+                                                                @Override
+                                                                public void actionPerformed(ActionEvent e) {
+                                                                    if (player2.money > 9000){
+                                                                        JOptionPane.showMessageDialog(f, "Weapon bought",
+                                                                                "Weapon Buying Confirmed", JOptionPane.PLAIN_MESSAGE);
+                                                                        player2.power += 9000;
+                                                                        player2.money -= 9000;
+                                                                        System.out.println(player2.power);
+                                                                    }
+                                                                    else {
+                                                                        JOptionPane.showMessageDialog(f, "Your money is low",
+                                                                                "Error", JOptionPane.ERROR_MESSAGE);
+                                                                    }
+                                                                }
+                                                            });
 
                                                             ImageIcon weapon6 = new ImageIcon("Assets/weapon6.png");
                                                             JButton w6 = new JButton();
@@ -3019,6 +3495,22 @@ public class Traveling_Salesman{
                                                                     super.mouseClicked(e);
                                                                 }
                                                             });
+                                                            w6.addActionListener(new ActionListener() {
+                                                                @Override
+                                                                public void actionPerformed(ActionEvent e) {
+                                                                    if (player2.money > 10000){
+                                                                        JOptionPane.showMessageDialog(f, "Weapon bought",
+                                                                                "Weapon Buying Confirmed", JOptionPane.PLAIN_MESSAGE);
+                                                                        player2.power += 10000;
+                                                                        player2.money -= 10000;
+                                                                        System.out.println(player2.power);
+                                                                    }
+                                                                    else {
+                                                                        JOptionPane.showMessageDialog(f, "Your money is low",
+                                                                                "Error", JOptionPane.ERROR_MESSAGE);
+                                                                    }
+                                                                }
+                                                            });
 
 
                                                             h.add(w1);
@@ -3051,7 +3543,7 @@ public class Traveling_Salesman{
                                                     money *= 1000;
                                                     JOptionPane.showMessageDialog(layeredPane2, "You got"+ " "+ String.valueOf(money)+" money",
                                                             "congratulations", JOptionPane.PLAIN_MESSAGE);
-                                                    player1.money +=money;
+                                                    player2.money +=money;
                                                     logicBoard[xAdjustment2[0]][yAdjustment2[0] -1]=0;
                                                 }
 
@@ -3221,8 +3713,8 @@ public class Traveling_Salesman{
                                                 else {
                                                     arr[xAdjustment[0] - 1][yAdjustment[0]].setBackground(Color.blue);
 
-                                                    if (logicBoard[xAdjustment[0]][yAdjustment[0]] != 1 && logicBoard[xAdjustment[0]][yAdjustment[0]] !=2 && logicBoard[xAdjustment[0]][yAdjustment[0]] !=4){
-                                                        logicBoard[xAdjustment[0]][yAdjustment[0]] = 99;
+                                                    if (logicBoard[xAdjustment2[0]][yAdjustment2[0]] != 1 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=21 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=22 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=23 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=24 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=25 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=26 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=27 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=28 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=4){
+                                                        logicBoard[xAdjustment2[0]][yAdjustment2[0]] = 99;
                                                     }
 
                                                     if (logicBoard[xAdjustment[0] - 1][yAdjustment[0]]==1){
@@ -3465,20 +3957,46 @@ public class Traveling_Salesman{
                                                         b.addMouseListener(new MouseAdapter() {
 
                                                             public void mouseEntered(MouseEvent evt) {
+                                                                b.setText("7000");
                                                                 b.setBackground(Color.white);
                                                                 b.setForeground(Color.black);
                                                                 b.setBorder(BorderFactory.createLineBorder(Color.black));
+                                                                b.setFont(new Font("Arial", Font.BOLD, 30));
                                                             }
 
                                                             public void mouseExited(MouseEvent evt) {
                                                                 b.setBackground(Color.black);
                                                                 b.setForeground(Color.white);
                                                                 b.setBorder(blackline2);
+                                                                b.setText("Buy treasure place");
+                                                                b.setFont(new Font("Arial", Font.BOLD, 10));
                                                             }
 
                                                             @Override
                                                             public void mouseClicked(MouseEvent e) {
 
+                                                            }
+                                                        });
+                                                        b.addActionListener(new ActionListener() {
+                                                            @Override
+                                                            public void actionPerformed(ActionEvent e) {
+                                                                if (player1.money > 7000){
+                                                                    int sw = 0;
+                                                                    for (int i = 0 ;i<finalSize1 && sw ==0 ; i++){
+                                                                        for (int j = 0 ; j<finalSize1 && sw ==0 ; j++){
+                                                                            if (logicBoard[i][j] == 21 || logicBoard[i][j] == 22 || logicBoard[i][j] == 23 || logicBoard[i][j] ==24 || logicBoard[i][j] ==25 || logicBoard[i][j] == 26 || logicBoard[i][j] ==27 || logicBoard[i][j] ==28){
+                                                                                JOptionPane.showMessageDialog(f, "Treasure place : " + String.valueOf(i+1) + " " + String.valueOf(j+1),
+                                                                                        "Weapon Buying Confirmed", JOptionPane.PLAIN_MESSAGE);
+                                                                                sw = 1;
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                    player1.money -= 7000;
+                                                                }
+                                                                else {
+                                                                    JOptionPane.showMessageDialog(f, "Your money is low",
+                                                                            "Error", JOptionPane.ERROR_MESSAGE);
+                                                                }
                                                             }
                                                         });
 
@@ -3550,6 +4068,23 @@ public class Traveling_Salesman{
                                                                         super.mouseClicked(e);
                                                                     }
                                                                 });
+                                                                w1.addActionListener(new ActionListener() {
+                                                                    @Override
+                                                                    public void actionPerformed(ActionEvent e) {
+                                                                        if (player1.money > 5000){
+                                                                            JOptionPane.showMessageDialog(f, "Weapon bought",
+                                                                                    "Weapon Buying Confirmed", JOptionPane.PLAIN_MESSAGE);
+                                                                            player1.power += 5000;
+                                                                            player1.money -= 5000;
+                                                                            System.out.println(player1.power);
+                                                                        }
+                                                                        else {
+                                                                            JOptionPane.showMessageDialog(f, "Your money is low",
+                                                                                    "Error", JOptionPane.ERROR_MESSAGE);
+                                                                        }
+                                                                    }
+                                                                });
+
 
                                                                 ImageIcon weapon2 = new ImageIcon("Assets/weapon2.png");
                                                                 JButton w2 = new JButton();
@@ -3582,6 +4117,22 @@ public class Traveling_Salesman{
                                                                     @Override
                                                                     public void mouseClicked(MouseEvent e) {
                                                                         super.mouseClicked(e);
+                                                                    }
+                                                                });
+                                                                w2.addActionListener(new ActionListener() {
+                                                                    @Override
+                                                                    public void actionPerformed(ActionEvent e) {
+                                                                        if (player1.money > 6000){
+                                                                            JOptionPane.showMessageDialog(f, "Weapon bought",
+                                                                                    "Weapon Buying Confirmed", JOptionPane.PLAIN_MESSAGE);
+                                                                            player1.power += 6000;
+                                                                            player1.money -= 6000;
+                                                                            System.out.println(player1.power);
+                                                                        }
+                                                                        else {
+                                                                            JOptionPane.showMessageDialog(f, "Your money is low",
+                                                                                    "Error", JOptionPane.ERROR_MESSAGE);
+                                                                        }
                                                                     }
                                                                 });
 
@@ -3618,6 +4169,22 @@ public class Traveling_Salesman{
                                                                         super.mouseClicked(e);
                                                                     }
                                                                 });
+                                                                w3.addActionListener(new ActionListener() {
+                                                                    @Override
+                                                                    public void actionPerformed(ActionEvent e) {
+                                                                        if (player1.money > 7000){
+                                                                            JOptionPane.showMessageDialog(f, "Weapon bought",
+                                                                                    "Weapon Buying Confirmed", JOptionPane.PLAIN_MESSAGE);
+                                                                            player1.power += 7000;
+                                                                            player1.money -= 7000;
+                                                                            System.out.println(player1.power);
+                                                                        }
+                                                                        else {
+                                                                            JOptionPane.showMessageDialog(f, "Your money is low",
+                                                                                    "Error", JOptionPane.ERROR_MESSAGE);
+                                                                        }
+                                                                    }
+                                                                });
 
                                                                 ImageIcon weapon4 = new ImageIcon("Assets/weapon4.png");
                                                                 JButton w4 = new JButton();
@@ -3650,6 +4217,22 @@ public class Traveling_Salesman{
                                                                     @Override
                                                                     public void mouseClicked(MouseEvent e) {
                                                                         super.mouseClicked(e);
+                                                                    }
+                                                                });
+                                                                w4.addActionListener(new ActionListener() {
+                                                                    @Override
+                                                                    public void actionPerformed(ActionEvent e) {
+                                                                        if (player1.money > 8000){
+                                                                            JOptionPane.showMessageDialog(f, "Weapon bought",
+                                                                                    "Weapon Buying Confirmed", JOptionPane.PLAIN_MESSAGE);
+                                                                            player1.power += 8000;
+                                                                            player1.money -= 8000;
+                                                                            System.out.println(player1.power);
+                                                                        }
+                                                                        else {
+                                                                            JOptionPane.showMessageDialog(f, "Your money is low",
+                                                                                    "Error", JOptionPane.ERROR_MESSAGE);
+                                                                        }
                                                                     }
                                                                 });
 
@@ -3686,6 +4269,22 @@ public class Traveling_Salesman{
                                                                         super.mouseClicked(e);
                                                                     }
                                                                 });
+                                                                w5.addActionListener(new ActionListener() {
+                                                                    @Override
+                                                                    public void actionPerformed(ActionEvent e) {
+                                                                        if (player1.money > 9000){
+                                                                            JOptionPane.showMessageDialog(f, "Weapon bought",
+                                                                                    "Weapon Buying Confirmed", JOptionPane.PLAIN_MESSAGE);
+                                                                            player1.power += 9000;
+                                                                            player1.money -= 9000;
+                                                                            System.out.println(player1.power);
+                                                                        }
+                                                                        else {
+                                                                            JOptionPane.showMessageDialog(f, "Your money is low",
+                                                                                    "Error", JOptionPane.ERROR_MESSAGE);
+                                                                        }
+                                                                    }
+                                                                });
 
                                                                 ImageIcon weapon6 = new ImageIcon("Assets/weapon6.png");
                                                                 JButton w6 = new JButton();
@@ -3718,6 +4317,22 @@ public class Traveling_Salesman{
                                                                     @Override
                                                                     public void mouseClicked(MouseEvent e) {
                                                                         super.mouseClicked(e);
+                                                                    }
+                                                                });
+                                                                w6.addActionListener(new ActionListener() {
+                                                                    @Override
+                                                                    public void actionPerformed(ActionEvent e) {
+                                                                        if (player1.money > 10000){
+                                                                            JOptionPane.showMessageDialog(f, "Weapon bought",
+                                                                                    "Weapon Buying Confirmed", JOptionPane.PLAIN_MESSAGE);
+                                                                            player1.power += 10000;
+                                                                            player1.money -= 10000;
+                                                                            System.out.println(player1.power);
+                                                                        }
+                                                                        else {
+                                                                            JOptionPane.showMessageDialog(f, "Your money is low",
+                                                                                    "Error", JOptionPane.ERROR_MESSAGE);
+                                                                        }
                                                                     }
                                                                 });
 
@@ -3896,8 +4511,8 @@ public class Traveling_Salesman{
                                             else {
                                                 arr[xAdjustment[0] + 1][yAdjustment[0]].setBackground(Color.blue);
 
-                                                if (logicBoard[xAdjustment[0]][yAdjustment[0]] != 1 && logicBoard[xAdjustment[0]][yAdjustment[0]] !=2 && logicBoard[xAdjustment[0]][yAdjustment[0]] !=4){
-                                                    logicBoard[xAdjustment[0]][yAdjustment[0]] = 99;
+                                                if (logicBoard[xAdjustment2[0]][yAdjustment2[0]] != 1 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=21 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=22 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=23 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=24 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=25 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=26 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=27 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=28 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=4){
+                                                    logicBoard[xAdjustment2[0]][yAdjustment2[0]] = 99;
                                                 }
 
                                                 if (logicBoard[xAdjustment[0] + 1][yAdjustment[0]]==1){
@@ -4119,20 +4734,46 @@ public class Traveling_Salesman{
                                                     b.addMouseListener(new MouseAdapter() {
 
                                                         public void mouseEntered(MouseEvent evt) {
+                                                            b.setText("7000");
                                                             b.setBackground(Color.white);
                                                             b.setForeground(Color.black);
                                                             b.setBorder(BorderFactory.createLineBorder(Color.black));
+                                                            b.setFont(new Font("Arial", Font.BOLD, 30));
                                                         }
 
                                                         public void mouseExited(MouseEvent evt) {
                                                             b.setBackground(Color.black);
                                                             b.setForeground(Color.white);
                                                             b.setBorder(blackline2);
+                                                            b.setText("Buy treasure place");
+                                                            b.setFont(new Font("Arial", Font.BOLD, 10));
                                                         }
 
                                                         @Override
                                                         public void mouseClicked(MouseEvent e) {
 
+                                                        }
+                                                    });
+                                                    b.addActionListener(new ActionListener() {
+                                                        @Override
+                                                        public void actionPerformed(ActionEvent e) {
+                                                            if (player1.money > 7000){
+                                                                int sw = 0;
+                                                                for (int i = 0 ;i<finalSize1 && sw ==0 ; i++){
+                                                                    for (int j = 0 ; j<finalSize1 && sw ==0 ; j++){
+                                                                        if (logicBoard[i][j] == 21 || logicBoard[i][j] == 22 || logicBoard[i][j] == 23 || logicBoard[i][j] ==24 || logicBoard[i][j] ==25 || logicBoard[i][j] == 26 || logicBoard[i][j] ==27 || logicBoard[i][j] ==28){
+                                                                            JOptionPane.showMessageDialog(f, "Treasure place : " + String.valueOf(i+1) + " " + String.valueOf(j+1),
+                                                                                    "Weapon Buying Confirmed", JOptionPane.PLAIN_MESSAGE);
+                                                                            sw = 1;
+                                                                        }
+                                                                    }
+                                                                }
+                                                                player1.money -= 7000;
+                                                            }
+                                                            else {
+                                                                JOptionPane.showMessageDialog(f, "Your money is low",
+                                                                        "Error", JOptionPane.ERROR_MESSAGE);
+                                                            }
                                                         }
                                                     });
 
@@ -4204,6 +4845,23 @@ public class Traveling_Salesman{
                                                                     super.mouseClicked(e);
                                                                 }
                                                             });
+                                                            w1.addActionListener(new ActionListener() {
+                                                                @Override
+                                                                public void actionPerformed(ActionEvent e) {
+                                                                    if (player1.money > 5000){
+                                                                        JOptionPane.showMessageDialog(f, "Weapon bought",
+                                                                                "Weapon Buying Confirmed", JOptionPane.PLAIN_MESSAGE);
+                                                                        player1.power += 5000;
+                                                                        player1.money -= 5000;
+                                                                        System.out.println(player1.power);
+                                                                    }
+                                                                    else {
+                                                                        JOptionPane.showMessageDialog(f, "Your money is low",
+                                                                                "Error", JOptionPane.ERROR_MESSAGE);
+                                                                    }
+                                                                }
+                                                            });
+
 
                                                             ImageIcon weapon2 = new ImageIcon("Assets/weapon2.png");
                                                             JButton w2 = new JButton();
@@ -4236,6 +4894,22 @@ public class Traveling_Salesman{
                                                                 @Override
                                                                 public void mouseClicked(MouseEvent e) {
                                                                     super.mouseClicked(e);
+                                                                }
+                                                            });
+                                                            w2.addActionListener(new ActionListener() {
+                                                                @Override
+                                                                public void actionPerformed(ActionEvent e) {
+                                                                    if (player1.money > 6000){
+                                                                        JOptionPane.showMessageDialog(f, "Weapon bought",
+                                                                                "Weapon Buying Confirmed", JOptionPane.PLAIN_MESSAGE);
+                                                                        player1.power += 6000;
+                                                                        player1.money -= 6000;
+                                                                        System.out.println(player1.power);
+                                                                    }
+                                                                    else {
+                                                                        JOptionPane.showMessageDialog(f, "Your money is low",
+                                                                                "Error", JOptionPane.ERROR_MESSAGE);
+                                                                    }
                                                                 }
                                                             });
 
@@ -4272,6 +4946,22 @@ public class Traveling_Salesman{
                                                                     super.mouseClicked(e);
                                                                 }
                                                             });
+                                                            w3.addActionListener(new ActionListener() {
+                                                                @Override
+                                                                public void actionPerformed(ActionEvent e) {
+                                                                    if (player1.money > 7000){
+                                                                        JOptionPane.showMessageDialog(f, "Weapon bought",
+                                                                                "Weapon Buying Confirmed", JOptionPane.PLAIN_MESSAGE);
+                                                                        player1.power += 7000;
+                                                                        player1.money -= 7000;
+                                                                        System.out.println(player1.power);
+                                                                    }
+                                                                    else {
+                                                                        JOptionPane.showMessageDialog(f, "Your money is low",
+                                                                                "Error", JOptionPane.ERROR_MESSAGE);
+                                                                    }
+                                                                }
+                                                            });
 
                                                             ImageIcon weapon4 = new ImageIcon("Assets/weapon4.png");
                                                             JButton w4 = new JButton();
@@ -4304,6 +4994,22 @@ public class Traveling_Salesman{
                                                                 @Override
                                                                 public void mouseClicked(MouseEvent e) {
                                                                     super.mouseClicked(e);
+                                                                }
+                                                            });
+                                                            w4.addActionListener(new ActionListener() {
+                                                                @Override
+                                                                public void actionPerformed(ActionEvent e) {
+                                                                    if (player1.money > 8000){
+                                                                        JOptionPane.showMessageDialog(f, "Weapon bought",
+                                                                                "Weapon Buying Confirmed", JOptionPane.PLAIN_MESSAGE);
+                                                                        player1.power += 8000;
+                                                                        player1.money -= 8000;
+                                                                        System.out.println(player1.power);
+                                                                    }
+                                                                    else {
+                                                                        JOptionPane.showMessageDialog(f, "Your money is low",
+                                                                                "Error", JOptionPane.ERROR_MESSAGE);
+                                                                    }
                                                                 }
                                                             });
 
@@ -4340,6 +5046,22 @@ public class Traveling_Salesman{
                                                                     super.mouseClicked(e);
                                                                 }
                                                             });
+                                                            w5.addActionListener(new ActionListener() {
+                                                                @Override
+                                                                public void actionPerformed(ActionEvent e) {
+                                                                    if (player1.money > 9000){
+                                                                        JOptionPane.showMessageDialog(f, "Weapon bought",
+                                                                                "Weapon Buying Confirmed", JOptionPane.PLAIN_MESSAGE);
+                                                                        player1.power += 9000;
+                                                                        player1.money -= 9000;
+                                                                        System.out.println(player1.power);
+                                                                    }
+                                                                    else {
+                                                                        JOptionPane.showMessageDialog(f, "Your money is low",
+                                                                                "Error", JOptionPane.ERROR_MESSAGE);
+                                                                    }
+                                                                }
+                                                            });
 
                                                             ImageIcon weapon6 = new ImageIcon("Assets/weapon6.png");
                                                             JButton w6 = new JButton();
@@ -4372,6 +5094,22 @@ public class Traveling_Salesman{
                                                                 @Override
                                                                 public void mouseClicked(MouseEvent e) {
                                                                     super.mouseClicked(e);
+                                                                }
+                                                            });
+                                                            w6.addActionListener(new ActionListener() {
+                                                                @Override
+                                                                public void actionPerformed(ActionEvent e) {
+                                                                    if (player1.money > 10000){
+                                                                        JOptionPane.showMessageDialog(f, "Weapon bought",
+                                                                                "Weapon Buying Confirmed", JOptionPane.PLAIN_MESSAGE);
+                                                                        player1.power += 10000;
+                                                                        player1.money -= 10000;
+                                                                        System.out.println(player1.power);
+                                                                    }
+                                                                    else {
+                                                                        JOptionPane.showMessageDialog(f, "Your money is low",
+                                                                                "Error", JOptionPane.ERROR_MESSAGE);
+                                                                    }
                                                                 }
                                                             });
 
@@ -4550,8 +5288,8 @@ public class Traveling_Salesman{
                                             else {
                                                 arr[xAdjustment[0]][yAdjustment[0] +1].setBackground(Color.blue);
 
-                                                if (logicBoard[xAdjustment[0]][yAdjustment[0]] != 1 && logicBoard[xAdjustment[0]][yAdjustment[0]] !=2 && logicBoard[xAdjustment[0]][yAdjustment[0]] !=4){
-                                                    logicBoard[xAdjustment[0]][yAdjustment[0]] = 99;
+                                                if (logicBoard[xAdjustment2[0]][yAdjustment2[0]] != 1 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=21 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=22 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=23 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=24 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=25 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=26 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=27 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=28 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=4){
+                                                    logicBoard[xAdjustment2[0]][yAdjustment2[0]] = 99;
                                                 }
 
                                                 if (logicBoard[xAdjustment[0]][yAdjustment[0] + 1]==1){
@@ -4780,20 +5518,46 @@ public class Traveling_Salesman{
                                                     b.addMouseListener(new MouseAdapter() {
 
                                                         public void mouseEntered(MouseEvent evt) {
+                                                            b.setText("7000");
                                                             b.setBackground(Color.white);
                                                             b.setForeground(Color.black);
                                                             b.setBorder(BorderFactory.createLineBorder(Color.black));
+                                                            b.setFont(new Font("Arial", Font.BOLD, 30));
                                                         }
 
                                                         public void mouseExited(MouseEvent evt) {
                                                             b.setBackground(Color.black);
                                                             b.setForeground(Color.white);
                                                             b.setBorder(blackline2);
+                                                            b.setText("Buy treasure place");
+                                                            b.setFont(new Font("Arial", Font.BOLD, 10));
                                                         }
 
                                                         @Override
                                                         public void mouseClicked(MouseEvent e) {
 
+                                                        }
+                                                    });
+                                                    b.addActionListener(new ActionListener() {
+                                                        @Override
+                                                        public void actionPerformed(ActionEvent e) {
+                                                            if (player1.money > 7000){
+                                                                int sw = 0;
+                                                                for (int i = 0 ;i<finalSize1 && sw ==0 ; i++){
+                                                                    for (int j = 0 ; j<finalSize1 && sw ==0 ; j++){
+                                                                        if (logicBoard[i][j] == 21 || logicBoard[i][j] == 22 || logicBoard[i][j] == 23 || logicBoard[i][j] ==24 || logicBoard[i][j] ==25 || logicBoard[i][j] == 26 || logicBoard[i][j] ==27 || logicBoard[i][j] ==28){
+                                                                            JOptionPane.showMessageDialog(f, "Treasure place : " + String.valueOf(i+1) + " " + String.valueOf(j+1),
+                                                                                    "Weapon Buying Confirmed", JOptionPane.PLAIN_MESSAGE);
+                                                                            sw = 1;
+                                                                        }
+                                                                    }
+                                                                }
+                                                                player1.money -= 7000;
+                                                            }
+                                                            else {
+                                                                JOptionPane.showMessageDialog(f, "Your money is low",
+                                                                        "Error", JOptionPane.ERROR_MESSAGE);
+                                                            }
                                                         }
                                                     });
 
@@ -4865,6 +5629,23 @@ public class Traveling_Salesman{
                                                                     super.mouseClicked(e);
                                                                 }
                                                             });
+                                                            w1.addActionListener(new ActionListener() {
+                                                                @Override
+                                                                public void actionPerformed(ActionEvent e) {
+                                                                    if (player1.money > 5000){
+                                                                        JOptionPane.showMessageDialog(f, "Weapon bought",
+                                                                                "Weapon Buying Confirmed", JOptionPane.PLAIN_MESSAGE);
+                                                                        player1.power += 5000;
+                                                                        player1.money -= 5000;
+                                                                        System.out.println(player1.power);
+                                                                    }
+                                                                    else {
+                                                                        JOptionPane.showMessageDialog(f, "Your money is low",
+                                                                                "Error", JOptionPane.ERROR_MESSAGE);
+                                                                    }
+                                                                }
+                                                            });
+
 
                                                             ImageIcon weapon2 = new ImageIcon("Assets/weapon2.png");
                                                             JButton w2 = new JButton();
@@ -4897,6 +5678,22 @@ public class Traveling_Salesman{
                                                                 @Override
                                                                 public void mouseClicked(MouseEvent e) {
                                                                     super.mouseClicked(e);
+                                                                }
+                                                            });
+                                                            w2.addActionListener(new ActionListener() {
+                                                                @Override
+                                                                public void actionPerformed(ActionEvent e) {
+                                                                    if (player1.money > 6000){
+                                                                        JOptionPane.showMessageDialog(f, "Weapon bought",
+                                                                                "Weapon Buying Confirmed", JOptionPane.PLAIN_MESSAGE);
+                                                                        player1.power += 6000;
+                                                                        player1.money -= 6000;
+                                                                        System.out.println(player1.power);
+                                                                    }
+                                                                    else {
+                                                                        JOptionPane.showMessageDialog(f, "Your money is low",
+                                                                                "Error", JOptionPane.ERROR_MESSAGE);
+                                                                    }
                                                                 }
                                                             });
 
@@ -4933,6 +5730,22 @@ public class Traveling_Salesman{
                                                                     super.mouseClicked(e);
                                                                 }
                                                             });
+                                                            w3.addActionListener(new ActionListener() {
+                                                                @Override
+                                                                public void actionPerformed(ActionEvent e) {
+                                                                    if (player1.money > 7000){
+                                                                        JOptionPane.showMessageDialog(f, "Weapon bought",
+                                                                                "Weapon Buying Confirmed", JOptionPane.PLAIN_MESSAGE);
+                                                                        player1.power += 7000;
+                                                                        player1.money -= 7000;
+                                                                        System.out.println(player1.power);
+                                                                    }
+                                                                    else {
+                                                                        JOptionPane.showMessageDialog(f, "Your money is low",
+                                                                                "Error", JOptionPane.ERROR_MESSAGE);
+                                                                    }
+                                                                }
+                                                            });
 
                                                             ImageIcon weapon4 = new ImageIcon("Assets/weapon4.png");
                                                             JButton w4 = new JButton();
@@ -4965,6 +5778,22 @@ public class Traveling_Salesman{
                                                                 @Override
                                                                 public void mouseClicked(MouseEvent e) {
                                                                     super.mouseClicked(e);
+                                                                }
+                                                            });
+                                                            w4.addActionListener(new ActionListener() {
+                                                                @Override
+                                                                public void actionPerformed(ActionEvent e) {
+                                                                    if (player1.money > 8000){
+                                                                        JOptionPane.showMessageDialog(f, "Weapon bought",
+                                                                                "Weapon Buying Confirmed", JOptionPane.PLAIN_MESSAGE);
+                                                                        player1.power += 8000;
+                                                                        player1.money -= 8000;
+                                                                        System.out.println(player1.power);
+                                                                    }
+                                                                    else {
+                                                                        JOptionPane.showMessageDialog(f, "Your money is low",
+                                                                                "Error", JOptionPane.ERROR_MESSAGE);
+                                                                    }
                                                                 }
                                                             });
 
@@ -5001,6 +5830,22 @@ public class Traveling_Salesman{
                                                                     super.mouseClicked(e);
                                                                 }
                                                             });
+                                                            w5.addActionListener(new ActionListener() {
+                                                                @Override
+                                                                public void actionPerformed(ActionEvent e) {
+                                                                    if (player1.money > 9000){
+                                                                        JOptionPane.showMessageDialog(f, "Weapon bought",
+                                                                                "Weapon Buying Confirmed", JOptionPane.PLAIN_MESSAGE);
+                                                                        player1.power += 9000;
+                                                                        player1.money -= 9000;
+                                                                        System.out.println(player1.power);
+                                                                    }
+                                                                    else {
+                                                                        JOptionPane.showMessageDialog(f, "Your money is low",
+                                                                                "Error", JOptionPane.ERROR_MESSAGE);
+                                                                    }
+                                                                }
+                                                            });
 
                                                             ImageIcon weapon6 = new ImageIcon("Assets/weapon6.png");
                                                             JButton w6 = new JButton();
@@ -5033,6 +5878,22 @@ public class Traveling_Salesman{
                                                                 @Override
                                                                 public void mouseClicked(MouseEvent e) {
                                                                     super.mouseClicked(e);
+                                                                }
+                                                            });
+                                                            w6.addActionListener(new ActionListener() {
+                                                                @Override
+                                                                public void actionPerformed(ActionEvent e) {
+                                                                    if (player1.money > 10000){
+                                                                        JOptionPane.showMessageDialog(f, "Weapon bought",
+                                                                                "Weapon Buying Confirmed", JOptionPane.PLAIN_MESSAGE);
+                                                                        player1.power += 10000;
+                                                                        player1.money -= 10000;
+                                                                        System.out.println(player1.power);
+                                                                    }
+                                                                    else {
+                                                                        JOptionPane.showMessageDialog(f, "Your money is low",
+                                                                                "Error", JOptionPane.ERROR_MESSAGE);
+                                                                    }
                                                                 }
                                                             });
 
@@ -5209,8 +6070,8 @@ public class Traveling_Salesman{
 
                                             else {
                                                 arr[xAdjustment[0]][yAdjustment[0] -1].setBackground(Color.blue);
-                                                if (logicBoard[xAdjustment[0]][yAdjustment[0]] != 1 && logicBoard[xAdjustment[0]][yAdjustment[0]] !=2 && logicBoard[xAdjustment[0]][yAdjustment[0]] !=4){
-                                                    logicBoard[xAdjustment[0]][yAdjustment[0]] = 99;
+                                                if (logicBoard[xAdjustment2[0]][yAdjustment2[0]] != 1 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=21 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=22 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=23 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=24 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=25 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=26 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=27 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=28 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=4){
+                                                    logicBoard[xAdjustment2[0]][yAdjustment2[0]] = 99;
                                                 }
 
                                                 if (logicBoard[xAdjustment[0]][yAdjustment[0] -1]==1){
@@ -5439,20 +6300,46 @@ public class Traveling_Salesman{
                                                     b.addMouseListener(new MouseAdapter() {
 
                                                         public void mouseEntered(MouseEvent evt) {
+                                                            b.setText("7000");
                                                             b.setBackground(Color.white);
                                                             b.setForeground(Color.black);
                                                             b.setBorder(BorderFactory.createLineBorder(Color.black));
+                                                            b.setFont(new Font("Arial", Font.BOLD, 30));
                                                         }
 
                                                         public void mouseExited(MouseEvent evt) {
                                                             b.setBackground(Color.black);
                                                             b.setForeground(Color.white);
                                                             b.setBorder(blackline2);
+                                                            b.setText("Buy treasure place");
+                                                            b.setFont(new Font("Arial", Font.BOLD, 10));
                                                         }
 
                                                         @Override
                                                         public void mouseClicked(MouseEvent e) {
 
+                                                        }
+                                                    });
+                                                    b.addActionListener(new ActionListener() {
+                                                        @Override
+                                                        public void actionPerformed(ActionEvent e) {
+                                                            if (player1.money > 7000){
+                                                                int sw = 0;
+                                                                for (int i = 0 ;i<finalSize1 && sw ==0 ; i++){
+                                                                    for (int j = 0 ; j<finalSize1 && sw ==0 ; j++){
+                                                                        if (logicBoard[i][j] == 21 || logicBoard[i][j] == 22 || logicBoard[i][j] == 23 || logicBoard[i][j] ==24 || logicBoard[i][j] ==25 || logicBoard[i][j] == 26 || logicBoard[i][j] ==27 || logicBoard[i][j] ==28){
+                                                                            JOptionPane.showMessageDialog(f, "Treasure place : " + String.valueOf(i+1) + " " + String.valueOf(j+1),
+                                                                                    "Weapon Buying Confirmed", JOptionPane.PLAIN_MESSAGE);
+                                                                            sw = 1;
+                                                                        }
+                                                                    }
+                                                                }
+                                                                player1.money -= 7000;
+                                                            }
+                                                            else {
+                                                                JOptionPane.showMessageDialog(f, "Your money is low",
+                                                                        "Error", JOptionPane.ERROR_MESSAGE);
+                                                            }
                                                         }
                                                     });
 
@@ -5524,6 +6411,23 @@ public class Traveling_Salesman{
                                                                     super.mouseClicked(e);
                                                                 }
                                                             });
+                                                            w1.addActionListener(new ActionListener() {
+                                                                @Override
+                                                                public void actionPerformed(ActionEvent e) {
+                                                                    if (player1.money > 5000){
+                                                                        JOptionPane.showMessageDialog(f, "Weapon bought",
+                                                                                "Weapon Buying Confirmed", JOptionPane.PLAIN_MESSAGE);
+                                                                        player1.power += 5000;
+                                                                        player1.money -= 5000;
+                                                                        System.out.println(player1.power);
+                                                                    }
+                                                                    else {
+                                                                        JOptionPane.showMessageDialog(f, "Your money is low",
+                                                                                "Error", JOptionPane.ERROR_MESSAGE);
+                                                                    }
+                                                                }
+                                                            });
+
 
                                                             ImageIcon weapon2 = new ImageIcon("Assets/weapon2.png");
                                                             JButton w2 = new JButton();
@@ -5556,6 +6460,22 @@ public class Traveling_Salesman{
                                                                 @Override
                                                                 public void mouseClicked(MouseEvent e) {
                                                                     super.mouseClicked(e);
+                                                                }
+                                                            });
+                                                            w2.addActionListener(new ActionListener() {
+                                                                @Override
+                                                                public void actionPerformed(ActionEvent e) {
+                                                                    if (player1.money > 6000){
+                                                                        JOptionPane.showMessageDialog(f, "Weapon bought",
+                                                                                "Weapon Buying Confirmed", JOptionPane.PLAIN_MESSAGE);
+                                                                        player1.power += 6000;
+                                                                        player1.money -= 6000;
+                                                                        System.out.println(player1.power);
+                                                                    }
+                                                                    else {
+                                                                        JOptionPane.showMessageDialog(f, "Your money is low",
+                                                                                "Error", JOptionPane.ERROR_MESSAGE);
+                                                                    }
                                                                 }
                                                             });
 
@@ -5592,6 +6512,22 @@ public class Traveling_Salesman{
                                                                     super.mouseClicked(e);
                                                                 }
                                                             });
+                                                            w3.addActionListener(new ActionListener() {
+                                                                @Override
+                                                                public void actionPerformed(ActionEvent e) {
+                                                                    if (player1.money > 7000){
+                                                                        JOptionPane.showMessageDialog(f, "Weapon bought",
+                                                                                "Weapon Buying Confirmed", JOptionPane.PLAIN_MESSAGE);
+                                                                        player1.power += 7000;
+                                                                        player1.money -= 7000;
+                                                                        System.out.println(player1.power);
+                                                                    }
+                                                                    else {
+                                                                        JOptionPane.showMessageDialog(f, "Your money is low",
+                                                                                "Error", JOptionPane.ERROR_MESSAGE);
+                                                                    }
+                                                                }
+                                                            });
 
                                                             ImageIcon weapon4 = new ImageIcon("Assets/weapon4.png");
                                                             JButton w4 = new JButton();
@@ -5624,6 +6560,22 @@ public class Traveling_Salesman{
                                                                 @Override
                                                                 public void mouseClicked(MouseEvent e) {
                                                                     super.mouseClicked(e);
+                                                                }
+                                                            });
+                                                            w4.addActionListener(new ActionListener() {
+                                                                @Override
+                                                                public void actionPerformed(ActionEvent e) {
+                                                                    if (player1.money > 8000){
+                                                                        JOptionPane.showMessageDialog(f, "Weapon bought",
+                                                                                "Weapon Buying Confirmed", JOptionPane.PLAIN_MESSAGE);
+                                                                        player1.power += 8000;
+                                                                        player1.money -= 8000;
+                                                                        System.out.println(player1.power);
+                                                                    }
+                                                                    else {
+                                                                        JOptionPane.showMessageDialog(f, "Your money is low",
+                                                                                "Error", JOptionPane.ERROR_MESSAGE);
+                                                                    }
                                                                 }
                                                             });
 
@@ -5660,6 +6612,22 @@ public class Traveling_Salesman{
                                                                     super.mouseClicked(e);
                                                                 }
                                                             });
+                                                            w5.addActionListener(new ActionListener() {
+                                                                @Override
+                                                                public void actionPerformed(ActionEvent e) {
+                                                                    if (player1.money > 9000){
+                                                                        JOptionPane.showMessageDialog(f, "Weapon bought",
+                                                                                "Weapon Buying Confirmed", JOptionPane.PLAIN_MESSAGE);
+                                                                        player1.power += 9000;
+                                                                        player1.money -= 9000;
+                                                                        System.out.println(player1.power);
+                                                                    }
+                                                                    else {
+                                                                        JOptionPane.showMessageDialog(f, "Your money is low",
+                                                                                "Error", JOptionPane.ERROR_MESSAGE);
+                                                                    }
+                                                                }
+                                                            });
 
                                                             ImageIcon weapon6 = new ImageIcon("Assets/weapon6.png");
                                                             JButton w6 = new JButton();
@@ -5692,6 +6660,22 @@ public class Traveling_Salesman{
                                                                 @Override
                                                                 public void mouseClicked(MouseEvent e) {
                                                                     super.mouseClicked(e);
+                                                                }
+                                                            });
+                                                            w6.addActionListener(new ActionListener() {
+                                                                @Override
+                                                                public void actionPerformed(ActionEvent e) {
+                                                                    if (player1.money > 10000){
+                                                                        JOptionPane.showMessageDialog(f, "Weapon bought",
+                                                                                "Weapon Buying Confirmed", JOptionPane.PLAIN_MESSAGE);
+                                                                        player1.power += 10000;
+                                                                        player1.money -= 10000;
+                                                                        System.out.println(player1.power);
+                                                                    }
+                                                                    else {
+                                                                        JOptionPane.showMessageDialog(f, "Your money is low",
+                                                                                "Error", JOptionPane.ERROR_MESSAGE);
+                                                                    }
                                                                 }
                                                             });
 
