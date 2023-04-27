@@ -10,6 +10,24 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 import java.util.List;
 import java.util.stream.IntStream;
+import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.Timer;
+import java.awt.Color;
+import java.awt.Font;
+import static java.awt.Font.BOLD;
+import static java.awt.Font.ITALIC;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.text.StyledEditorKit;
 
 public class Traveling_Salesman{
 
@@ -65,7 +83,8 @@ public class Traveling_Salesman{
 
         int size = 10;
         Scanner scanner = new Scanner(System.in);
-        size = scanner.nextInt();
+        System.out.println("Enter your table size : ");
+        size = 9;
         Dimension boardSize = new Dimension(1100,750);
 
         player1.x=0;
@@ -178,7 +197,7 @@ public class Traveling_Salesman{
         arr[0][0].setBackground(Color.blue);
 
         JButton ShowScore = new JButton("Score Board");
-        ShowScore.setBounds(120,300,140,50);
+        ShowScore.setBounds(120,275,140,50);
         ShowScore.setBackground(Color.black);
         ShowScore.setForeground(Color.white);
         ShowScore.setBorder(blackline);
@@ -247,7 +266,7 @@ public class Traveling_Salesman{
         });
 
         JButton Quest1 = new JButton("Quest");
-        Quest1.setBounds(120,365,100,50);
+        Quest1.setBounds(138,365,100,50);
         Quest1.setBackground(Color.black);
         Quest1.setForeground(Color.white);
         Quest1.setBorder(blackline);
@@ -269,8 +288,13 @@ public class Traveling_Salesman{
         Quest1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(layeredPane, "Quest is " + questName,
-                        "Quest", JOptionPane.PLAIN_MESSAGE);
+                JFrame f = new JFrame("Quest");
+                f.setSize(600,300);
+                f.setVisible(true);
+                f.add(new Text_Animation("Quest is",questName));
+                f.setBackground(new Color(16,5,47));
+                f.getContentPane().setForeground(new Color(16,5,47));
+                f.getContentPane().setBackground(new Color(16,5,47));
             }
         });
 
@@ -461,7 +485,7 @@ public class Traveling_Salesman{
 
 
         JButton Quest2 = new JButton("Quest");
-        Quest2.setBounds(120,365,100,50);
+        Quest2.setBounds(138,365,100,50);
         Quest2.setBackground(Color.black);
         Quest2.setForeground(Color.white);
         Quest2.setBorder(blackline);
@@ -484,8 +508,11 @@ public class Traveling_Salesman{
         Quest2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(layeredPane2, "Quest is " + questName,
-                        "Quest", JOptionPane.PLAIN_MESSAGE);
+                JFrame f = new JFrame("Quest");
+                f.setSize(600,300);
+                f.setVisible(true);
+                f.add(new Text_Animation("Quest is",questName));
+                f.setBackground(new Color(16,5,47));
             }
         });
 
@@ -1240,8 +1267,8 @@ public class Traveling_Salesman{
                                             if (xAdjustment2[0]-1 == xAdjustment[0] && yAdjustment2[0]==yAdjustment[0]){
                                                 System.out.println("Yes");
                                                 if (player1.power == player2.power){
-                                                    JOptionPane.showMessageDialog(layeredPane2, "Player1's power is more \n beacuse Player1 is here more",
-                                                            "Error", JOptionPane.ERROR_MESSAGE);
+                                                    JOptionPane.showMessageDialog(layeredPane2, "Player1 won.\nbeacuse Player1 is here more",
+                                                            "Fight", JOptionPane.PLAIN_MESSAGE);
 
                                                     int moneyTemp = ((player1.power - player2.power)/(player1.power + player2.power)) * player2.money;
                                                     player1.money += moneyTemp;
@@ -1254,8 +1281,8 @@ public class Traveling_Salesman{
                                                     arr2[xAdjustment2[0]-1][yAdjustment2[0]].setBackground(Color.white);
                                                 }
                                                 if (player1.power > player2.power){
-                                                    JOptionPane.showMessageDialog(layeredPane2, "Player1's power is more \n beacuse Player1 is here more",
-                                                            "Error", JOptionPane.ERROR_MESSAGE);
+                                                    JOptionPane.showMessageDialog(layeredPane2, "Player1 won.\n beacuse Player1's power is more",
+                                                            "Fight", JOptionPane.PLAIN_MESSAGE);
 
                                                     int moneyTemp = ((player1.power - player2.power)/(player1.power + player2.power)) * player2.money;
                                                     player1.money += moneyTemp;
@@ -1268,8 +1295,8 @@ public class Traveling_Salesman{
                                                     arr2[xAdjustment2[0]-1][yAdjustment2[0]].setBackground(Color.white);
                                                 }
                                                 if (player1.power < player2.power){
-                                                    JOptionPane.showMessageDialog(layeredPane2, "Player1's power is more \n beacuse Player1 is here more",
-                                                            "Error", JOptionPane.ERROR_MESSAGE);
+                                                    JOptionPane.showMessageDialog(layeredPane2, "Player2 won.\nbeacuse Player2's power is more",
+                                                            "Fight", JOptionPane.PLAIN_MESSAGE);
 
                                                     int moneyTemp = ((player2.power - player1.power)/(player2.power + player1.power)) * player1.money;
                                                     player2.money += moneyTemp;
@@ -1278,6 +1305,7 @@ public class Traveling_Salesman{
                                                     player2.power -= player1.power;
                                                     player1.power = 0;
 
+                                                    arr[xAdjustment[0]][yAdjustment[0]].setBackground(Color.white);
                                                     xAdjustment[0] = 0;
                                                     yAdjustment[0] = 0;
                                                 }
@@ -1299,7 +1327,7 @@ public class Traveling_Salesman{
                                                 yAdjustment2[0] = finalSize-1;
                                                 uu[0]=0;
                                                 counter += 1;
-                                                ll2[0] = counter;
+                                                ll2[0] = 0;
                                                 PLaying_Game2.setVisible(false);
                                                 PLaying_Game.setVisible(true);
                                                 arr2[xAdjustment2[0]][yAdjustment2[0]].setBackground(Color.red);
@@ -2003,8 +2031,8 @@ public class Traveling_Salesman{
                                         if (xAdjustment2[0]+1 == xAdjustment[0] && yAdjustment2[0]==yAdjustment[0]){
                                             System.out.println("Yes");
                                             if (player1.power == player2.power){
-                                                JOptionPane.showMessageDialog(layeredPane2, "Player1's power is more \n beacuse Player1 is here more",
-                                                        "Error", JOptionPane.ERROR_MESSAGE);
+                                                JOptionPane.showMessageDialog(layeredPane2, "Player1 won.\nbeacuse Player1 is here more",
+                                                        "Fight", JOptionPane.PLAIN_MESSAGE);
 
                                                 int moneyTemp = ((player1.power - player2.power)/(player1.power + player2.power)) * player2.money;
                                                 player1.money += moneyTemp;
@@ -2017,8 +2045,8 @@ public class Traveling_Salesman{
                                                 arr2[xAdjustment2[0]+1][yAdjustment2[0]].setBackground(Color.white);
                                             }
                                             if (player1.power > player2.power){
-                                                JOptionPane.showMessageDialog(layeredPane2, "Player1's power is more \n beacuse Player1 is here more",
-                                                        "Error", JOptionPane.ERROR_MESSAGE);
+                                                JOptionPane.showMessageDialog(layeredPane2, "Player1 won.\nbeacuse Player1's power is more",
+                                                        "Fight", JOptionPane.PLAIN_MESSAGE);
 
                                                 int moneyTemp = ((player1.power - player2.power)/(player1.power + player2.power)) * player2.money;
                                                 player1.money += moneyTemp;
@@ -2031,8 +2059,8 @@ public class Traveling_Salesman{
                                                 arr2[xAdjustment2[0]+1][yAdjustment2[0]].setBackground(Color.white);
                                             }
                                             if (player1.power < player2.power){
-                                                JOptionPane.showMessageDialog(layeredPane2, "Player1's power is more \n beacuse Player1 is here more",
-                                                        "Error", JOptionPane.ERROR_MESSAGE);
+                                                JOptionPane.showMessageDialog(layeredPane2, "Player2 won.\nbeacuse Player2's power is more ",
+                                                        "Fight", JOptionPane.PLAIN_MESSAGE);
 
                                                 int moneyTemp = ((player2.power - player1.power)/(player2.power + player1.power)) * player1.money;
                                                 player2.money += moneyTemp;
@@ -2041,6 +2069,7 @@ public class Traveling_Salesman{
                                                 player2.power -= player1.power;
                                                 player1.power = 0;
 
+                                                arr[xAdjustment[0]][yAdjustment[0]].setBackground(Color.white);
                                                 xAdjustment[0] = 0;
                                                 yAdjustment[0] = 0;
                                             }
@@ -2786,8 +2815,8 @@ public class Traveling_Salesman{
                                                 if (xAdjustment2[0] == xAdjustment[0] && yAdjustment2[0] + 1==yAdjustment[0]){
                                                     System.out.println("Yes");
                                                     if (player1.power == player2.power){
-                                                        JOptionPane.showMessageDialog(layeredPane2, "Player1's power is more \n beacuse Player1 is here more",
-                                                                "Error", JOptionPane.ERROR_MESSAGE);
+                                                        JOptionPane.showMessageDialog(layeredPane2, "Player1 won.\nbeacuse Player1 is here more",
+                                                                "Fight", JOptionPane.PLAIN_MESSAGE);
 
                                                         int moneyTemp = ((player1.power - player2.power)/(player1.power + player2.power)) * player2.money;
                                                         player1.money += moneyTemp;
@@ -2800,8 +2829,8 @@ public class Traveling_Salesman{
                                                         arr2[xAdjustment2[0]][yAdjustment2[0] + 1].setBackground(Color.white);
                                                     }
                                                     if (player1.power > player2.power){
-                                                        JOptionPane.showMessageDialog(layeredPane2, "Player1's power is more \n beacuse Player1 is here more",
-                                                                "Error", JOptionPane.ERROR_MESSAGE);
+                                                        JOptionPane.showMessageDialog(layeredPane2, "Player1 won.\nbeacuse Player1's power is more",
+                                                                "Fight", JOptionPane.PLAIN_MESSAGE);
 
                                                         int moneyTemp = ((player1.power - player2.power)/(player1.power + player2.power)) * player2.money;
                                                         player1.money += moneyTemp;
@@ -2814,8 +2843,8 @@ public class Traveling_Salesman{
                                                         arr2[xAdjustment2[0]][yAdjustment2[0] + 1].setBackground(Color.white);
                                                     }
                                                     if (player1.power < player2.power){
-                                                        JOptionPane.showMessageDialog(layeredPane2, "Player1's power is more \n beacuse Player1 is here more",
-                                                                "Error", JOptionPane.ERROR_MESSAGE);
+                                                        JOptionPane.showMessageDialog(layeredPane2, "Player2 won.\nbeacuse Player2's is more",
+                                                                "Fight", JOptionPane.PLAIN_MESSAGE);
 
                                                         int moneyTemp = ((player2.power - player1.power)/(player2.power + player1.power)) * player1.money;
                                                         player2.money += moneyTemp;
@@ -2824,6 +2853,7 @@ public class Traveling_Salesman{
                                                         player2.power -= player1.power;
                                                         player1.power = 0;
 
+                                                        arr[xAdjustment[0]][yAdjustment[0]].setBackground(Color.white);
                                                         xAdjustment[0] = 0;
                                                         yAdjustment[0] = 0;
                                                     }
@@ -3569,8 +3599,8 @@ public class Traveling_Salesman{
                                                 if (xAdjustment2[0] == xAdjustment[0] && yAdjustment2[0] - 1==yAdjustment[0]){
                                                     System.out.println("Yes");
                                                     if (player1.power == player2.power){
-                                                        JOptionPane.showMessageDialog(layeredPane2, "Player1's power is more \n beacuse Player1 is here more",
-                                                                "Error", JOptionPane.ERROR_MESSAGE);
+                                                        JOptionPane.showMessageDialog(layeredPane2, "Player1 won.\nbeacuse Player1 is here more",
+                                                                "Fight", JOptionPane.PLAIN_MESSAGE);
 
                                                         int moneyTemp = ((player1.power - player2.power)/(player1.power + player2.power)) * player2.money;
                                                         player1.money += moneyTemp;
@@ -3583,8 +3613,8 @@ public class Traveling_Salesman{
                                                         arr2[xAdjustment2[0]][yAdjustment2[0] - 1].setBackground(Color.white);
                                                     }
                                                     if (player1.power > player2.power){
-                                                        JOptionPane.showMessageDialog(layeredPane2, "Player1's power is more \nbeacuse Player1 is here more",
-                                                                "Error", JOptionPane.ERROR_MESSAGE);
+                                                        JOptionPane.showMessageDialog(layeredPane2, "Player1 won.\nbeacuse Player1's power is more",
+                                                                "Fight", JOptionPane.PLAIN_MESSAGE);
 
                                                         int moneyTemp = ((player1.power - player2.power)/(player1.power + player2.power)) * player2.money;
                                                         player1.money += moneyTemp;
@@ -3597,8 +3627,8 @@ public class Traveling_Salesman{
                                                         arr2[xAdjustment2[0]][yAdjustment2[0] - 1].setBackground(Color.white);
                                                     }
                                                     if (player1.power < player2.power){
-                                                        JOptionPane.showMessageDialog(layeredPane2, "Player1's power is more \n beacuse Player1 is here more",
-                                                                "Error", JOptionPane.ERROR_MESSAGE);
+                                                        JOptionPane.showMessageDialog(layeredPane2, "Player2 won\nbeacuse Player2's power is more",
+                                                                "Fight", JOptionPane.PLAIN_MESSAGE);
 
                                                         int moneyTemp = ((player2.power - player1.power)/(player2.power + player1.power)) * player1.money;
                                                         player2.money += moneyTemp;
@@ -3607,6 +3637,7 @@ public class Traveling_Salesman{
                                                         player2.power -= player1.power;
                                                         player1.power = 0;
 
+                                                        arr[xAdjustment[0]][yAdjustment[0]].setBackground(Color.white);
                                                         xAdjustment[0] = 0;
                                                         yAdjustment[0] = 0;
                                                     }
@@ -4391,8 +4422,8 @@ public class Traveling_Salesman{
 
                                                     if (xAdjustment[0] - 1 == xAdjustment2[0] && yAdjustment[0] == yAdjustment2[0]){
                                                         if (player1.power == player2.power){
-                                                            JOptionPane.showMessageDialog(layeredPane2, "Player1's power is more \n beacuse Player1 is here more",
-                                                                    "Error", JOptionPane.ERROR_MESSAGE);
+                                                            JOptionPane.showMessageDialog(layeredPane2, "Player2 won\nbeacuse Player2 is here more",
+                                                                    "Fight", JOptionPane.PLAIN_MESSAGE);
 
                                                             int moneyTemp = ((player2.power - player1.power)/(player1.power + player2.power)) * player1.money;
                                                             player2.money += moneyTemp;
@@ -4405,8 +4436,8 @@ public class Traveling_Salesman{
                                                             arr[xAdjustment[0] - 1][yAdjustment[0]].setBackground(Color.white);
                                                         }
                                                         if (player1.power > player2.power){
-                                                            JOptionPane.showMessageDialog(layeredPane2, "Player1's power is more \nbeacuse Player1 is here more",
-                                                                    "Error", JOptionPane.ERROR_MESSAGE);
+                                                            JOptionPane.showMessageDialog(layeredPane2, "Player1 won\nbeacuse Player1's power is more",
+                                                                    "Fight", JOptionPane.PLAIN_MESSAGE);
 
                                                             int moneyTemp = ((player1.power - player2.power)/(player1.power + player2.power)) * player2.money;
                                                             player1.money += moneyTemp;
@@ -4419,8 +4450,8 @@ public class Traveling_Salesman{
                                                             yAdjustment2[0] = finalSize-1;
                                                         }
                                                         if (player1.power < player2.power){
-                                                            JOptionPane.showMessageDialog(layeredPane2, "Player1's power is more \n beacuse Player1 is here more",
-                                                                    "Error", JOptionPane.ERROR_MESSAGE);
+                                                            JOptionPane.showMessageDialog(layeredPane2, "Player2 won.\nbeacuse Player2's power is more",
+                                                                    "Fight", JOptionPane.PLAIN_MESSAGE);
 
                                                             int moneyTemp = ((player2.power - player1.power)/(player2.power + player1.power)) * player1.money;
                                                             player2.money += moneyTemp;
@@ -5169,8 +5200,8 @@ public class Traveling_Salesman{
 
                                                 if (xAdjustment[0] + 1 == xAdjustment2[0] && yAdjustment[0] == yAdjustment2[0]){
                                                     if (player1.power == player2.power){
-                                                        JOptionPane.showMessageDialog(layeredPane2, "Player1's power is more \n beacuse Player1 is here more",
-                                                                "Error", JOptionPane.ERROR_MESSAGE);
+                                                        JOptionPane.showMessageDialog(layeredPane2, "Player2 won\nbeacuse Player2 is here more",
+                                                                "Fight", JOptionPane.PLAIN_MESSAGE);
 
                                                         int moneyTemp = ((player2.power - player1.power)/(player1.power + player2.power)) * player1.money;
                                                         player2.money += moneyTemp;
@@ -5183,8 +5214,8 @@ public class Traveling_Salesman{
                                                         arr[xAdjustment[0] + 1][yAdjustment[0]].setBackground(Color.white);
                                                     }
                                                     if (player1.power > player2.power){
-                                                        JOptionPane.showMessageDialog(layeredPane2, "Player1's power is more \nbeacuse Player1 is here more",
-                                                                "Error", JOptionPane.ERROR_MESSAGE);
+                                                        JOptionPane.showMessageDialog(layeredPane2, "Player1 won.\nbeacuse Player1's power is more",
+                                                                "Fight", JOptionPane.PLAIN_MESSAGE);
 
                                                         int moneyTemp = ((player1.power - player2.power)/(player1.power + player2.power)) * player2.money;
                                                         player1.money += moneyTemp;
@@ -5197,8 +5228,8 @@ public class Traveling_Salesman{
                                                         yAdjustment2[0] = finalSize-1;
                                                     }
                                                     if (player1.power < player2.power){
-                                                        JOptionPane.showMessageDialog(layeredPane2, "Player1's power is more \n beacuse Player1 is here more",
-                                                                "Error", JOptionPane.ERROR_MESSAGE);
+                                                        JOptionPane.showMessageDialog(layeredPane2, "Player2 won\nbeacuse Player2's power is more",
+                                                                "Fight", JOptionPane.PLAIN_MESSAGE);
 
                                                         int moneyTemp = ((player2.power - player1.power)/(player2.power + player1.power)) * player1.money;
                                                         player2.money += moneyTemp;
@@ -5953,8 +5984,8 @@ public class Traveling_Salesman{
 
                                                 if (xAdjustment[0] == xAdjustment2[0] && yAdjustment[0] + 1 == yAdjustment2[0]){
                                                     if (player1.power == player2.power){
-                                                        JOptionPane.showMessageDialog(layeredPane2, "Player1's power is more \n beacuse Player1 is here more",
-                                                                "Error", JOptionPane.ERROR_MESSAGE);
+                                                        JOptionPane.showMessageDialog(layeredPane2, "Player2 won\nbeacuse Player2 is here more",
+                                                                "Fight", JOptionPane.PLAIN_MESSAGE);
 
                                                         int moneyTemp = ((player2.power - player1.power)/(player1.power + player2.power)) * player1.money;
                                                         player2.money += moneyTemp;
@@ -5967,8 +5998,8 @@ public class Traveling_Salesman{
                                                         arr[xAdjustment[0]][yAdjustment[0] + 1].setBackground(Color.white);
                                                     }
                                                     if (player1.power > player2.power){
-                                                        JOptionPane.showMessageDialog(layeredPane2, "Player1's power is more \nbeacuse Player1 is here more",
-                                                                "Error", JOptionPane.ERROR_MESSAGE);
+                                                        JOptionPane.showMessageDialog(layeredPane2, "Player1 won.\nbeacuse Player1's power is more",
+                                                                "Fight", JOptionPane.PLAIN_MESSAGE);
 
                                                         int moneyTemp = ((player1.power - player2.power)/(player1.power + player2.power)) * player2.money;
                                                         player1.money += moneyTemp;
@@ -5981,8 +6012,8 @@ public class Traveling_Salesman{
                                                         yAdjustment2[0] = finalSize-1;
                                                     }
                                                     if (player1.power < player2.power){
-                                                        JOptionPane.showMessageDialog(layeredPane2, "Player1's power is more \n beacuse Player1 is here more",
-                                                                "Error", JOptionPane.ERROR_MESSAGE);
+                                                        JOptionPane.showMessageDialog(layeredPane2, "Player2 won.\nbeacuse Player2's power is more",
+                                                                "Fight", JOptionPane.PLAIN_MESSAGE);
 
                                                         int moneyTemp = ((player2.power - player1.power)/(player2.power + player1.power)) * player1.money;
                                                         player2.money += moneyTemp;
@@ -6735,8 +6766,8 @@ public class Traveling_Salesman{
 
                                                 if (xAdjustment[0] == xAdjustment2[0] && yAdjustment[0] - 1 == yAdjustment2[0]){
                                                     if (player1.power == player2.power){
-                                                        JOptionPane.showMessageDialog(layeredPane2, "Player1's power is more \n beacuse Player1 is here more",
-                                                                "Error", JOptionPane.ERROR_MESSAGE);
+                                                        JOptionPane.showMessageDialog(layeredPane2, "Player2 won.\nbeacuse Player2 is here more",
+                                                                "Fight", JOptionPane.PLAIN_MESSAGE);
 
                                                         int moneyTemp = ((player2.power - player1.power)/(player1.power + player2.power)) * player1.money;
                                                         player2.money += moneyTemp;
@@ -6749,8 +6780,8 @@ public class Traveling_Salesman{
                                                         arr[xAdjustment[0]][yAdjustment[0] - 1].setBackground(Color.white);
                                                     }
                                                     if (player1.power > player2.power){
-                                                        JOptionPane.showMessageDialog(layeredPane2, "Player1's power is more \nbeacuse Player1 is here more",
-                                                                "Error", JOptionPane.ERROR_MESSAGE);
+                                                        JOptionPane.showMessageDialog(layeredPane2, "Player1 won.\nbeacuse Player1's power is more",
+                                                                "Fight", JOptionPane.PLAIN_MESSAGE);
 
                                                         int moneyTemp = ((player1.power - player2.power)/(player1.power + player2.power)) * player2.money;
                                                         player1.money += moneyTemp;
@@ -6763,8 +6794,8 @@ public class Traveling_Salesman{
                                                         yAdjustment2[0] = finalSize-1;
                                                     }
                                                     if (player1.power < player2.power){
-                                                        JOptionPane.showMessageDialog(layeredPane2, "Player1's power is more \n beacuse Player1 is here more",
-                                                                "Error", JOptionPane.ERROR_MESSAGE);
+                                                        JOptionPane.showMessageDialog(layeredPane2, "Player2 won.\nbeacuse Player2's power is more",
+                                                                "Fight", JOptionPane.PLAIN_MESSAGE);
 
                                                         int moneyTemp = ((player2.power - player1.power)/(player2.power + player1.power)) * player1.money;
                                                         player2.money += moneyTemp;
@@ -6827,10 +6858,13 @@ public class Traveling_Salesman{
         });
 
         JFrame StartingFrame = new JFrame("Traveling Salesman");
-        StartingFrame.setContentPane(new JLabel(new ImageIcon(ImageIO.read(new File("Assets/StartingWindowBackground.png")))));
+
         StartingFrame.setSize(1100,750);
-        StartingFrame.pack();
+        StartingFrame.setContentPane(new JLabel(new ImageIcon(ImageIO.read(new File("Assets/StartingWindowBackground.png")))));
         StartingFrame.setVisible(true);
+        StartingFrame.setLayout(null);
+
+
 
         JButton play = new JButton("Play");
         play.setBounds(465,650 , 80,40);
@@ -6842,6 +6876,7 @@ public class Traveling_Salesman{
                 PLaying_Game.setVisible(true);
             }
         });
+        StartingFrame.pack();
 
 
 

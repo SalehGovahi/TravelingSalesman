@@ -11,7 +11,6 @@ public class QuestClass {
 
     public String questName(){
         pointer = rand.nextInt((8)) + 21;
-        System.out.println(pointer);
         if (pointer==21){
             namme = "Diamond ring";
             quest = 21;
