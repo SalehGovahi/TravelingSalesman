@@ -262,6 +262,14 @@ public class Traveling_Salesman{
                 Scoreboard.setBackground(new Color(16,5,47));
                 Scoreboard.setForeground(new Color(16,5,47));
                 Scoreboard.setVisible(true);
+                Scoreboard.addWindowListener(new WindowAdapter() {
+                    public void windowClosed(WindowEvent e) {
+                        PLaying_Game.setVisible(true);
+                    }
+                    public void windowClosing(WindowEvent e){
+                        PLaying_Game.setVisible(true);
+                    }
+                });
             }
         });
 
@@ -480,8 +488,17 @@ public class Traveling_Salesman{
                 Scoreboard.setBackground(new Color(16,5,47));
                 Scoreboard.setForeground(new Color(16,5,47));
                 Scoreboard.setVisible(true);
+                Scoreboard.addWindowListener(new WindowAdapter() {
+                    public void windowClosed(WindowEvent e) {
+                        PLaying_Game2.setVisible(true);
+                    }
+                    public void windowClosing(WindowEvent e){
+                        PLaying_Game2.setVisible(true);
+                    }
+                });
             }
         });
+        
 
 
         JButton Quest2 = new JButton("Quest");
@@ -683,14 +700,41 @@ public class Traveling_Salesman{
                                                             }
                                                             player2.money += 100000;
                                                             player2.treasure_founded += 1;
-                                                            for (int i = 0; i< finalSize2; i++){
-                                                                for (int j = 0 ; j<finalSize2 ; j++){
-                                                                    if (logicBoard[i][j]==21 || logicBoard[i][j]==22 || logicBoard[i][j]==23 || logicBoard[i][j]==24 || logicBoard[i][j]==25 || logicBoard[i][j]==26 || logicBoard[i][j]==27 || logicBoard[i][j]==28){
-                                                                        System.out.printf("--%d %d--\n" , i,j);
+                                                            info.treasureCounter += 1;
+                                                            f.setVisible(false);
+                                                            if (info.treasureCounter == 8){
+                                                                PLaying_Game.setVisible(false);
+                                                                PLaying_Game2.setVisible(false);
+                                                                if (player1.treasure_founded > player2.treasure_founded){
+                                                                    JFrame f = new JFrame("Quest");
+                                                                    f.setSize(600,300);
+                                                                    f.setVisible(true);
+                                                                    f.add(new Text_Animation("Winner :","Player1"));
+                                                                    f.setBackground(new Color(16,5,47));
+                                                                    f.getContentPane().setForeground(new Color(16,5,47));
+                                                                    f.getContentPane().setBackground(new Color(16,5,47));
+                                                                }
+                                                                if (player2.treasure_founded > player1.treasure_founded){
+                                                                    JFrame f = new JFrame("Quest");
+                                                                    f.setSize(600,300);
+                                                                    f.setVisible(true);
+                                                                    f.add(new Text_Animation("Winner :","Player2"));
+                                                                    f.setBackground(new Color(16,5,47));
+                                                                    f.getContentPane().setForeground(new Color(16,5,47));
+                                                                    f.getContentPane().setBackground(new Color(16,5,47));
+                                                                }
+                                                                else{
+                                                                    if (player1.treasure_founded > player2.treasure_founded){
+                                                                        JFrame f = new JFrame("Quest");
+                                                                        f.setSize(600,300);
+                                                                        f.setVisible(true);
+                                                                        f.add(new Text_Animation("Draw"," "));
+                                                                        f.setBackground(new Color(16,5,47));
+                                                                        f.getContentPane().setForeground(new Color(16,5,47));
+                                                                        f.getContentPane().setBackground(new Color(16,5,47));
                                                                     }
                                                                 }
                                                             }
-                                                            f.setVisible(false);
                                                         }
                                                         if(sw==0){
                                                             JOptionPane.showMessageDialog(f, "This is not a trasure code",
@@ -1270,7 +1314,10 @@ public class Traveling_Salesman{
                                                     JOptionPane.showMessageDialog(layeredPane2, "Player1 won.\nbeacuse Player1 is here more",
                                                             "Fight", JOptionPane.PLAIN_MESSAGE);
 
-                                                    int moneyTemp = ((player1.power - player2.power)/(player1.power + player2.power)) * player2.money;
+                                                    int moneyTemp = 0;
+                                                    if (player1.power + player2.power != 0){
+                                                        moneyTemp=((player1.power - player2.power)/(player1.power + player2.power)) * player2.money;
+                                                    }
                                                     player1.money += moneyTemp;
                                                     player2.money -= moneyTemp;
 
@@ -1284,7 +1331,10 @@ public class Traveling_Salesman{
                                                     JOptionPane.showMessageDialog(layeredPane2, "Player1 won.\n beacuse Player1's power is more",
                                                             "Fight", JOptionPane.PLAIN_MESSAGE);
 
-                                                    int moneyTemp = ((player1.power - player2.power)/(player1.power + player2.power)) * player2.money;
+                                                    int moneyTemp = 0;
+                                                    if (player1.power + player2.power != 0){
+                                                        moneyTemp=((player1.power - player2.power)/(player1.power + player2.power)) * player2.money;
+                                                    }
                                                     player1.money += moneyTemp;
                                                     player2.money -= moneyTemp;
 
@@ -1298,7 +1348,10 @@ public class Traveling_Salesman{
                                                     JOptionPane.showMessageDialog(layeredPane2, "Player2 won.\nbeacuse Player2's power is more",
                                                             "Fight", JOptionPane.PLAIN_MESSAGE);
 
-                                                    int moneyTemp = ((player2.power - player1.power)/(player2.power + player1.power)) * player1.money;
+                                                    int moneyTemp = 0;
+                                                    if (player1.power + player2.power != 0){
+                                                        moneyTemp = ((player2.power - player1.power)/(player2.power + player1.power)) * player1.money;
+                                                    }
                                                     player2.money += moneyTemp;
                                                     player1.money -= moneyTemp;
 
@@ -1454,6 +1507,41 @@ public class Traveling_Salesman{
                                                         }
                                                         player2.money += 100000;
                                                         player2.treasure_founded += 1;
+                                                        info.treasureCounter += 1;
+                                                        f.setVisible(false);
+                                                            if (info.treasureCounter == 8){
+                                                                PLaying_Game.setVisible(false);
+                                                                PLaying_Game2.setVisible(false);
+                                                                if (player1.treasure_founded > player2.treasure_founded){
+                                                                    JFrame f = new JFrame("Quest");
+                                                                    f.setSize(600,300);
+                                                                    f.setVisible(true);
+                                                                    f.add(new Text_Animation("Winner :","Player1"));
+                                                                    f.setBackground(new Color(16,5,47));
+                                                                    f.getContentPane().setForeground(new Color(16,5,47));
+                                                                    f.getContentPane().setBackground(new Color(16,5,47));
+                                                                }
+                                                                if (player2.treasure_founded > player1.treasure_founded){
+                                                                    JFrame f = new JFrame("Quest");
+                                                                    f.setSize(600,300);
+                                                                    f.setVisible(true);
+                                                                    f.add(new Text_Animation("Winner :","Player2"));
+                                                                    f.setBackground(new Color(16,5,47));
+                                                                    f.getContentPane().setForeground(new Color(16,5,47));
+                                                                    f.getContentPane().setBackground(new Color(16,5,47));
+                                                                }
+                                                                else{
+                                                                    if (player1.treasure_founded > player2.treasure_founded){
+                                                                        JFrame f = new JFrame("Quest");
+                                                                        f.setSize(600,300);
+                                                                        f.setVisible(true);
+                                                                        f.add(new Text_Animation("Draw"," "));
+                                                                        f.setBackground(new Color(16,5,47));
+                                                                        f.getContentPane().setForeground(new Color(16,5,47));
+                                                                        f.getContentPane().setBackground(new Color(16,5,47));
+                                                                    }
+                                                                }
+                                                            }
                                                     }
                                                     if(sw==0){
                                                         JOptionPane.showMessageDialog(f, "This is not a trasure code",
@@ -2034,7 +2122,10 @@ public class Traveling_Salesman{
                                                 JOptionPane.showMessageDialog(layeredPane2, "Player1 won.\nbeacuse Player1 is here more",
                                                         "Fight", JOptionPane.PLAIN_MESSAGE);
 
-                                                int moneyTemp = ((player1.power - player2.power)/(player1.power + player2.power)) * player2.money;
+                                                int moneyTemp = 0;
+                                                if (player1.power + player2.power != 0){
+                                                    moneyTemp = ((player1.power - player2.power)/(player1.power + player2.power)) * player2.money;
+                                                }
                                                 player1.money += moneyTemp;
                                                 player2.money -= moneyTemp;
 
@@ -2048,7 +2139,10 @@ public class Traveling_Salesman{
                                                 JOptionPane.showMessageDialog(layeredPane2, "Player1 won.\nbeacuse Player1's power is more",
                                                         "Fight", JOptionPane.PLAIN_MESSAGE);
 
-                                                int moneyTemp = ((player1.power - player2.power)/(player1.power + player2.power)) * player2.money;
+                                                int moneyTemp = 0;
+                                                if (player1.power + player2.power != 0){
+                                                    moneyTemp = ((player1.power - player2.power)/(player1.power + player2.power)) * player2.money;
+                                                }
                                                 player1.money += moneyTemp;
                                                 player2.money -= moneyTemp;
 
@@ -2062,7 +2156,10 @@ public class Traveling_Salesman{
                                                 JOptionPane.showMessageDialog(layeredPane2, "Player2 won.\nbeacuse Player2's power is more ",
                                                         "Fight", JOptionPane.PLAIN_MESSAGE);
 
-                                                int moneyTemp = ((player2.power - player1.power)/(player2.power + player1.power)) * player1.money;
+                                                int moneyTemp = 0;
+                                                if (player1.power + player2.power != 0){
+                                                    moneyTemp = ((player2.power - player1.power)/(player2.power + player1.power)) * player1.money;
+                                                }
                                                 player2.money += moneyTemp;
                                                 player1.money -= moneyTemp;
 
@@ -2231,6 +2328,39 @@ public class Traveling_Salesman{
                                                                 player2.money += 100000;
                                                                 player2.treasure_founded += 1;
                                                                 f.setVisible(false);
+                                                            if (info.treasureCounter == 8){
+                                                                PLaying_Game.setVisible(false);
+                                                                PLaying_Game2.setVisible(false);
+                                                                if (player1.treasure_founded > player2.treasure_founded){
+                                                                    JFrame f = new JFrame("Quest");
+                                                                    f.setSize(600,300);
+                                                                    f.setVisible(true);
+                                                                    f.add(new Text_Animation("Winner :","Player1"));
+                                                                    f.setBackground(new Color(16,5,47));
+                                                                    f.getContentPane().setForeground(new Color(16,5,47));
+                                                                    f.getContentPane().setBackground(new Color(16,5,47));
+                                                                }
+                                                                if (player2.treasure_founded > player1.treasure_founded){
+                                                                    JFrame f = new JFrame("Quest");
+                                                                    f.setSize(600,300);
+                                                                    f.setVisible(true);
+                                                                    f.add(new Text_Animation("Winner :","Player2"));
+                                                                    f.setBackground(new Color(16,5,47));
+                                                                    f.getContentPane().setForeground(new Color(16,5,47));
+                                                                    f.getContentPane().setBackground(new Color(16,5,47));
+                                                                }
+                                                                else{
+                                                                    if (player1.treasure_founded > player2.treasure_founded){
+                                                                        JFrame f = new JFrame("Quest");
+                                                                        f.setSize(600,300);
+                                                                        f.setVisible(true);
+                                                                        f.add(new Text_Animation("Draw"," "));
+                                                                        f.setBackground(new Color(16,5,47));
+                                                                        f.getContentPane().setForeground(new Color(16,5,47));
+                                                                        f.getContentPane().setBackground(new Color(16,5,47));
+                                                                    }
+                                                                }
+                                                            }
                                                             }
                                                             if(sw==0){
                                                                 JOptionPane.showMessageDialog(f, "This is not a trasure code",
@@ -2818,7 +2948,10 @@ public class Traveling_Salesman{
                                                         JOptionPane.showMessageDialog(layeredPane2, "Player1 won.\nbeacuse Player1 is here more",
                                                                 "Fight", JOptionPane.PLAIN_MESSAGE);
 
-                                                        int moneyTemp = ((player1.power - player2.power)/(player1.power + player2.power)) * player2.money;
+                                                        int moneyTemp = 0;
+                                                        if (player1.power + player2.power != 0){
+                                                            moneyTemp = ((player1.power - player2.power)/(player1.power + player2.power)) * player2.money;
+                                                        }
                                                         player1.money += moneyTemp;
                                                         player2.money -= moneyTemp;
 
@@ -2832,7 +2965,10 @@ public class Traveling_Salesman{
                                                         JOptionPane.showMessageDialog(layeredPane2, "Player1 won.\nbeacuse Player1's power is more",
                                                                 "Fight", JOptionPane.PLAIN_MESSAGE);
 
-                                                        int moneyTemp = ((player1.power - player2.power)/(player1.power + player2.power)) * player2.money;
+                                                        int moneyTemp = 0;
+                                                        if (player1.power + player2.power != 0){
+                                                            moneyTemp = ((player1.power - player2.power)/(player1.power + player2.power)) * player2.money;
+                                                        }
                                                         player1.money += moneyTemp;
                                                         player2.money -= moneyTemp;
 
@@ -2846,7 +2982,10 @@ public class Traveling_Salesman{
                                                         JOptionPane.showMessageDialog(layeredPane2, "Player2 won.\nbeacuse Player2's is more",
                                                                 "Fight", JOptionPane.PLAIN_MESSAGE);
 
-                                                        int moneyTemp = ((player2.power - player1.power)/(player2.power + player1.power)) * player1.money;
+                                                        int moneyTemp = 0;
+                                                        if (player1.power + player2.power != 0){
+                                                            moneyTemp = ((player2.power - player1.power)/(player2.power + player1.power)) * player1.money;
+                                                        }
                                                         player2.money += moneyTemp;
                                                         player1.money -= moneyTemp;
 
@@ -3015,6 +3154,39 @@ public class Traveling_Salesman{
                                                                 player2.money += 100000;
                                                                 player2.treasure_founded +=1;
                                                                 f.setVisible(false);
+                                                            if (info.treasureCounter == 8){
+                                                                PLaying_Game.setVisible(false);
+                                                                PLaying_Game2.setVisible(false);
+                                                                if (player1.treasure_founded > player2.treasure_founded){
+                                                                    JFrame f = new JFrame("Quest");
+                                                                    f.setSize(600,300);
+                                                                    f.setVisible(true);
+                                                                    f.add(new Text_Animation("Winner :","Player1"));
+                                                                    f.setBackground(new Color(16,5,47));
+                                                                    f.getContentPane().setForeground(new Color(16,5,47));
+                                                                    f.getContentPane().setBackground(new Color(16,5,47));
+                                                                }
+                                                                if (player2.treasure_founded > player1.treasure_founded){
+                                                                    JFrame f = new JFrame("Quest");
+                                                                    f.setSize(600,300);
+                                                                    f.setVisible(true);
+                                                                    f.add(new Text_Animation("Winner :","Player2"));
+                                                                    f.setBackground(new Color(16,5,47));
+                                                                    f.getContentPane().setForeground(new Color(16,5,47));
+                                                                    f.getContentPane().setBackground(new Color(16,5,47));
+                                                                }
+                                                                else{
+                                                                    if (player1.treasure_founded > player2.treasure_founded){
+                                                                        JFrame f = new JFrame("Quest");
+                                                                        f.setSize(600,300);
+                                                                        f.setVisible(true);
+                                                                        f.add(new Text_Animation("Draw"," "));
+                                                                        f.setBackground(new Color(16,5,47));
+                                                                        f.getContentPane().setForeground(new Color(16,5,47));
+                                                                        f.getContentPane().setBackground(new Color(16,5,47));
+                                                                    }
+                                                                }
+                                                            }
                                                             }
                                                             if(sw==0){
                                                                 JOptionPane.showMessageDialog(f, "This is not a trasure code",
@@ -3602,7 +3774,10 @@ public class Traveling_Salesman{
                                                         JOptionPane.showMessageDialog(layeredPane2, "Player1 won.\nbeacuse Player1 is here more",
                                                                 "Fight", JOptionPane.PLAIN_MESSAGE);
 
-                                                        int moneyTemp = ((player1.power - player2.power)/(player1.power + player2.power)) * player2.money;
+                                                        int moneyTemp = 0;
+                                                        if (player1.power + player2.power != 0){
+                                                            moneyTemp = ((player1.power - player2.power)/(player1.power + player2.power)) * player2.money;
+                                                        }
                                                         player1.money += moneyTemp;
                                                         player2.money -= moneyTemp;
 
@@ -3616,7 +3791,10 @@ public class Traveling_Salesman{
                                                         JOptionPane.showMessageDialog(layeredPane2, "Player1 won.\nbeacuse Player1's power is more",
                                                                 "Fight", JOptionPane.PLAIN_MESSAGE);
 
-                                                        int moneyTemp = ((player1.power - player2.power)/(player1.power + player2.power)) * player2.money;
+                                                        int moneyTemp = 0;
+                                                        if (player1.power + player2.power != 0){
+                                                            moneyTemp = ((player1.power - player2.power)/(player1.power + player2.power)) * player2.money;
+                                                        }
                                                         player1.money += moneyTemp;
                                                         player2.money -= moneyTemp;
 
@@ -3630,7 +3808,10 @@ public class Traveling_Salesman{
                                                         JOptionPane.showMessageDialog(layeredPane2, "Player2 won\nbeacuse Player2's power is more",
                                                                 "Fight", JOptionPane.PLAIN_MESSAGE);
 
-                                                        int moneyTemp = ((player2.power - player1.power)/(player2.power + player1.power)) * player1.money;
+                                                        int moneyTemp = 0;
+                                                        if (player1.power + player2.power != 0){
+                                                            moneyTemp = ((player2.power - player1.power)/(player2.power + player1.power)) * player1.money;
+                                                        }
                                                         player2.money += moneyTemp;
                                                         player1.money -= moneyTemp;
 
@@ -3744,8 +3925,8 @@ public class Traveling_Salesman{
                                                 else {
                                                     arr[xAdjustment[0] - 1][yAdjustment[0]].setBackground(Color.blue);
 
-                                                    if (logicBoard[xAdjustment2[0]][yAdjustment2[0]] != 1 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=21 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=22 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=23 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=24 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=25 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=26 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=27 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=28 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=4){
-                                                        logicBoard[xAdjustment2[0]][yAdjustment2[0]] = 99;
+                                                    if (logicBoard[xAdjustment[0]][yAdjustment[0]] != 1 && logicBoard[xAdjustment[0]][yAdjustment[0]] !=21 && logicBoard[xAdjustment[0]][yAdjustment[0]] !=22 && logicBoard[xAdjustment[0]][yAdjustment[0]] !=23 && logicBoard[xAdjustment[0]][yAdjustment[0]] !=24 && logicBoard[xAdjustment[0]][yAdjustment[0]] !=25 && logicBoard[xAdjustment[0]][yAdjustment[0]] !=26 && logicBoard[xAdjustment[0]][yAdjustment[0]] !=27 && logicBoard[xAdjustment[0]][yAdjustment[0]] !=28 && logicBoard[xAdjustment[0]][yAdjustment[0]] !=4){
+                                                        logicBoard[xAdjustment[0]][yAdjustment[0]] = 99;
                                                     }
 
                                                     if (logicBoard[xAdjustment[0] - 1][yAdjustment[0]]==1){
@@ -3839,14 +4020,40 @@ public class Traveling_Salesman{
                                                                     }
                                                                     player1.money += 100000;
                                                                     player1.treasure_founded += 1;
-                                                                    for (int i = 0; i< finalSize2; i++){
-                                                                        for (int j = 0 ; j<finalSize2 ; j++){
-                                                                            if (logicBoard[i][j]==21 || logicBoard[i][j]==22 || logicBoard[i][j]==23 || logicBoard[i][j]==24 || logicBoard[i][j]==25 || logicBoard[i][j]==26 || logicBoard[i][j]==27 || logicBoard[i][j]==28){
-                                                                                System.out.printf("--%d %d--\n" , i,j);
-                                                                            }
-                                                                        }
-                                                                    }
                                                                     f.setVisible(false);
+                                                            if (info.treasureCounter == 8){
+                                                                PLaying_Game.setVisible(false);
+                                                                PLaying_Game2.setVisible(false);
+                                                                if (player1.treasure_founded > player2.treasure_founded){
+                                                                    JFrame f = new JFrame("Quest");
+                                                                    f.setSize(600,300);
+                                                                    f.setVisible(true);
+                                                                    f.add(new Text_Animation("Winner :","Player1"));
+                                                                    f.setBackground(new Color(16,5,47));
+                                                                    f.getContentPane().setForeground(new Color(16,5,47));
+                                                                    f.getContentPane().setBackground(new Color(16,5,47));
+                                                                }
+                                                                if (player2.treasure_founded > player1.treasure_founded){
+                                                                    JFrame f = new JFrame("Quest");
+                                                                    f.setSize(600,300);
+                                                                    f.setVisible(true);
+                                                                    f.add(new Text_Animation("Winner :","Player2"));
+                                                                    f.setBackground(new Color(16,5,47));
+                                                                    f.getContentPane().setForeground(new Color(16,5,47));
+                                                                    f.getContentPane().setBackground(new Color(16,5,47));
+                                                                }
+                                                                else{
+                                                                    if (player1.treasure_founded > player2.treasure_founded){
+                                                                        JFrame f = new JFrame("Quest");
+                                                                        f.setSize(600,300);
+                                                                        f.setVisible(true);
+                                                                        f.add(new Text_Animation("Draw"," "));
+                                                                        f.setBackground(new Color(16,5,47));
+                                                                        f.getContentPane().setForeground(new Color(16,5,47));
+                                                                        f.getContentPane().setBackground(new Color(16,5,47));
+                                                                    }
+                                                                }
+                                                            }
                                                                 }
                                                                 if(sw==0){
                                                                     JOptionPane.showMessageDialog(f, "This is not a trasure code",
@@ -4425,7 +4632,10 @@ public class Traveling_Salesman{
                                                             JOptionPane.showMessageDialog(layeredPane2, "Player2 won\nbeacuse Player2 is here more",
                                                                     "Fight", JOptionPane.PLAIN_MESSAGE);
 
-                                                            int moneyTemp = ((player2.power - player1.power)/(player1.power + player2.power)) * player1.money;
+                                                            int moneyTemp = 0;
+                                                            if (player1.power + player2.power != 0){
+                                                                moneyTemp = ((player2.power - player1.power)/(player2.power + player1.power)) * player1.money;
+                                                            }
                                                             player2.money += moneyTemp;
                                                             player1.money -= moneyTemp;
 
@@ -4439,7 +4649,10 @@ public class Traveling_Salesman{
                                                             JOptionPane.showMessageDialog(layeredPane2, "Player1 won\nbeacuse Player1's power is more",
                                                                     "Fight", JOptionPane.PLAIN_MESSAGE);
 
-                                                            int moneyTemp = ((player1.power - player2.power)/(player1.power + player2.power)) * player2.money;
+                                                            int moneyTemp = 0;
+                                                            if (player1.power + player2.power != 0){
+                                                                moneyTemp = ((player1.power - player2.power)/(player1.power + player2.power)) * player2.money;
+                                                            }
                                                             player1.money += moneyTemp;
                                                             player2.money -= moneyTemp;
 
@@ -4453,7 +4666,10 @@ public class Traveling_Salesman{
                                                             JOptionPane.showMessageDialog(layeredPane2, "Player2 won.\nbeacuse Player2's power is more",
                                                                     "Fight", JOptionPane.PLAIN_MESSAGE);
 
-                                                            int moneyTemp = ((player2.power - player1.power)/(player2.power + player1.power)) * player1.money;
+                                                            int moneyTemp = 0;
+                                                            if (player1.power + player2.power != 0){
+                                                                moneyTemp = ((player2.power - player1.power)/(player2.power + player1.power)) * player1.money;
+                                                            }
                                                             player2.money += moneyTemp;
                                                             player1.money -= moneyTemp;
 
@@ -4542,8 +4758,8 @@ public class Traveling_Salesman{
                                             else {
                                                 arr[xAdjustment[0] + 1][yAdjustment[0]].setBackground(Color.blue);
 
-                                                if (logicBoard[xAdjustment2[0]][yAdjustment2[0]] != 1 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=21 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=22 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=23 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=24 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=25 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=26 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=27 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=28 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=4){
-                                                    logicBoard[xAdjustment2[0]][yAdjustment2[0]] = 99;
+                                                if (logicBoard[xAdjustment[0]][yAdjustment[0]] != 1 && logicBoard[xAdjustment[0]][yAdjustment[0]] !=21 && logicBoard[xAdjustment[0]][yAdjustment[0]] !=22 && logicBoard[xAdjustment[0]][yAdjustment[0]] !=23 && logicBoard[xAdjustment[0]][yAdjustment[0]] !=24 && logicBoard[xAdjustment[0]][yAdjustment[0]] !=25 && logicBoard[xAdjustment[0]][yAdjustment[0]] !=26 && logicBoard[xAdjustment[0]][yAdjustment[0]] !=27 && logicBoard[xAdjustment[0]][yAdjustment[0]] !=28 && logicBoard[xAdjustment[0]][yAdjustment[0]] !=4){
+                                                    logicBoard[xAdjustment[0]][yAdjustment[0]] = 99;
                                                 }
 
                                                 if (logicBoard[xAdjustment[0] + 1][yAdjustment[0]]==1){
@@ -4624,6 +4840,39 @@ public class Traveling_Salesman{
                                                                 player1.money += 100000;
                                                                 player1.treasure_founded += 1;
                                                                 f.setVisible(false);
+                                                            if (info.treasureCounter == 8){
+                                                                PLaying_Game.setVisible(false);
+                                                                PLaying_Game2.setVisible(false);
+                                                                if (player1.treasure_founded > player2.treasure_founded){
+                                                                    JFrame f = new JFrame("Quest");
+                                                                    f.setSize(600,300);
+                                                                    f.setVisible(true);
+                                                                    f.add(new Text_Animation("Winner :","Player1"));
+                                                                    f.setBackground(new Color(16,5,47));
+                                                                    f.getContentPane().setForeground(new Color(16,5,47));
+                                                                    f.getContentPane().setBackground(new Color(16,5,47));
+                                                                }
+                                                                if (player2.treasure_founded > player1.treasure_founded){
+                                                                    JFrame f = new JFrame("Quest");
+                                                                    f.setSize(600,300);
+                                                                    f.setVisible(true);
+                                                                    f.add(new Text_Animation("Winner :","Player2"));
+                                                                    f.setBackground(new Color(16,5,47));
+                                                                    f.getContentPane().setForeground(new Color(16,5,47));
+                                                                    f.getContentPane().setBackground(new Color(16,5,47));
+                                                                }
+                                                                else{
+                                                                    if (player1.treasure_founded > player2.treasure_founded){
+                                                                        JFrame f = new JFrame("Quest");
+                                                                        f.setSize(600,300);
+                                                                        f.setVisible(true);
+                                                                        f.add(new Text_Animation("Draw"," "));
+                                                                        f.setBackground(new Color(16,5,47));
+                                                                        f.getContentPane().setForeground(new Color(16,5,47));
+                                                                        f.getContentPane().setBackground(new Color(16,5,47));
+                                                                    }
+                                                                }
+                                                            }
                                                             }
                                                             if(sw==0){
                                                                 JOptionPane.showMessageDialog(f, "This is not a trasure code",
@@ -5203,7 +5452,10 @@ public class Traveling_Salesman{
                                                         JOptionPane.showMessageDialog(layeredPane2, "Player2 won\nbeacuse Player2 is here more",
                                                                 "Fight", JOptionPane.PLAIN_MESSAGE);
 
-                                                        int moneyTemp = ((player2.power - player1.power)/(player1.power + player2.power)) * player1.money;
+                                                        int moneyTemp = 0;
+                                                        if (player1.power + player2.power != 0){
+                                                            moneyTemp = ((player2.power - player1.power)/(player2.power + player1.power)) * player1.money;
+                                                        }
                                                         player2.money += moneyTemp;
                                                         player1.money -= moneyTemp;
 
@@ -5217,7 +5469,10 @@ public class Traveling_Salesman{
                                                         JOptionPane.showMessageDialog(layeredPane2, "Player1 won.\nbeacuse Player1's power is more",
                                                                 "Fight", JOptionPane.PLAIN_MESSAGE);
 
-                                                        int moneyTemp = ((player1.power - player2.power)/(player1.power + player2.power)) * player2.money;
+                                                        int moneyTemp = 0;
+                                                        if (player1.power + player2.power != 0){
+                                                            moneyTemp = ((player1.power - player2.power)/(player1.power + player2.power)) * player2.money;
+                                                        }
                                                         player1.money += moneyTemp;
                                                         player2.money -= moneyTemp;
 
@@ -5231,7 +5486,10 @@ public class Traveling_Salesman{
                                                         JOptionPane.showMessageDialog(layeredPane2, "Player2 won\nbeacuse Player2's power is more",
                                                                 "Fight", JOptionPane.PLAIN_MESSAGE);
 
-                                                        int moneyTemp = ((player2.power - player1.power)/(player2.power + player1.power)) * player1.money;
+                                                        int moneyTemp = 0;
+                                                        if (player1.power + player2.power != 0){
+                                                            moneyTemp = ((player2.power - player1.power)/(player2.power + player1.power)) * player1.money;
+                                                        }
                                                         player2.money += moneyTemp;
                                                         player1.money -= moneyTemp;
 
@@ -5319,8 +5577,8 @@ public class Traveling_Salesman{
                                             else {
                                                 arr[xAdjustment[0]][yAdjustment[0] +1].setBackground(Color.blue);
 
-                                                if (logicBoard[xAdjustment2[0]][yAdjustment2[0]] != 1 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=21 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=22 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=23 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=24 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=25 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=26 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=27 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=28 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=4){
-                                                    logicBoard[xAdjustment2[0]][yAdjustment2[0]] = 99;
+                                                if (logicBoard[xAdjustment[0]][yAdjustment[0]] != 1 && logicBoard[xAdjustment[0]][yAdjustment[0]] !=21 && logicBoard[xAdjustment[0]][yAdjustment[0]] !=22 && logicBoard[xAdjustment[0]][yAdjustment[0]] !=23 && logicBoard[xAdjustment[0]][yAdjustment[0]] !=24 && logicBoard[xAdjustment[0]][yAdjustment[0]] !=25 && logicBoard[xAdjustment[0]][yAdjustment[0]] !=26 && logicBoard[xAdjustment[0]][yAdjustment[0]] !=27 && logicBoard[xAdjustment[0]][yAdjustment[0]] !=28 && logicBoard[xAdjustment[0]][yAdjustment[0]] !=4){
+                                                    logicBoard[xAdjustment[0]][yAdjustment[0]] = 99;
                                                 }
 
                                                 if (logicBoard[xAdjustment[0]][yAdjustment[0] + 1]==1){
@@ -5401,6 +5659,39 @@ public class Traveling_Salesman{
                                                                 player1.money += 100000;
                                                                 player1.treasure_founded += 1;
                                                                 f.setVisible(false);
+                                                            if (info.treasureCounter == 8){
+                                                                PLaying_Game.setVisible(false);
+                                                                PLaying_Game2.setVisible(false);
+                                                                if (player1.treasure_founded > player2.treasure_founded){
+                                                                    JFrame f = new JFrame("Quest");
+                                                                    f.setSize(600,300);
+                                                                    f.setVisible(true);
+                                                                    f.add(new Text_Animation("Winner :","Player1"));
+                                                                    f.setBackground(new Color(16,5,47));
+                                                                    f.getContentPane().setForeground(new Color(16,5,47));
+                                                                    f.getContentPane().setBackground(new Color(16,5,47));
+                                                                }
+                                                                if (player2.treasure_founded > player1.treasure_founded){
+                                                                    JFrame f = new JFrame("Quest");
+                                                                    f.setSize(600,300);
+                                                                    f.setVisible(true);
+                                                                    f.add(new Text_Animation("Winner :","Player2"));
+                                                                    f.setBackground(new Color(16,5,47));
+                                                                    f.getContentPane().setForeground(new Color(16,5,47));
+                                                                    f.getContentPane().setBackground(new Color(16,5,47));
+                                                                }
+                                                                else{
+                                                                    if (player1.treasure_founded > player2.treasure_founded){
+                                                                        JFrame f = new JFrame("Quest");
+                                                                        f.setSize(600,300);
+                                                                        f.setVisible(true);
+                                                                        f.add(new Text_Animation("Draw"," "));
+                                                                        f.setBackground(new Color(16,5,47));
+                                                                        f.getContentPane().setForeground(new Color(16,5,47));
+                                                                        f.getContentPane().setBackground(new Color(16,5,47));
+                                                                    }
+                                                                }
+                                                            }
                                                             }
                                                             if(sw==0){
                                                                 JOptionPane.showMessageDialog(f, "This is not a trasure code",
@@ -5987,7 +6278,10 @@ public class Traveling_Salesman{
                                                         JOptionPane.showMessageDialog(layeredPane2, "Player2 won\nbeacuse Player2 is here more",
                                                                 "Fight", JOptionPane.PLAIN_MESSAGE);
 
-                                                        int moneyTemp = ((player2.power - player1.power)/(player1.power + player2.power)) * player1.money;
+                                                        int moneyTemp = 0;
+                                                        if (player1.power + player2.power != 0){
+                                                            moneyTemp = ((player2.power - player1.power)/(player2.power + player1.power)) * player1.money;
+                                                        }
                                                         player2.money += moneyTemp;
                                                         player1.money -= moneyTemp;
 
@@ -6001,7 +6295,10 @@ public class Traveling_Salesman{
                                                         JOptionPane.showMessageDialog(layeredPane2, "Player1 won.\nbeacuse Player1's power is more",
                                                                 "Fight", JOptionPane.PLAIN_MESSAGE);
 
-                                                        int moneyTemp = ((player1.power - player2.power)/(player1.power + player2.power)) * player2.money;
+                                                        int moneyTemp = 0;
+                                                    if (player1.power + player2.power != 0){
+                                                            moneyTemp = ((player1.power - player2.power)/(player1.power + player2.power)) * player2.money;
+                                                        }
                                                         player1.money += moneyTemp;
                                                         player2.money -= moneyTemp;
 
@@ -6015,7 +6312,10 @@ public class Traveling_Salesman{
                                                         JOptionPane.showMessageDialog(layeredPane2, "Player2 won.\nbeacuse Player2's power is more",
                                                                 "Fight", JOptionPane.PLAIN_MESSAGE);
 
-                                                        int moneyTemp = ((player2.power - player1.power)/(player2.power + player1.power)) * player1.money;
+                                                        int moneyTemp = 0;
+                                                        if (player1.power + player2.power != 0){
+                                                            moneyTemp = ((player2.power - player1.power)/(player2.power + player1.power)) * player1.money;
+                                                        }
                                                         player2.money += moneyTemp;
                                                         player1.money -= moneyTemp;
 
@@ -6101,8 +6401,8 @@ public class Traveling_Salesman{
 
                                             else {
                                                 arr[xAdjustment[0]][yAdjustment[0] -1].setBackground(Color.blue);
-                                                if (logicBoard[xAdjustment2[0]][yAdjustment2[0]] != 1 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=21 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=22 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=23 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=24 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=25 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=26 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=27 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=28 && logicBoard[xAdjustment2[0]][yAdjustment2[0]] !=4){
-                                                    logicBoard[xAdjustment2[0]][yAdjustment2[0]] = 99;
+                                                if (logicBoard[xAdjustment[0]][yAdjustment[0]] != 1 && logicBoard[xAdjustment[0]][yAdjustment[0]] !=21 && logicBoard[xAdjustment[0]][yAdjustment[0]] !=22 && logicBoard[xAdjustment[0]][yAdjustment[0]] !=23 && logicBoard[xAdjustment[0]][yAdjustment[0]] !=24 && logicBoard[xAdjustment[0]][yAdjustment[0]] !=25 && logicBoard[xAdjustment[0]][yAdjustment[0]] !=26 && logicBoard[xAdjustment[0]][yAdjustment[0]] !=27 && logicBoard[xAdjustment[0]][yAdjustment[0]] !=28 && logicBoard[xAdjustment[0]][yAdjustment[0]] !=4){
+                                                    logicBoard[xAdjustment[0]][yAdjustment[0]] = 99;
                                                 }
 
                                                 if (logicBoard[xAdjustment[0]][yAdjustment[0] -1]==1){
@@ -6183,6 +6483,39 @@ public class Traveling_Salesman{
                                                                 player1.money += 100000;
                                                                 player1.treasure_founded += 1;
                                                                 f.setVisible(false);
+                                                            if (info.treasureCounter == 8){
+                                                                PLaying_Game.setVisible(false);
+                                                                PLaying_Game2.setVisible(false);
+                                                                if (player1.treasure_founded > player2.treasure_founded){
+                                                                    JFrame f = new JFrame("Quest");
+                                                                    f.setSize(600,300);
+                                                                    f.setVisible(true);
+                                                                    f.add(new Text_Animation("Winner :","Player1"));
+                                                                    f.setBackground(new Color(16,5,47));
+                                                                    f.getContentPane().setForeground(new Color(16,5,47));
+                                                                    f.getContentPane().setBackground(new Color(16,5,47));
+                                                                }
+                                                                if (player2.treasure_founded > player1.treasure_founded){
+                                                                    JFrame f = new JFrame("Quest");
+                                                                    f.setSize(600,300);
+                                                                    f.setVisible(true);
+                                                                    f.add(new Text_Animation("Winner :","Player2"));
+                                                                    f.setBackground(new Color(16,5,47));
+                                                                    f.getContentPane().setForeground(new Color(16,5,47));
+                                                                    f.getContentPane().setBackground(new Color(16,5,47));
+                                                                }
+                                                                else{
+                                                                    if (player1.treasure_founded > player2.treasure_founded){
+                                                                        JFrame f = new JFrame("Quest");
+                                                                        f.setSize(600,300);
+                                                                        f.setVisible(true);
+                                                                        f.add(new Text_Animation("Draw"," "));
+                                                                        f.setBackground(new Color(16,5,47));
+                                                                        f.getContentPane().setForeground(new Color(16,5,47));
+                                                                        f.getContentPane().setBackground(new Color(16,5,47));
+                                                                    }
+                                                                }
+                                                            }
                                                             }
                                                             if(sw==0){
                                                                 JOptionPane.showMessageDialog(f, "This is not a trasure code",
@@ -6769,7 +7102,10 @@ public class Traveling_Salesman{
                                                         JOptionPane.showMessageDialog(layeredPane2, "Player2 won.\nbeacuse Player2 is here more",
                                                                 "Fight", JOptionPane.PLAIN_MESSAGE);
 
-                                                        int moneyTemp = ((player2.power - player1.power)/(player1.power + player2.power)) * player1.money;
+                                                        int moneyTemp = 0;
+                                                        if (player1.power + player2.power != 0){
+                                                            moneyTemp = ((player2.power - player1.power)/(player2.power + player1.power)) * player1.money;
+                                                        }
                                                         player2.money += moneyTemp;
                                                         player1.money -= moneyTemp;
 
@@ -6783,7 +7119,10 @@ public class Traveling_Salesman{
                                                         JOptionPane.showMessageDialog(layeredPane2, "Player1 won.\nbeacuse Player1's power is more",
                                                                 "Fight", JOptionPane.PLAIN_MESSAGE);
 
-                                                        int moneyTemp = ((player1.power - player2.power)/(player1.power + player2.power)) * player2.money;
+                                                        int moneyTemp = 0;
+                                                        if (player1.power + player2.power != 0){
+                                                            moneyTemp = ((player1.power - player2.power)/(player1.power + player2.power)) * player2.money;
+                                                        }
                                                         player1.money += moneyTemp;
                                                         player2.money -= moneyTemp;
 
@@ -6797,7 +7136,10 @@ public class Traveling_Salesman{
                                                         JOptionPane.showMessageDialog(layeredPane2, "Player2 won.\nbeacuse Player2's power is more",
                                                                 "Fight", JOptionPane.PLAIN_MESSAGE);
 
-                                                        int moneyTemp = ((player2.power - player1.power)/(player2.power + player1.power)) * player1.money;
+                                                        int moneyTemp = 0;
+                                                        if (player1.power + player2.power != 0){
+                                                            moneyTemp = ((player2.power - player1.power)/(player2.power + player1.power)) * player1.money;
+                                                        }
                                                         player2.money += moneyTemp;
                                                         player1.money -= moneyTemp;
 
