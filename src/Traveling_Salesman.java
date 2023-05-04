@@ -1,4 +1,6 @@
 import javax.imageio.ImageIO;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
@@ -7216,6 +7218,15 @@ public class Traveling_Salesman{
             public void actionPerformed(ActionEvent e) {
                 StartingFrame.setVisible(false);
                 PLaying_Game.setVisible(true);
+                try {
+                    AudioPlayer a= new AudioPlayer();
+                } catch (UnsupportedAudioFileException ex) {
+                    ex.printStackTrace();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                } catch (LineUnavailableException ex) {
+                    ex.printStackTrace();
+                }
             }
         });
         StartingFrame.pack();
